@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abaco · Count twice, trade once</title>
+<meta name="description" content="In 1202 Fibonacci's Liber Abaci taught merchants to count before they traded. We still do: data, code, tests and execution for systematic traders.">
+<meta property="og:title" content="Abaco · Count twice, trade once">
+<meta property="og:description" content="In 1202 Fibonacci's Liber Abaci taught merchants to count before they traded. We still do: data, code, tests and execution for systematic traders.">
+<meta property="og:image" content="https://abacolab.github.io/og.png">
+<meta property="og:url" content="https://abacolab.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@AbacoLab">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="abaco-mark-small.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+  :root { --bg: #1b1d22; --fg: #ece8df; --muted: #a8abb2; --dim: #8d9099; --cu: #e07c4e; --line: #33363e; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg); }
+  body { font-family: Jost, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 18px; line-height: 1.55; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding-inline: 24px; }
+  header { padding-block: 28px; }
+  header img { height: 34px; width: auto; display: block; }
+  .hero { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: center; padding-block: 48px 56px; }
+  h1 { font-weight: 500; font-size: clamp(48px, 7.5vw, 96px); line-height: 1; margin: 0; letter-spacing: -0.01em; }
+  h1 span { display: block; width: max-content; }
+  h1 .cu { color: var(--cu); }
+  h1 .second { font-size: 1.104em; }   /* «trade once» è più corta: così le due righe hanno la stessa larghezza */
+  .chain { margin: 22px 0 0; color: var(--muted); font-size: clamp(18px, 2vw, 22px); letter-spacing: 0.02em; }
+  .chart { width: 100%; height: auto; display: block; }
+  .story { border-top: 1px solid var(--line); padding-block: 36px 8px; }
+  .story p { max-width: 60ch; margin: 0 0 14px; font-size: clamp(19px, 2vw, 22px); }
+  .story .motto { color: var(--muted); font-style: italic; }
+  .links { display: flex; flex-wrap: wrap; gap: 14px 32px; padding-block: 20px 64px; margin: 0; list-style: none; padding-inline: 0; }
+  .links a { color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+  .links a:hover, .links a:focus-visible { border-color: var(--cu); }
+  .links small { display: block; color: var(--dim); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
+  footer { border-top: 1px solid var(--line); padding-block: 24px 40px; color: var(--dim); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+  @media (max-width: 760px) { .hero { grid-template-columns: 1fr; padding-block: 24px 40px; gap: 32px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><img src="abaco-lockup-light.svg" alt="abaco"></header>
+
+  <section class="hero">
+    <div>
+      <h1><span class="cu">Count twice</span><span class="second">trade once</span></h1>
+      <p class="chain">data · code · test · trade</p>
+    </div>
+    <img class="chart" src="fili-volume.svg" alt="One wire per bar; the beads gather around the price, sized by the volume traded there.">
+  </section>
+
+  <section class="story">
+    <p>In 1202 Fibonacci's <em>Liber Abaci</em> taught merchants to count before they traded. We still do: data, code, tests and execution for systematic traders.</p>
+    <p class="motto">Out of sample, or it doesn't count.</p>
+  </section>
+
+  <ul class="links">
+    <li><small>TradingView</small><a href="https://www.tradingview.com/u/AbacoLab/">AbacoLab</a></li>
+    <li><small>X</small><a href="https://x.com/AbacoLab">@AbacoLab</a></li>
+    <li><small>Custom Pine Script and Python</small><a href="https://www.fiverr.com/abacolab">Fiverr</a></li>
+  </ul>
+
+  <footer>
+    <span>© 2026 Abaco</span>
+    <span>Nothing on this site is investment advice.</span>
+  </footer>
+</div>
+</body>
+</html>
