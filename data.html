@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Abaco · Count twice, trade once</title>
-<meta name="description" content="Phisys, by Abaco: a strategy tester for perpetuals that does the test right, then runs the rule on a machine of yours in the cloud. Written by an algo trader, for algo traders.">
-<meta property="og:title" content="Abaco · Count twice, trade once">
-<meta property="og:description" content="Phisys, by Abaco: a strategy tester for perpetuals that does the test right, then runs the rule on a machine of yours in the cloud. Written by an algo trader, for algo traders.">
+<title>Data · Abaco</title>
+<meta name="description" content="Four venues on one 5-minute grid: Binance, Bybit, Dukascopy and Hyperliquid, aligned and checked, inside Phisys. Why 5 minutes: the outcome of a trade is decided inside the bar.">
+<meta property="og:title" content="Data · Abaco">
+<meta property="og:description" content="Four venues on one 5-minute grid: Binance, Bybit, Dukascopy and Hyperliquid, aligned and checked, inside Phisys. Why 5 minutes: the outcome of a trade is decided inside the bar.">
 <meta property="og:image" content="https://abacolab.github.io/og.png">
-<meta property="og:url" content="https://abacolab.github.io/index.html">
+<meta property="og:url" content="https://abacolab.github.io/data.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@AbacoLab">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -109,50 +109,54 @@
 </head>
 <body>
 <div class="wrap">
-  <header><a href="index.html"><img src="abaco-lockup-light.svg" alt="abaco"></a><nav><a href="phisys.html">phisys</a><span class="dot">·</span><a href="data.html">data</a><span class="dot">·</span><a href="test.html">test</a><span class="dot">·</span><a href="ai.html">ai</a><span class="dot">·</span><a href="notes.html">notes</a><span class="dot">·</span><a href="pricing.html">pricing</a></nav></header>
+  <header><a href="index.html"><img src="abaco-lockup-light.svg" alt="abaco"></a><nav><a href="phisys.html">phisys</a><span class="dot">·</span><a href="data.html" aria-current="page">data</a><span class="dot">·</span><a href="test.html">test</a><span class="dot">·</span><a href="ai.html">ai</a><span class="dot">·</span><a href="notes.html">notes</a><span class="dot">·</span><a href="pricing.html">pricing</a></nav></header>
 
-  <section class="hero flush">
-    <div>
-      <h1><span class="cu">Count twice</span><span class="second">trade once</span></h1>
-      <p class="chain">data · rules · test · trade</p>
-    </div>
-    <img class="chart" src="fili-volume.svg" alt="One wire per bar; the beads gather around the price, sized by the volume traded there.">
-  </section>
-
-  <section>
-    <p class="quote">Phisys tests a trading rule <span class="cu">the way it should be tested</span>, then runs it on a machine of yours. You pilot the machine; you do not follow the chart.</p>
-    <p class="lede">Chosen on the past, judged on what came after, with the real costs of the venue you trade on. Written by an algo trader, for algo traders: the test we run on our own rules, in a page you open and use.</p>
-    <a class="cta" href="phisys.html">See Phisys</a> <a class="cta ghost" href="pricing.html">Pricing</a>
-  </section>
+  <div class="page">
+    <span class="kicker">data</span>
+    <h1>Four venues, one 5-minute grid</h1>
+    <p class="lede">Everything Phisys tests on, since 2017 and back to 2003 for the cash markets, kept current every week and checked the way our own research needs it. Not sold on its own: it is what your tests run on.</p>
+  </div>
 
   <section class="flush">
-    <img class="shot" src="img/lab-interface.png" alt="Phisys in the browser: the rule on the chart, the signals, the out-of-sample report beside it.">
-  </section>
-
-  <section>
-    <div class="grid2">
-      <div class="verb"><span class="kicker">data</span><h3>Four venues, one 5-minute grid</h3><p>Binance, Bybit, Dukascopy and Hyperliquid since 2017, aligned and checked. Every test is resolved on the 5-minute path, because the outcome of a trade is decided inside the bar.</p><a href="data.html">The data →</a></div>
-      <div class="verb"><span class="kicker">rules</span><h3>Yours, written with you</h3><p>Describe the rule in words; the assistant drafts it from Phisys's indicators; the test judges it. Or start from ours, each with its walk-forward.</p><a href="ai.html">The assistant →</a></div>
-      <div class="verb"><span class="kicker">test</span><h3>Out of sample, with real costs</h3><p>Walk-forward, the venue's costs, every setting on one map, four tests per asset. Never an average.</p><a href="test.html">The test →</a></div>
-      <div class="verb"><span class="kicker">trade</span><h3>From your machine, with your keys</h3><p>When a rule holds, the same machine runs it: Hyperliquid, Binance, Bybit. Keys are born on your machine and never touch ours.</p><a href="phisys.html#execution">The execution →</a></div>
-    </div>
+    <img class="shot" src="img/data-coverage.png" alt="Coverage timeline: Dukascopy cash since 2003, Coinbase spot 2015, Binance spot 2017, Binance and Bybit perps 2020, Hyperliquid 2023, TradFi perps 2026.">
   </section>
 
   <section>
     <div class="feature">
-      <div>
-        <span class="kicker">latest note</span>
-        <h2>How much a timeframe costs</h2>
-        <p>At 5 minutes the typical bar does not pay the round trip, on any of 55 Hyperliquid crypto perps. The trade must last about half an hour, whatever the entry. Measured, asset by asset.</p>
-        <a class="cta ghost" href="test/timeframe-cost.html">Read the study</a>
+      <div class="why">
+        <h2>Why 5 minutes</h2>
+        <p>Nobody should trade below 15 minutes: <a href="test/timeframe-cost.html">we measured it</a>, the typical 5-minute bar does not pay its own round trip. But a test at 1 hour that only knows the hourly bar cannot say whether the stop or the target was hit first, and that is the whole outcome of a trade.</p>
+        <p>So every series lives on one 5-minute grid, and every test at 15 minutes and above is resolved on the 5-minute path: the stop, the partial targets, the breakeven, the trailing, in the order they actually happened. The higher timeframes are built from the same bars, so nothing disagrees with itself.</p>
       </div>
-      <a href="test/timeframe-cost.html"><img src="test/img/1-minutes.png" alt="Minutes a trade must last to be worth two round trips, 55 crypto perps."></a>
+      <img src="img/data-grid.png" alt="One hour seen as one bar and as twelve 5-minute bars: the stop was hit before the target, which the hourly bar cannot say.">
     </div>
   </section>
 
   <section>
-    <p class="lede">In 1202 Fibonacci's <em>Liber Abaci</em> taught merchants to count before they traded. We still do. Abaco is written by an algo trader, for algo traders.</p>
-    <p class="motto">Out of sample, or it doesn't count.</p>
+    <h2>What is inside</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Venue</th><th>Since</th><th>Series</th></tr></thead>
+      <tbody>
+        <tr><td>Binance, perps and spot</td><td class="n">2017</td><td>bars with taker flow; open interest since 2020; funding; the TradFi perps since 2026</td></tr>
+        <tr><td>Bybit, perps and spot</td><td class="n">2020</td><td>bars; open interest; liquidations; funding; the TradFi perps since 2026</td></tr>
+        <tr><td>Dukascopy, cash</td><td class="n">2003 · stocks 2017</td><td>the long history behind the stock, index and commodity perps</td></tr>
+        <tr><td>Hyperliquid, perps</td><td class="n">2023</td><td>mark, mid and oracle; open interest; impact spread; taker flow and liquidations by side; funding; HIP-3 included</td></tr>
+        <tr><td>Coinbase, spot</td><td class="n">2015</td><td>bars, as a witness for the crypto spot</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">From the venues' public feeds, aligned and checked by us, updated every week. Inside Phisys your machine reads only the slices a test needs; nothing to download.</p>
+  </section>
+
+  <section>
+    <h2>How it is checked</h2>
+    <ul class="plain">
+      <li><b>On the grid.</b> Every timestamp is a multiple of five minutes; a snapshot is never passed off as a closed bar.</li>
+      <li><b>Holes are holes.</b> A missing bar is missing, never filled with the last value; the known gaps are listed.</li>
+      <li><b>Zero is not missing.</b> A zero volume is a bar nobody traded; an absent value is absent.</li>
+      <li><b>Each series against a witness.</b> Prices against a second venue; open interest against the archive; spreads against the order book.</li>
+      <li><b>Nothing from the future.</b> Every value is stamped at the bar where it was known.</li>
+    </ul>
+    <p class="note">The checks are the same ones our own research runs on. The data is a by-product of using it.</p>
   </section>
 
   <footer>

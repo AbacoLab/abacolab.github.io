@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Abaco · Count twice, trade once</title>
-<meta name="description" content="Phisys, by Abaco: a strategy tester for perpetuals that does the test right, then runs the rule on a machine of yours in the cloud. Written by an algo trader, for algo traders.">
-<meta property="og:title" content="Abaco · Count twice, trade once">
-<meta property="og:description" content="Phisys, by Abaco: a strategy tester for perpetuals that does the test right, then runs the rule on a machine of yours in the cloud. Written by an algo trader, for algo traders.">
+<title>Phisys · Abaco</title>
+<meta name="description" content="A strategy tester for perpetuals that does the test right, on a machine of yours in the cloud created in one click. Nothing to install; your keys stay on your machine.">
+<meta property="og:title" content="Phisys · Abaco">
+<meta property="og:description" content="A strategy tester for perpetuals that does the test right, on a machine of yours in the cloud created in one click. Nothing to install; your keys stay on your machine.">
 <meta property="og:image" content="https://abacolab.github.io/og.png">
-<meta property="og:url" content="https://abacolab.github.io/index.html">
+<meta property="og:url" content="https://abacolab.github.io/phisys.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@AbacoLab">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -109,50 +109,58 @@
 </head>
 <body>
 <div class="wrap">
-  <header><a href="index.html"><img src="abaco-lockup-light.svg" alt="abaco"></a><nav><a href="phisys.html">phisys</a><span class="dot">·</span><a href="data.html">data</a><span class="dot">·</span><a href="test.html">test</a><span class="dot">·</span><a href="ai.html">ai</a><span class="dot">·</span><a href="notes.html">notes</a><span class="dot">·</span><a href="pricing.html">pricing</a></nav></header>
+  <header><a href="index.html"><img src="abaco-lockup-light.svg" alt="abaco"></a><nav><a href="phisys.html" aria-current="page">phisys</a><span class="dot">·</span><a href="data.html">data</a><span class="dot">·</span><a href="test.html">test</a><span class="dot">·</span><a href="ai.html">ai</a><span class="dot">·</span><a href="notes.html">notes</a><span class="dot">·</span><a href="pricing.html">pricing</a></nav></header>
 
-  <section class="hero flush">
-    <div>
-      <h1><span class="cu">Count twice</span><span class="second">trade once</span></h1>
-      <p class="chain">data · rules · test · trade</p>
-    </div>
-    <img class="chart" src="fili-volume.svg" alt="One wire per bar; the beads gather around the price, sized by the volume traded there.">
-  </section>
-
-  <section>
-    <p class="quote">Phisys tests a trading rule <span class="cu">the way it should be tested</span>, then runs it on a machine of yours. You pilot the machine; you do not follow the chart.</p>
-    <p class="lede">Chosen on the past, judged on what came after, with the real costs of the venue you trade on. Written by an algo trader, for algo traders: the test we run on our own rules, in a page you open and use.</p>
-    <a class="cta" href="phisys.html">See Phisys</a> <a class="cta ghost" href="pricing.html">Pricing</a>
-  </section>
+  <div class="page">
+    <span class="kicker">the product · by abaco</span>
+    <h1>Phisys <span class="tag">in preparation</span></h1>
+    <p class="lede">Testing a rule properly is slow, fussy work that almost nobody does on perpetuals: the tester on your chart has no walk-forward, the open-source bots optimise on the whole history, the serious tools cost a thousand dollars and stop at futures. Phisys is the test we run on our own rules, made usable from a page in your browser.</p>
+  </div>
 
   <section class="flush">
-    <img class="shot" src="img/lab-interface.png" alt="Phisys in the browser: the rule on the chart, the signals, the out-of-sample report beside it.">
+    <img class="shot" src="img/lab-interface.png" alt="Phisys in the browser: the rule on the chart, the signals where they were known, the out-of-sample report beside it.">
   </section>
 
   <section>
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><h3>Open the page</h3><p>Phisys has its own address, separate from this site: you sign in, and from there you create your server or open it. Any browser, any computer; nothing to download, nothing to update.</p></div>
+      <div class="step"><h3>Get your machine</h3><p>One click creates a small server of yours in the cloud with the engine already inside. We set it up, then remove our own access. Prefer your own provider? Paste a token and it is built on your account instead.</p></div>
+      <div class="step"><h3>Test, then trade</h3><p>Pick a venue, an asset, a rule. Your machine reads the data it needs from our server, runs the test, shows the report. When a rule holds, the same machine runs it, with your keys.</p></div>
+    </div>
+    <img class="shot" src="img/lab-machine.png" alt="Your browser talks to your machine; your machine reads data slices from our server and trades on the venues with your keys." style="margin-top:24px">
+  </section>
+
+  <section>
+    <h2>What is inside</h2>
     <div class="grid2">
-      <div class="verb"><span class="kicker">data</span><h3>Four venues, one 5-minute grid</h3><p>Binance, Bybit, Dukascopy and Hyperliquid since 2017, aligned and checked. Every test is resolved on the 5-minute path, because the outcome of a trade is decided inside the bar.</p><a href="data.html">The data →</a></div>
-      <div class="verb"><span class="kicker">rules</span><h3>Yours, written with you</h3><p>Describe the rule in words; the assistant drafts it from Phisys's indicators; the test judges it. Or start from ours, each with its walk-forward.</p><a href="ai.html">The assistant →</a></div>
-      <div class="verb"><span class="kicker">test</span><h3>Out of sample, with real costs</h3><p>Walk-forward, the venue's costs, every setting on one map, four tests per asset. Never an average.</p><a href="test.html">The test →</a></div>
-      <div class="verb"><span class="kicker">trade</span><h3>From your machine, with your keys</h3><p>When a rule holds, the same machine runs it: Hyperliquid, Binance, Bybit. Keys are born on your machine and never touch ours.</p><a href="phisys.html#execution">The execution →</a></div>
+      <div class="verb"><span class="kicker">data</span><h3>Four venues, one 5-minute grid</h3><p>Binance since 2017, Bybit since 2020, Hyperliquid since 2023, and the cash history of stocks, gold and oil since 2017 for the new TradFi perps. Open interest, taker flow, funding and impact spread where the venue gives them. Your machine reads only the slices a test needs.</p><a href="data.html">The data →</a></div>
+      <div class="verb"><span class="kicker">rules</span><h3>Yours, and the Book</h3><p>Yours are built in the page from Phisys's indicators: by hand, or by describing them to the assistant. The Book is ours: every strategy that passed the test, with its walk-forward published and the list of assets where it held, updated as new ones pass or old ones stop.</p><a href="ai.html">The assistant →</a></div>
+      <div class="verb"><span class="kicker">test</span><h3>The test done right</h3><p>Settings chosen inside a window and scored on the next one. The real costs of the venue. Every combination of the inputs on one map. Four tests per asset. Stop in ATR, partial targets, breakeven and fixed-risk sizing on a grid.</p><a href="test.html">The test →</a></div>
+      <div class="verb"><span class="kicker">trade</span><h3>From your machine</h3><p>Hyperliquid through an agent key that can trade and cannot withdraw; Binance and Bybit through trade-only API keys bound to your machine. Round the clock: you pilot the machine, you do not follow the chart.</p><a href="#execution">The execution ↓</a></div>
+    </div>
+  </section>
+
+  <section id="execution">
+    <h2>Your keys, your machine</h2>
+    <div class="grid2">
+      <div class="card cu"><h3>Where the keys live</h3><p>On Hyperliquid an agent key is created on your machine and authorised once from your wallet; it can trade, it cannot withdraw, and you revoke it whenever you want. On Binance and Bybit you create trade-only API keys bound to your machine's address and paste them in the page, which hands them to your machine and forgets them. After setup we remove our access; the engine updates itself.</p></div>
+      <div class="card"><h3>What we do not do</h3><p>No signals, no alerts sent to you, no bots running with your keys on our servers, no custody, no promise of returns. Every number comes with its walk-forward; nothing comes as a yield. If you want nobody but you to be able to touch the machine, build it on your own provider account.</p></div>
     </div>
   </section>
 
   <section>
-    <div class="feature">
-      <div>
-        <span class="kicker">latest note</span>
-        <h2>How much a timeframe costs</h2>
-        <p>At 5 minutes the typical bar does not pay the round trip, on any of 55 Hyperliquid crypto perps. The trade must last about half an hour, whatever the entry. Measured, asset by asset.</p>
-        <a class="cta ghost" href="test/timeframe-cost.html">Read the study</a>
-      </div>
-      <a href="test/timeframe-cost.html"><img src="test/img/1-minutes.png" alt="Minutes a trade must last to be worth two round trips, 55 crypto perps."></a>
+    <h2>Who it is for</h2>
+    <div class="grid2">
+      <div><h3>The systematic retail trader</h3><p>You trade perps on Hyperliquid, Binance or Bybit, you look at TradingView, and you want to know whether a rule holds before you fund it. You are not a quant; you know what out of sample means.</p></div>
+      <div><h3>Whoever trades stocks and gold at leverage, 24/7</h3><p>Hundreds of TradFi perps opened this year on the three venues, with months of history. Phisys tests them on the cash history behind them and trades them on the perp.</p></div>
     </div>
+    <p class="note" style="margin-top:12px">Written by an algo trader, for algo traders: Phisys is the engine we built for our own trading, cut down to what a test needs and made usable from a browser.</p>
   </section>
 
   <section>
-    <p class="lede">In 1202 Fibonacci's <em>Liber Abaci</em> taught merchants to count before they traded. We still do. Abaco is written by an algo trader, for algo traders.</p>
-    <p class="motto">Out of sample, or it doesn't count.</p>
+    <h2>Price and opening</h2>
+    <p>Two levels, Phisys and Phisys with the Book, plus a small machine of yours: see <a href="pricing.html">pricing</a>. A free sandbox on a machine of ours lets you see the test before paying. Phisys opens when its first strategy has a public walk-forward. Until then the studies, the notes and the free indicators are the way in; follow <a href="https://x.com/AbacoLab">@AbacoLab</a> for the date.</p>
   </section>
 
   <footer>

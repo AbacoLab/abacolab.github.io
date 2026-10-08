@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How much a timeframe costs · Abaco</title>
+<meta name="description" content="The typical move of one bar against the cost of one round trip, for 55 Hyperliquid crypto perps at 5m, 15m, 1h and 4h. At 5 minutes the bar does not pay the trip; the trade must last about half an hour whatever the entry.">
+<meta property="og:title" content="How much a timeframe costs">
+<meta property="og:description" content="At 5 minutes the typical bar does not pay the round trip on any of 55 crypto perps. The trade must last about half an hour, whatever the entry. Measured, asset by asset.">
+<meta property="og:image" content="https://abacolab.github.io/test/img/1-minutes.png">
+<meta property="og:url" content="https://abacolab.github.io/test/timeframe-cost.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@AbacoLab">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+  :root { --bg: #1b1d22; --fg: #ece8df; --muted: #a8abb2; --dim: #8d9099; --cu: #e07c4e; --line: #33363e; --card: #22252b; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg); }
+  body { font-family: Jost, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 18px; line-height: 1.55; }
+  .wrap { max-width: 980px; margin: 0 auto; padding-inline: 24px; }
+  header { padding-block: 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  header img { height: 34px; width: auto; display: block; }
+  header a { color: var(--fg); text-decoration: none; }
+  .kicker { color: var(--cu); font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
+  h1 { font-weight: 500; font-size: clamp(34px, 5.5vw, 56px); line-height: 1.05; margin: 8px 0 16px; letter-spacing: -0.01em; text-wrap: balance; }
+  h2 { font-weight: 500; font-size: clamp(24px, 3vw, 30px); margin: 48px 0 12px; text-wrap: balance; }
+  p { max-width: 64ch; margin: 0 0 14px; }
+  .lede { font-size: clamp(19px, 2vw, 22px); color: var(--muted); }
+  figure { margin: 28px 0; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 6px; }
+  figcaption { color: var(--dim); font-size: 14px; margin-top: 8px; }
+  .counts { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin: 20px 0; }
+  .counts div { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+  .counts .tf { color: var(--cu); font-family: "IBM Plex Mono", monospace; font-size: 13px; }
+  .counts .n { font-size: 30px; font-weight: 500; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .counts small { color: var(--dim); font-size: 13px; display: block; }
+  @media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  .tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; margin: 20px 0; }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 15px; font-variant-numeric: tabular-nums; }
+  th, td { text-align: right; padding: 7px 12px; border-top: 1px solid var(--line); }
+  th:first-child, td:first-child { text-align: left; font-family: "IBM Plex Mono", monospace; font-size: 14px; }
+  thead th { border-top: 0; color: var(--dim); font-weight: 400; font-size: 13px; letter-spacing: .05em; text-transform: uppercase; background: var(--card); position: sticky; top: 0; }
+  .note { color: var(--muted); font-size: 16px; }
+  ul { max-width: 64ch; padding-left: 20px; } li { margin-bottom: 8px; }
+  footer { border-top: 1px solid var(--line); margin-top: 56px; padding-block: 24px 40px; color: var(--dim); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><a href="../"><img src="../abaco-lockup-light.svg" alt="abaco"></a><span class="kicker">test · October 2026</span></header>
+
+  <div class="kicker">Out of sample, or it doesn't count</div>
+  <h1>How much a timeframe costs</h1>
+  <p class="lede">The typical move of one bar against the cost of one round trip, for 55 Hyperliquid crypto perps at 5m, 15m, 1h and 4h. Fourteen months of 5-minute bars, July 2025 to September 2026.</p>
+
+  <p><strong>At 5 minutes the typical bar does not pay the round trip, on any of the 55.</strong> At 15 minutes it pays one trip on 50, but two trips on only 5. At 1 hour it pays two trips on 50; at 4 hours on all 55.</p>
+
+  <div class="counts">
+    <div><span class="tf">5m</span><div class="n">0 / 55</div><small>bars worth two round trips (taker)</small></div>
+    <div><span class="tf">15m</span><div class="n">5 / 55</div><small>HYPE, ZEC, XPL, ENA, ZRO</small></div>
+    <div><span class="tf">1h</span><div class="n">50 / 55</div><small>open for almost everything</small></div>
+    <div><span class="tf">4h</span><div class="n">55 / 55</div><small>open for everything</small></div>
+  </div>
+
+  <figure><img src="img/2-counts.png" alt="How many of 55 crypto perps have a typical bar move worth two round trips, per timeframe, taker and maker."><figcaption>Taker: fee 4.5 bps per side plus the asset's median impact spread. Maker: 1.5 bps per side, no spread, no guarantee of a fill.</figcaption></figure>
+
+  <h2>Why the typical bar, when nobody enters on a typical bar</h2>
+  <p>Because the bar is the unit everything in a strategy is measured in. The stop is one or two ATRs of that bar, the target a multiple of the stop, the trailing moves bar by bar. If the bar is smaller than the cost, a stop set at one bar is hit by ordinary noise, and every hit costs a full round trip.</p>
+  <p>And the bar sets the scale of every holding period: the move grows with the square root of the bars held. We measured it: from 5m to 1h the median move grows 3.55× (√12 = 3.46), from 5m to 4h 7.2× (√48 = 6.9), with little dispersion across the 55. So the 5-minute bar tells how long a trade must last for its move to be worth two round trips, <em>whatever the entry rule</em>.</p>
+
+  <figure><img src="img/1-minutes.png" alt="Minutes a trade must last for the typical move to equal two round trips, for 55 crypto perps."><figcaption>Median across the 55: 29 minutes. BTC 56, ETH 30, SOL 20, HYPE 10, TRX almost five hours.</figcaption></figure>
+
+  <p>A "5-minute strategy" on BTC that pays its costs has to hold for an hour: it is an hourly strategy with 5-minute stops, which is the worst of both.</p>
+
+  <h2>The exceptions, so nobody has to point them out</h2>
+  <ul>
+    <li><strong>Makers.</strong> At 1.5 bps per side and no spread, the 5-minute bar is worth two round trips on 53 of the 55. Below 15 minutes the job is getting filled, not hitting the book.</li>
+    <li><strong>Events.</strong> A 5-minute bar inside a liquidation cascade moves ten round trips. That is an occasion, not a cadence.</li>
+    <li><strong>Fee tiers and referrals</strong> move the threshold by a few minutes, not by a timeframe.</li>
+    <li><strong>The asset matters more than the timeframe.</strong> HYPE pays the trip at 5 minutes; TRX does not pay it at 1 hour.</li>
+  </ul>
+
+  <figure><img src="img/3-majors.png" alt="Median move of one bar in basis points for BTC, ETH, SOL, XRP, DOGE and HYPE at four timeframes, against the taker round trip."><figcaption>Six majors. The line is the taker round trip for that asset.</figcaption></figure>
+
+  <h2>All 55, asset by asset</h2>
+  <p class="note">Move: median absolute close-to-close change of one bar, in basis points. Round trip: taker, 9 bps of fees plus the asset's median impact spread. Minutes: how long a trade must last for its move to equal two round trips.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>asset</th><th>round trip, bps</th><th>5m move</th><th>15m move</th><th>1h move</th><th>minutes to 2 trips</th></tr></thead>
+    <tbody>
+<tr><td>ZEC</td><td>12</td><td>19</td><td>33</td><td>67</td><td>8</td></tr>
+<tr><td>HYPE</td><td>11</td><td>15</td><td>27</td><td>53</td><td>10</td></tr>
+<tr><td>ENA</td><td>14</td><td>17</td><td>29</td><td>58</td><td>13</td></tr>
+<tr><td>XPL</td><td>17</td><td>22</td><td>39</td><td>81</td><td>13</td></tr>
+<tr><td>ZRO</td><td>13</td><td>16</td><td>27</td><td>57</td><td>14</td></tr>
+<tr><td>WLD</td><td>14</td><td>16</td><td>27</td><td>54</td><td>15</td></tr>
+<tr><td>PENGU</td><td>14</td><td>16</td><td>28</td><td>56</td><td>16</td></tr>
+<tr><td>SUI</td><td>11</td><td>12</td><td>21</td><td>41</td><td>17</td></tr>
+<tr><td>TAO</td><td>14</td><td>15</td><td>26</td><td>52</td><td>17</td></tr>
+<tr><td>VIRTUAL</td><td>15</td><td>16</td><td>28</td><td>56</td><td>19</td></tr>
+<tr><td>SOL</td><td>10</td><td>10</td><td>17</td><td>33</td><td>20</td></tr>
+<tr><td>NEAR</td><td>15</td><td>14</td><td>25</td><td>50</td><td>21</td></tr>
+<tr><td>AAVE</td><td>13</td><td>12</td><td>22</td><td>44</td><td>22</td></tr>
+<tr><td>DOGE</td><td>10</td><td>10</td><td>18</td><td>34</td><td>22</td></tr>
+<tr><td>ADA</td><td>12</td><td>11</td><td>20</td><td>39</td><td>23</td></tr>
+<tr><td>ARB</td><td>15</td><td>14</td><td>24</td><td>48</td><td>24</td></tr>
+<tr><td>LINK</td><td>12</td><td>11</td><td>19</td><td>37</td><td>24</td></tr>
+<tr><td>AVAX</td><td>11</td><td>10</td><td>18</td><td>37</td><td>25</td></tr>
+<tr><td>UNI</td><td>15</td><td>13</td><td>23</td><td>45</td><td>25</td></tr>
+<tr><td>XRP</td><td>10</td><td>9</td><td>15</td><td>30</td><td>25</td></tr>
+<tr><td>LDO</td><td>16</td><td>14</td><td>24</td><td>50</td><td>26</td></tr>
+<tr><td>ONDO</td><td>16</td><td>14</td><td>24</td><td>48</td><td>26</td></tr>
+<tr><td>ASTER</td><td>14</td><td>12</td><td>20</td><td>38</td><td>27</td></tr>
+<tr><td>APT</td><td>15</td><td>13</td><td>23</td><td>46</td><td>28</td></tr>
+<tr><td>CRV</td><td>16</td><td>14</td><td>25</td><td>49</td><td>28</td></tr>
+<tr><td>ETHFI</td><td>19</td><td>16</td><td>28</td><td>57</td><td>29</td></tr>
+<tr><td>FET</td><td>18</td><td>15</td><td>26</td><td>52</td><td>29</td></tr>
+<tr><td>INJ</td><td>17</td><td>14</td><td>26</td><td>51</td><td>29</td></tr>
+<tr><td>ETH</td><td>9</td><td>8</td><td>14</td><td>27</td><td>30</td></tr>
+<tr><td>JTO</td><td>19</td><td>16</td><td>28</td><td>58</td><td>30</td></tr>
+<tr><td>JUP</td><td>18</td><td>14</td><td>25</td><td>52</td><td>30</td></tr>
+<tr><td>PENDLE</td><td>18</td><td>15</td><td>26</td><td>55</td><td>31</td></tr>
+<tr><td>XMR</td><td>16</td><td>12</td><td>23</td><td>46</td><td>32</td></tr>
+<tr><td>VVV</td><td>24</td><td>18</td><td>33</td><td>70</td><td>35</td></tr>
+<tr><td>ICP</td><td>18</td><td>13</td><td>24</td><td>48</td><td>36</td></tr>
+<tr><td>XLM</td><td>15</td><td>11</td><td>19</td><td>39</td><td>37</td></tr>
+<tr><td>OP</td><td>19</td><td>14</td><td>24</td><td>49</td><td>38</td></tr>
+<tr><td>PYTH</td><td>20</td><td>15</td><td>26</td><td>54</td><td>38</td></tr>
+<tr><td>DOT</td><td>16</td><td>12</td><td>20</td><td>41</td><td>39</td></tr>
+<tr><td>GRASS</td><td>27</td><td>19</td><td>34</td><td>70</td><td>39</td></tr>
+<tr><td>BCH</td><td>12</td><td>9</td><td>16</td><td>31</td><td>40</td></tr>
+<tr><td>KAITO</td><td>21</td><td>15</td><td>26</td><td>52</td><td>40</td></tr>
+<tr><td>LTC</td><td>12</td><td>9</td><td>15</td><td>30</td><td>40</td></tr>
+<tr><td>HBAR</td><td>16</td><td>10</td><td>18</td><td>37</td><td>47</td></tr>
+<tr><td>MORPHO</td><td>21</td><td>13</td><td>24</td><td>49</td><td>47</td></tr>
+<tr><td>FIL</td><td>19</td><td>12</td><td>22</td><td>43</td><td>49</td></tr>
+<tr><td>AERO</td><td>24</td><td>14</td><td>26</td><td>54</td><td>56</td></tr>
+<tr><td>BNB</td><td>11</td><td>6</td><td>12</td><td>23</td><td>56</td></tr>
+<tr><td>BTC</td><td>9</td><td>6</td><td>10</td><td>19</td><td>56</td></tr>
+<tr><td>STX</td><td>20</td><td>12</td><td>21</td><td>43</td><td>56</td></tr>
+<tr><td>ALGO</td><td>23</td><td>12</td><td>21</td><td>43</td><td>69</td></tr>
+<tr><td>ATOM</td><td>21</td><td>11</td><td>18</td><td>37</td><td>80</td></tr>
+<tr><td>IMX</td><td>30</td><td>14</td><td>24</td><td>49</td><td>95</td></tr>
+<tr><td>MINA</td><td>30</td><td>12</td><td>22</td><td>45</td><td>125</td></tr>
+<tr><td>TRX</td><td>12</td><td>3</td><td>6</td><td>12</td><td>296</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>What this does not say</h2>
+  <p>Nothing about where to enter. An event bar moves three to ten times the median, and that is the bar a strategy looks for. We measured that separately: after a 15-minute shock the gross move beats the round trip in 11 cases out of 110. The right entry does not rescue the timeframe.</p>
+  <p>Nothing about an edge either. Above two round trips there is room; room is not an advantage. Whether a rule has one is answered out of sample, and only there.</p>
+
+  <h2>Method</h2>
+  <p>Bars at 15m, 1h and 4h are built from the 5-minute bars (first open, highest high, lowest low, last close), and a bar counts only when all its 5-minute pieces are there. Fees are Hyperliquid's base tier. The impact spread is the distance between Hyperliquid's impact bid and ask, median over the period, measured by us at 5 minutes. The 36 HIP-3 perps on stocks, indices and commodities are left out of this page: their bars include the hours when the underlying is closed, and need a session-only reading.</p>
+
+  <footer>
+    <span>© 2026 Abaco · Nothing on this site is investment advice.</span>
+    <span><a href="../">abacolab.github.io</a> · <a href="https://x.com/AbacoLab">X</a> · <a href="https://www.tradingview.com/u/abacolab/">TradingView</a></span>
+  </footer>
+</div>
+</body>
+</html>

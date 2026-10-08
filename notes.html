@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Abaco · Count twice, trade once</title>
-<meta name="description" content="Phisys, by Abaco: a strategy tester for perpetuals that does the test right, then runs the rule on a machine of yours in the cloud. Written by an algo trader, for algo traders.">
-<meta property="og:title" content="Abaco · Count twice, trade once">
-<meta property="og:description" content="Phisys, by Abaco: a strategy tester for perpetuals that does the test right, then runs the rule on a machine of yours in the cloud. Written by an algo trader, for algo traders.">
+<title>Notes · Abaco</title>
+<meta name="description" content="Measurements, costs, and the errors that look like edges. One note a week, one study a month.">
+<meta property="og:title" content="Notes · Abaco">
+<meta property="og:description" content="Measurements, costs, and the errors that look like edges. One note a week, one study a month.">
 <meta property="og:image" content="https://abacolab.github.io/og.png">
-<meta property="og:url" content="https://abacolab.github.io/index.html">
+<meta property="og:url" content="https://abacolab.github.io/notes.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@AbacoLab">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -109,50 +109,19 @@
 </head>
 <body>
 <div class="wrap">
-  <header><a href="index.html"><img src="abaco-lockup-light.svg" alt="abaco"></a><nav><a href="phisys.html">phisys</a><span class="dot">·</span><a href="data.html">data</a><span class="dot">·</span><a href="test.html">test</a><span class="dot">·</span><a href="ai.html">ai</a><span class="dot">·</span><a href="notes.html">notes</a><span class="dot">·</span><a href="pricing.html">pricing</a></nav></header>
+  <header><a href="index.html"><img src="abaco-lockup-light.svg" alt="abaco"></a><nav><a href="phisys.html">phisys</a><span class="dot">·</span><a href="data.html">data</a><span class="dot">·</span><a href="test.html">test</a><span class="dot">·</span><a href="ai.html">ai</a><span class="dot">·</span><a href="notes.html" aria-current="page">notes</a><span class="dot">·</span><a href="pricing.html">pricing</a></nav></header>
 
-  <section class="hero flush">
-    <div>
-      <h1><span class="cu">Count twice</span><span class="second">trade once</span></h1>
-      <p class="chain">data · rules · test · trade</p>
-    </div>
-    <img class="chart" src="fili-volume.svg" alt="One wire per bar; the beads gather around the price, sized by the volume traded there.">
-  </section>
+  <div class="page">
+    <span class="kicker">notes</span>
+    <h1>Notes</h1>
+    <p class="lede">What we measured this week, what it cost, and the mistakes that looked like edges. Numbers with their population; no advice.</p>
+  </div>
 
   <section>
-    <p class="quote">Phisys tests a trading rule <span class="cu">the way it should be tested</span>, then runs it on a machine of yours. You pilot the machine; you do not follow the chart.</p>
-    <p class="lede">Chosen on the past, judged on what came after, with the real costs of the venue you trade on. Written by an algo trader, for algo traders: the test we run on our own rules, in a page you open and use.</p>
-    <a class="cta" href="phisys.html">See Phisys</a> <a class="cta ghost" href="pricing.html">Pricing</a>
-  </section>
-
-  <section class="flush">
-    <img class="shot" src="img/lab-interface.png" alt="Phisys in the browser: the rule on the chart, the signals, the out-of-sample report beside it.">
-  </section>
-
-  <section>
-    <div class="grid2">
-      <div class="verb"><span class="kicker">data</span><h3>Four venues, one 5-minute grid</h3><p>Binance, Bybit, Dukascopy and Hyperliquid since 2017, aligned and checked. Every test is resolved on the 5-minute path, because the outcome of a trade is decided inside the bar.</p><a href="data.html">The data →</a></div>
-      <div class="verb"><span class="kicker">rules</span><h3>Yours, written with you</h3><p>Describe the rule in words; the assistant drafts it from Phisys's indicators; the test judges it. Or start from ours, each with its walk-forward.</p><a href="ai.html">The assistant →</a></div>
-      <div class="verb"><span class="kicker">test</span><h3>Out of sample, with real costs</h3><p>Walk-forward, the venue's costs, every setting on one map, four tests per asset. Never an average.</p><a href="test.html">The test →</a></div>
-      <div class="verb"><span class="kicker">trade</span><h3>From your machine, with your keys</h3><p>When a rule holds, the same machine runs it: Hyperliquid, Binance, Bybit. Keys are born on your machine and never touch ours.</p><a href="phisys.html#execution">The execution →</a></div>
-    </div>
-  </section>
-
-  <section>
-    <div class="feature">
-      <div>
-        <span class="kicker">latest note</span>
-        <h2>How much a timeframe costs</h2>
-        <p>At 5 minutes the typical bar does not pay the round trip, on any of 55 Hyperliquid crypto perps. The trade must last about half an hour, whatever the entry. Measured, asset by asset.</p>
-        <a class="cta ghost" href="test/timeframe-cost.html">Read the study</a>
-      </div>
-      <a href="test/timeframe-cost.html"><img src="test/img/1-minutes.png" alt="Minutes a trade must last to be worth two round trips, 55 crypto perps."></a>
-    </div>
-  </section>
-
-  <section>
-    <p class="lede">In 1202 Fibonacci's <em>Liber Abaci</em> taught merchants to count before they traded. We still do. Abaco is written by an algo trader, for algo traders.</p>
-    <p class="motto">Out of sample, or it doesn't count.</p>
+    <ul class="plain">
+      <li><b><a href="test/timeframe-cost.html">How much a timeframe costs</a></b> · October 2026 · At 5 minutes the typical bar does not pay the round trip on any of 55 Hyperliquid crypto perps; the trade must last about half an hour, whatever the entry.</li>
+    </ul>
+    <p class="note">Next notes: one asset a week from the cost table; an error that looked like an edge, every Friday. The free indicators on TradingView are on the <a href="scripts.html">scripts</a> page.</p>
   </section>
 
   <footer>

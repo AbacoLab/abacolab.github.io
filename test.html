@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Abaco · Count twice, trade once</title>
-<meta name="description" content="Phisys, by Abaco: a strategy tester for perpetuals that does the test right, then runs the rule on a machine of yours in the cloud. Written by an algo trader, for algo traders.">
-<meta property="og:title" content="Abaco · Count twice, trade once">
-<meta property="og:description" content="Phisys, by Abaco: a strategy tester for perpetuals that does the test right, then runs the rule on a machine of yours in the cloud. Written by an algo trader, for algo traders.">
+<title>Test · Abaco</title>
+<meta name="description" content="How Phisys tests: out of sample, with the venue's real costs, every setting on one map, each asset on its own. The studies we publish.">
+<meta property="og:title" content="Test · Abaco">
+<meta property="og:description" content="How Phisys tests: out of sample, with the venue's real costs, every setting on one map, each asset on its own. The studies we publish.">
 <meta property="og:image" content="https://abacolab.github.io/og.png">
-<meta property="og:url" content="https://abacolab.github.io/index.html">
+<meta property="og:url" content="https://abacolab.github.io/test.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@AbacoLab">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -109,50 +109,63 @@
 </head>
 <body>
 <div class="wrap">
-  <header><a href="index.html"><img src="abaco-lockup-light.svg" alt="abaco"></a><nav><a href="phisys.html">phisys</a><span class="dot">·</span><a href="data.html">data</a><span class="dot">·</span><a href="test.html">test</a><span class="dot">·</span><a href="ai.html">ai</a><span class="dot">·</span><a href="notes.html">notes</a><span class="dot">·</span><a href="pricing.html">pricing</a></nav></header>
+  <header><a href="index.html"><img src="abaco-lockup-light.svg" alt="abaco"></a><nav><a href="phisys.html">phisys</a><span class="dot">·</span><a href="data.html">data</a><span class="dot">·</span><a href="test.html" aria-current="page">test</a><span class="dot">·</span><a href="ai.html">ai</a><span class="dot">·</span><a href="notes.html">notes</a><span class="dot">·</span><a href="pricing.html">pricing</a></nav></header>
 
-  <section class="hero flush">
-    <div>
-      <h1><span class="cu">Count twice</span><span class="second">trade once</span></h1>
-      <p class="chain">data · rules · test · trade</p>
-    </div>
-    <img class="chart" src="fili-volume.svg" alt="One wire per bar; the beads gather around the price, sized by the volume traded there.">
-  </section>
-
-  <section>
-    <p class="quote">Phisys tests a trading rule <span class="cu">the way it should be tested</span>, then runs it on a machine of yours. You pilot the machine; you do not follow the chart.</p>
-    <p class="lede">Chosen on the past, judged on what came after, with the real costs of the venue you trade on. Written by an algo trader, for algo traders: the test we run on our own rules, in a page you open and use.</p>
-    <a class="cta" href="phisys.html">See Phisys</a> <a class="cta ghost" href="pricing.html">Pricing</a>
-  </section>
+  <div class="page">
+    <span class="kicker">test</span>
+    <h1>Out of sample, or it doesn't count</h1>
+    <p class="lede">A backtest is a story about the past. A test is a choice made on the past and judged on what came after. Phisys only runs the second kind, and we only publish the second kind.</p>
+  </div>
 
   <section class="flush">
-    <img class="shot" src="img/lab-interface.png" alt="Phisys in the browser: the rule on the chart, the signals, the out-of-sample report beside it.">
+    <div class="feature">
+      <div>
+        <h2>Chosen on the past, judged on what came after</h2>
+        <p>Settings are picked inside a window and scored on the next one, window after window. The number Phisys reports is the one from the stretch never looked at. A rule tuned on the whole history has already seen the answer.</p>
+      </div>
+      <img src="img/test-walkforward.png" alt="The walk-forward: in each fold the settings are chosen on a window and scored on the next; the out-of-sample stretches are what we report.">
+    </div>
   </section>
 
   <section>
-    <div class="grid2">
-      <div class="verb"><span class="kicker">data</span><h3>Four venues, one 5-minute grid</h3><p>Binance, Bybit, Dukascopy and Hyperliquid since 2017, aligned and checked. Every test is resolved on the 5-minute path, because the outcome of a trade is decided inside the bar.</p><a href="data.html">The data →</a></div>
-      <div class="verb"><span class="kicker">rules</span><h3>Yours, written with you</h3><p>Describe the rule in words; the assistant drafts it from Phisys's indicators; the test judges it. Or start from ours, each with its walk-forward.</p><a href="ai.html">The assistant →</a></div>
-      <div class="verb"><span class="kicker">test</span><h3>Out of sample, with real costs</h3><p>Walk-forward, the venue's costs, every setting on one map, four tests per asset. Never an average.</p><a href="test.html">The test →</a></div>
-      <div class="verb"><span class="kicker">trade</span><h3>From your machine, with your keys</h3><p>When a rule holds, the same machine runs it: Hyperliquid, Binance, Bybit. Keys are born on your machine and never touch ours.</p><a href="phisys.html#execution">The execution →</a></div>
+    <div class="feature rev">      <img src="img/test-plateau.png" alt="Every combination of two inputs, coloured by the return after costs; the chosen setting sits inside a plateau of profitable neighbours.">
+      <div>
+        <h2>Every setting, on one map</h2>
+        <p>The rule runs on every combination of its inputs, after costs, and the map shows them all. A good setting sits on a plateau: its neighbours make money too. A lone peak among losing cells is a lucky number, and it moves the day the market does.</p>
+      </div>
     </div>
   </section>
 
   <section>
     <div class="feature">
-      <div>
-        <span class="kicker">latest note</span>
-        <h2>How much a timeframe costs</h2>
-        <p>At 5 minutes the typical bar does not pay the round trip, on any of 55 Hyperliquid crypto perps. The trade must last about half an hour, whatever the entry. Measured, asset by asset.</p>
-        <a class="cta ghost" href="test/timeframe-cost.html">Read the study</a>
+      <div>        <h2>Four tests per asset, never an average</h2>
+        <p>The same four every time: positive after costs on the stretch never looked at; most windows positive, not one lucky year; on a plateau, three neighbours in four positive; and choosing beats not choosing, the settings chosen on the past ahead of two thirds of the fixed ones. The rule holds where it passes all four, and the page says which one failed where it does not. No averages across assets: a rule that works on three majors and fails on twelve others is a rule for three majors.</p>
       </div>
-      <a href="test/timeframe-cost.html"><img src="test/img/1-minutes.png" alt="Minutes a trade must last to be worth two round trips, 55 crypto perps."></a>
+      <img src="img/test-evidence.png" alt="A grid of assets by timeframe: each cell holds or no, with the four tests it passed.">
     </div>
   </section>
 
   <section>
-    <p class="lede">In 1202 Fibonacci's <em>Liber Abaci</em> taught merchants to count before they traded. We still do. Abaco is written by an algo trader, for algo traders.</p>
-    <p class="motto">Out of sample, or it doesn't count.</p>
+    <h2>And the rest of the test</h2>
+    <ul class="plain">
+      <li><b>Real costs.</b> Fees, the measured impact spread, funding, slippage on stops, for the venue you will trade on. A rule that only works without them does not work.</li>
+      <li><b>Every outcome where it was known.</b> A signal at the close, a stop on the 5-minute bar that hit it, in the order it happened. Nothing from the future.</li>
+      <li><b>The management on a grid.</b> Stop in ATR, TP1 and TP2, breakeven, fixed-risk sizing: tried as a grid, with the same walk-forward, so the management is tested like the entry.</li>
+      <li><b>The report as a page.</b> Equity, trades, every window in sequence, the map of settings, the four tests, in a page you keep.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Studies</h2>
+    <div class="feature">
+      <div>
+        <h3>How much a timeframe costs <span class="tag live">October 2026</span></h3>
+        <p>The typical move of one bar against the cost of one round trip, 55 Hyperliquid crypto perps, four timeframes. At 5 minutes the bar does not pay the trip; the trade must last about half an hour whatever the entry.</p>
+        <a class="cta ghost" href="test/timeframe-cost.html">Read</a>
+      </div>
+      <a href="test/timeframe-cost.html"><img src="test/img/2-counts.png" alt="How many crypto perps pay two round trips per timeframe."></a>
+    </div>
+    <p class="note" style="margin-top:20px">Next: what a limit order really saves, measured on a live account; the weekend of stocks on Hyperliquid's HIP-3 perps; whether extreme funding predicts anything. All in <a href="notes.html">notes</a>.</p>
   </section>
 
   <footer>
