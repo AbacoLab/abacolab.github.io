@@ -153,6 +153,7 @@ h4{font-size:20px;line-height:1.15;letter-spacing:.02em}
 .line-claim .ic{width:30px;height:30px}
 .line-claim h3{font-size:clamp(26px,3vw,36px)}
 .line-claim p{color:var(--muted)}
+.tiers + .line-claim{margin-top:clamp(28px,4vw,44px)}
 
 /* claims with icons */
 .claims{list-style:none;margin:0;padding:0;display:grid;gap:16px}
