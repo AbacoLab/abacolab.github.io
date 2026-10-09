@@ -47,34 +47,30 @@
     <p class="eyebrow"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-coins"/></svg>pricing</p>
     <h1>From Novice to Magister</h1>
     <p class="lede">Follow for free. Build, test and trade from Apprentice. Priced along Fibonacci: <span class="fib">0 · 34 · 55 · 89</span></p>
-    <div class="billing" role="group" aria-label="Billing period"><button type="button" id="bill-m" aria-pressed="true">Monthly</button><button type="button" id="bill-y" aria-pressed="false">Yearly<span class="save">1 month free</span></button></div>
+    <div class="billbar"><div class="billing" role="group" aria-label="Billing period"><button type="button" id="bill-m" aria-pressed="true">Monthly</button><button type="button" id="bill-y" aria-pressed="false">Yearly<span class="save">1 month free</span></button></div><a class="ref" href="https://app.hyperliquid.xyz/join/PHISYS" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>First month free with referral</a></div>
   </div>
 </section>
 
 <section class="sec first" aria-label="Plans">
-  <div class="wrap wide">
+  <div class="wrap">
     <div class="tiers">
       <article class="tier">
-        <div class="name"><svg class="tk" viewBox="0 0 64 56" role="img" aria-label="Tetractys, row 1 lit"><circle class="cu" cx="32" cy="7" r="4.6"/><circle cx="24.5" cy="21" r="4"/><circle cx="39.5" cy="21" r="4"/><circle cx="17" cy="35" r="4"/><circle cx="32" cy="35" r="4"/><circle cx="47" cy="35" r="4"/><circle cx="9.5" cy="49" r="4"/><circle cx="24.5" cy="49" r="4"/><circle cx="39.5" cy="49" r="4"/><circle cx="54.5" cy="49" r="4"/></svg><div><div class="stage">free</div><h2 class="tname">Novice</h2></div></div>
+        <div class="name"><svg class="tk" viewBox="0 0 64 56" role="img" aria-label="Tetractys, row 1 lit"><circle class="cu" cx="32" cy="7" r="4.6"/><circle cx="24.5" cy="21" r="4"/><circle cx="39.5" cy="21" r="4"/><circle cx="17" cy="35" r="4"/><circle cx="32" cy="35" r="4"/><circle cx="47" cy="35" r="4"/><circle cx="9.5" cy="49" r="4"/><circle cx="24.5" cy="49" r="4"/><circle cx="39.5" cy="49" r="4"/><circle cx="54.5" cy="49" r="4"/></svg><div><h2 class="tname">Novice</h2></div></div>
         <p class="for">At the door of the workshop. Follow before you pay</p>
         <div class="price">€0</div>
         <div class="price-sub">no card, no wallet</div>
         <ul>
           <li><b>Monthly report</b> by email: studies, walk-forward optimisations of the sample strategies</li>
-          <li><b>Free indicators</b> on TradingView</li>
+          <li><b>Our indicators and screeners</b> on TradingView, free with sign-up</li>
         </ul>
-        <form class="mini" data-mock="sub-status" novalidate>
-          <label class="small" for="sub-email">Your email</label>
-          <input id="sub-email" type="email" placeholder="you@example.com" autocomplete="email">
-          <button class="btn ghost" type="submit">Subscribe</button>
-          <p class="status" id="sub-status" aria-live="polite" hidden></p>
-        </form>
+        <a class="btn" data-plan="novice" href="checkout.html?plan=novice">Sign up</a>
       </article>
       <article class="tier">
-        <div class="name"><svg class="tk" viewBox="0 0 64 56" role="img" aria-label="Tetractys, rows 1 to 2 lit"><circle class="on" cx="32" cy="7" r="4.6"/><circle class="cu" cx="24.5" cy="21" r="4.6"/><circle class="cu" cx="39.5" cy="21" r="4.6"/><circle cx="17" cy="35" r="4"/><circle cx="32" cy="35" r="4"/><circle cx="47" cy="35" r="4"/><circle cx="9.5" cy="49" r="4"/><circle cx="24.5" cy="49" r="4"/><circle cx="39.5" cy="49" r="4"/><circle cx="54.5" cy="49" r="4"/></svg><div><div class="stage">phisys</div><h2 class="tname">Apprentice</h2></div></div>
+        <div class="name"><svg class="tk" viewBox="0 0 64 56" role="img" aria-label="Tetractys, rows 1 to 2 lit"><circle class="on" cx="32" cy="7" r="4.6"/><circle class="cu" cx="24.5" cy="21" r="4.6"/><circle class="cu" cx="39.5" cy="21" r="4.6"/><circle cx="17" cy="35" r="4"/><circle cx="32" cy="35" r="4"/><circle cx="47" cy="35" r="4"/><circle cx="9.5" cy="49" r="4"/><circle cx="24.5" cy="49" r="4"/><circle cx="39.5" cy="49" r="4"/><circle cx="54.5" cy="49" r="4"/></svg><div><h2 class="tname">Apprentice</h2></div></div>
         <p class="for">At the bench. Your rules, tested properly</p>
         <div class="price" data-m="€34" data-y="€374">€34<small data-m="/ month" data-y="/ year">/ month</small></div><div class="price-sub" data-m="or €374 a year" data-y="that is €31.17 a month">or €374 a year</div>
         <ul>
+          <li>Everything in Novice</li>
           <li><b>Walk-forward optimisation</b> of your strategies: real costs, every setting on one map, four tests for every asset</li>
           <li><b>The assistant</b> writes strategies, indicators and signals with you</li>
           <li><b>Crypto</b>: 106 assets, full history</li>
@@ -83,11 +79,11 @@
           <li><b>Albedo</b>, the first strategy pack</li>
           <li><b>Unlimited price alerts</b> on Telegram</li>
         </ul>
-        <a class="btn" href="mailto:ciao.abaco@gmail.com?subject=Begin%20Apprentice">Begin Apprentice</a>
+        <a class="btn" data-plan="apprentice" href="checkout.html?plan=apprentice&amp;bill=m">Begin Apprentice</a>
       </article>
       <article class="tier cu">
         <span class="flag">most chosen</span>
-        <div class="name"><svg class="tk" viewBox="0 0 64 56" role="img" aria-label="Tetractys, rows 1 to 3 lit"><circle class="on" cx="32" cy="7" r="4.6"/><circle class="on" cx="24.5" cy="21" r="4.6"/><circle class="on" cx="39.5" cy="21" r="4.6"/><circle class="cu" cx="17" cy="35" r="4.6"/><circle class="cu" cx="32" cy="35" r="4.6"/><circle class="cu" cx="47" cy="35" r="4.6"/><circle cx="9.5" cy="49" r="4"/><circle cx="24.5" cy="49" r="4"/><circle cx="39.5" cy="49" r="4"/><circle cx="54.5" cy="49" r="4"/></svg><div><div class="stage">phisys</div><h2 class="tname">Adept</h2></div></div>
+        <div class="name"><svg class="tk" viewBox="0 0 64 56" role="img" aria-label="Tetractys, rows 1 to 3 lit"><circle class="on" cx="32" cy="7" r="4.6"/><circle class="on" cx="24.5" cy="21" r="4.6"/><circle class="on" cx="39.5" cy="21" r="4.6"/><circle class="cu" cx="17" cy="35" r="4.6"/><circle class="cu" cx="32" cy="35" r="4.6"/><circle class="cu" cx="47" cy="35" r="4.6"/><circle cx="9.5" cy="49" r="4"/><circle cx="24.5" cy="49" r="4"/><circle cx="39.5" cy="49" r="4"/><circle cx="54.5" cy="49" r="4"/></svg><div><h2 class="tname">Adept</h2></div></div>
         <p class="for">Trusted with the finer tools. Every timeframe</p>
         <div class="price" data-m="€55" data-y="€605">€55<small data-m="/ month" data-y="/ year">/ month</small></div><div class="price-sub" data-m="or €605 a year" data-y="that is €50.42 a month">or €605 a year</div>
         <ul>
@@ -95,12 +91,11 @@
           <li class="plus"><b>Every timeframe</b>, from 5 minutes</li>
           <li class="plus"><b>A Book of 10 strategies</b></li>
           <li class="plus"><b>Citrinitas</b>: more strategies, a richer Book</li>
-          <li class="plus"><b>Invite-only indicators</b> on TradingView</li>
         </ul>
-        <a class="btn fill" href="mailto:ciao.abaco@gmail.com?subject=Begin%20Adept">Begin Adept</a>
+        <a class="btn fill" data-plan="adept" href="checkout.html?plan=adept&amp;bill=m">Begin Adept</a>
       </article>
       <article class="tier">
-        <div class="name"><svg class="tk" viewBox="0 0 64 56" role="img" aria-label="Tetractys, rows 1 to 4 lit"><circle class="on" cx="32" cy="7" r="4.6"/><circle class="on" cx="24.5" cy="21" r="4.6"/><circle class="on" cx="39.5" cy="21" r="4.6"/><circle class="on" cx="17" cy="35" r="4.6"/><circle class="on" cx="32" cy="35" r="4.6"/><circle class="on" cx="47" cy="35" r="4.6"/><circle class="cu" cx="9.5" cy="49" r="4.6"/><circle class="cu" cx="24.5" cy="49" r="4.6"/><circle class="cu" cx="39.5" cy="49" r="4.6"/><circle class="cu" cx="54.5" cy="49" r="4.6"/></svg><div><div class="stage">phisys</div><h2 class="tname">Magister</h2></div></div>
+        <div class="name"><svg class="tk" viewBox="0 0 64 56" role="img" aria-label="Tetractys, rows 1 to 4 lit"><circle class="on" cx="32" cy="7" r="4.6"/><circle class="on" cx="24.5" cy="21" r="4.6"/><circle class="on" cx="39.5" cy="21" r="4.6"/><circle class="on" cx="17" cy="35" r="4.6"/><circle class="on" cx="32" cy="35" r="4.6"/><circle class="on" cx="47" cy="35" r="4.6"/><circle class="cu" cx="9.5" cy="49" r="4.6"/><circle class="cu" cx="24.5" cy="49" r="4.6"/><circle class="cu" cx="39.5" cy="49" r="4.6"/><circle class="cu" cx="54.5" cy="49" r="4.6"/></svg><div><h2 class="tname">Magister</h2></div></div>
         <p class="for">The master’s key. Every asset, every timeframe</p>
         <div class="price" data-m="€89" data-y="€979">€89<small data-m="/ month" data-y="/ year">/ month</small></div><div class="price-sub" data-m="or €979 a year" data-y="that is €81.58 a month">or €979 a year</div>
         <ul>
@@ -108,21 +103,19 @@
           <li class="plus"><b>Stocks, ETFs, commodities, indices and FX</b>: 295 assets in all</li>
           <li class="plus"><b>A Book without limits</b></li>
           <li class="plus"><b>Rubedo</b>: the full set of strategies and Books</li>
-          <li class="plus"><b>Every indicator</b> and <b>the screeners</b> on TradingView</li>
           <li class="plus"><b>Phisys screener</b>: one alert on a whole watchlist</li>
           <li class="plus"><b>Binance, Bybit, Kraken, OKX</b> on request, free with referral</li>
         </ul>
-        <a class="btn" href="mailto:ciao.abaco@gmail.com?subject=Begin%20Magister">Begin Magister</a>
+        <a class="btn" data-plan="magister" href="checkout.html?plan=magister&amp;bill=m">Begin Magister</a>
       </article>
     </div>
-    <div class="line-claim"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><div><h3>First month free with referral</h3><p>Open your exchange account through our referral link and the first month of any paid plan is free</p></div></div>
   </div>
 </section>
 
 <section class="sec" aria-labelledby="side-h">
   <div class="wrap">
     <div class="sec-head"><p class="eyebrow"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-assets"/></svg>compare</p><h2 id="side-h">Side by side</h2></div>
-    <div class="tbl"><table><thead><tr><th scope="col">What you get</th><th scope="col">Novice</th><th scope="col">Apprentice</th><th scope="col" class="cu">Adept</th><th scope="col">Magister</th></tr></thead><tbody><tr class="grp"><th colspan="5" scope="colgroup">Follow</th></tr><tr><th scope="row">Monthly report: studies, walk-forward optimisations of the sample strategies</th><td class="y">yes</td><td class="y">yes</td><td class="y cu">yes</td><td class="y">yes</td></tr><tr><th scope="row">Indicators on TradingView</th><td class="y">free ones</td><td class="y">free ones</td><td class="y cu">+ invite-only</td><td class="y">+ every one and the screeners</td></tr><tr class="grp"><th colspan="5" scope="colgroup">Build and test</th></tr><tr><th scope="row">Walk-forward optimisation of your strategies</th><td class="no">—</td><td class="y">yes</td><td class="y cu">yes</td><td class="y">yes</td></tr><tr><th scope="row">Assistant: strategies, indicators, signals</th><td class="no">—</td><td class="y">yes</td><td class="y cu">yes</td><td class="y">yes</td></tr><tr><th scope="row">Assets</th><td class="no">—</td><td class="y">crypto, 106</td><td class="y cu">crypto, 106</td><td class="y">crypto and TradFi, 295</td></tr><tr><th scope="row">Timeframes</th><td class="no">—</td><td class="y">1h, 4h</td><td class="y cu">all</td><td class="y">all</td></tr><tr><th scope="row">History</th><td class="no">—</td><td class="y">full</td><td class="y cu">full</td><td class="y">full</td></tr><tr><th scope="row">Strategy packs</th><td class="no">—</td><td class="y">Albedo</td><td class="y cu">+ Citrinitas</td><td class="y">+ Rubedo</td></tr><tr><th scope="row">Book</th><td class="no">—</td><td class="y">3 strategies</td><td class="y cu">10 strategies</td><td class="y">no limit</td></tr><tr class="grp"><th colspan="5" scope="colgroup">Watch</th></tr><tr><th scope="row">Price alerts on Telegram</th><td class="no">—</td><td class="y">unlimited</td><td class="y cu">unlimited</td><td class="y">unlimited</td></tr><tr><th scope="row">Screener: one alert on a whole watchlist</th><td class="no">—</td><td class="no">—</td><td class="no cu">—</td><td class="y">yes</td></tr><tr class="grp"><th colspan="5" scope="colgroup">Trade: the executor, included</th></tr><tr><th scope="row">Runs your Book, round the clock</th><td class="no">—</td><td class="y">yes</td><td class="y cu">yes</td><td class="y">yes</td></tr><tr><th scope="row">Venue</th><td class="no">—</td><td class="y">Hyperliquid</td><td class="y cu">Hyperliquid</td><td class="y">Hyperliquid</td></tr><tr><th scope="row">Binance, Bybit, Kraken, OKX</th><td class="no">—</td><td class="no">—</td><td class="no cu">—</td><td class="y">free with referral, else €55 a month</td></tr><tr><th scope="row">Telegram: faults, and what your Book did</th><td class="no">—</td><td class="y">yes</td><td class="y cu">yes</td><td class="y">yes</td></tr></tbody></table></div>
+    <div class="tbl cmp"><table><thead><tr><th scope="col">What you get</th><th scope="col">Novice</th><th scope="col">Apprentice</th><th scope="col">Adept</th><th scope="col">Magister</th></tr></thead><tbody><tr class="grp"><th colspan="5" scope="colgroup">Follow</th></tr><tr><th scope="row">Monthly report: studies, walk-forward optimisations of the sample strategies</th><td class="y">yes</td><td class="y">yes</td><td class="y">yes</td><td class="y">yes</td></tr><tr><th scope="row">Indicators and screeners on TradingView, free with sign-up</th><td class="y">yes</td><td class="y">yes</td><td class="y">yes</td><td class="y">yes</td></tr><tr class="grp"><th colspan="5" scope="colgroup">Build and test</th></tr><tr><th scope="row">Walk-forward optimisation of your strategies</th><td class="no">—</td><td class="y">yes</td><td class="y">yes</td><td class="y">yes</td></tr><tr><th scope="row">Assistant: strategies, indicators, signals</th><td class="no">—</td><td class="y">yes</td><td class="y">yes</td><td class="y">yes</td></tr><tr><th scope="row">Assets</th><td class="no">—</td><td class="y">crypto, 106</td><td class="y">crypto, 106</td><td class="y">crypto and TradFi, 295</td></tr><tr><th scope="row">Timeframes</th><td class="no">—</td><td class="y">1h, 4h</td><td class="y">all</td><td class="y">all</td></tr><tr><th scope="row">History</th><td class="no">—</td><td class="y">full</td><td class="y">full</td><td class="y">full</td></tr><tr><th scope="row">Strategy packs</th><td class="no">—</td><td class="y">Albedo</td><td class="y">+ Citrinitas</td><td class="y">+ Rubedo</td></tr><tr><th scope="row">Book</th><td class="no">—</td><td class="y">3 strategies</td><td class="y">10 strategies</td><td class="y">no limit</td></tr><tr class="grp"><th colspan="5" scope="colgroup">Watch</th></tr><tr><th scope="row">Price alerts on Telegram</th><td class="no">—</td><td class="y">unlimited</td><td class="y">unlimited</td><td class="y">unlimited</td></tr><tr><th scope="row">Screener: one alert on a whole watchlist</th><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="y">yes</td></tr><tr class="grp"><th colspan="5" scope="colgroup">Trade: the executor, included</th></tr><tr><th scope="row">Runs your Book, round the clock</th><td class="no">—</td><td class="y">yes</td><td class="y">yes</td><td class="y">yes</td></tr><tr><th scope="row">Venue</th><td class="no">—</td><td class="y">Hyperliquid</td><td class="y">Hyperliquid</td><td class="y">Hyperliquid</td></tr><tr><th scope="row">Binance, Bybit, Kraken, OKX</th><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="y">free with referral, or €55 a month</td></tr><tr><th scope="row">Telegram: faults, and what your Book did</th><td class="no">—</td><td class="y">yes</td><td class="y">yes</td><td class="y">yes</td></tr></tbody></table></div>
     <p class="small" style="margin-top:14px">The mark on each plan is the tetractys: 1 + 2 + 3 + 4 = 10 points. Prices follow Fibonacci.</p>
   </div>
 </section>
@@ -161,7 +154,6 @@
         <h3>Renews on its own</h3>
         <p>Monthly or yearly. Cancel from your billing page, any day. Card payments are processed by Stripe.</p>
         <div class="chiprow"><span>Visa</span><span>Mastercard</span><span>Amex</span><span>Apple Pay</span><span>Google Pay</span></div>
-        <a class="btn fill" href="mailto:ciao.abaco@gmail.com?subject=Pay%20by%20card">Pay by card</a>
       </article>
       <article class="card cu">
         <div class="head"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-coins"/></svg><p class="eyebrow">in usdc</p></div>
@@ -170,7 +162,7 @@
         <div class="chiprow"><span>USDC</span><span>Arbitrum</span><span>Base</span></div>
         <div class="wallet" aria-label="Example of a USDC payment">
           <div class="rw"><span class="k">Adept, 3 months</span><span>€165, paid in USDC</span></div>
-          <div class="rw"><span class="k">Send to</span><span>sent to you by email</span></div>
+          <div class="rw"><span class="k">Send to</span><span>shown at checkout</span></div>
           <div class="rw"><span class="k">Network</span><span>Arbitrum or Base</span></div>
         </div>
         <ol class="steps3"><li>Pick the plan and the months</li><li>Send the USDC from your wallet</li><li>Your licence key arrives by email</li></ol>
@@ -206,6 +198,7 @@
     <div class="mark"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle class="f-fg" cx="25.06" cy="92.50" r="7.14"/><circle class="f-fg" cx="38.45" cy="105.87" r="8.71"/><circle class="f-fg" cx="60.88" cy="105.37" r="10.63"/><circle class="f-cu" cx="81.51" cy="88.51" r="12.97"/><circle class="f-cu" cx="86.26" cy="57.23" r="15.82"/><circle class="f-cu" cx="68.89" cy="23.30" r="19.30"/></svg><p>© 2026 Abaco. Nothing on this site is investment advice. We publish measurements and tools; we do not give signals or manage money.</p></div>
     <div><h4>Elsewhere</h4><a href="https://x.com/AbacoLab" target="_blank" rel="noopener">X</a> · <a href="https://www.tradingview.com/u/AbacoLab/" target="_blank" rel="noopener">TradingView</a> · <a href="https://github.com/AbacoLab" target="_blank" rel="noopener">GitHub</a></div>
     <div><h4>Write</h4><div class="mail"><span id="mail-addr">ciao.abaco@gmail.com</span><button class="copy-btn" type="button" data-copy="mail-addr"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg><span class="lb">Copy</span></button></div></div>
+    <div class="foot-sub"><h4>Monthly report</h4><form class="sub" data-mock="foot-status" novalidate><label class="sr" for="foot-email">Email</label><input id="foot-email" type="email" placeholder="you@example.com" autocomplete="email"><button class="btn" type="submit">Send it to me</button></form><p class="status" id="foot-status" aria-live="polite"></p></div>
   </div>
 </footer>
 </body>

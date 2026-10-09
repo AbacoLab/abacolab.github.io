@@ -109,6 +109,10 @@
         document.querySelectorAll('.price-sub[data-m]').forEach(function (el) {
           el.textContent = el.getAttribute('data-' + mode);
         });
+        document.querySelectorAll('a[data-plan]').forEach(function (a) {
+          var p = a.getAttribute('data-plan');
+          a.setAttribute('href', 'checkout.html?plan=' + p + (p === 'novice' ? '' : '&bill=' + mode));
+        });
       };
       bm.addEventListener('click', function () { set('m'); });
       by.addEventListener('click', function () { set('y'); });

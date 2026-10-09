@@ -51,7 +51,22 @@
   <div class="art"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path class="s-w" d="M6 60H114"/><circle class="f-b2" cx="12" cy="60" r="1.8"/><circle class="f-b3" cx="19" cy="60" r="2.3"/><circle class="f-b3" cx="28" cy="60" r="2.9"/><circle class="f-b3" cx="40" cy="60" r="3.6"/><circle class="f-fg" cx="56" cy="60" r="4.4"/><circle class="f-fg" cx="78" cy="60" r="5.4"/><circle class="f-cu" cx="106" cy="60" r="6.6"/><path class="s-dim" d="M12 44V50M106 44V50M12 47H106"/></svg></div>
 </section>
 
-<section class="sec first" aria-labelledby="studies-h">
+<section class="sec first" aria-labelledby="report-h">
+  <div class="wrap">
+    <article class="block">
+      <div class="art"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><rect class="s-mu" x="12" y="30" width="96" height="62" rx="7"/><path class="s-mu" d="M15 34L60 66L105 34"/><path class="s-w" d="M22 84H44M76 84H98"/><circle class="f-cu" cx="60" cy="66" r="5.5"/></svg></div>
+      <div class="body">
+        <p class="eyebrow"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>free</p>
+        <h2 id="report-h">Monthly report, by email</h2>
+        <p class="say">Studies and walk-forward optimisations of the sample strategies, once a month, at no cost.</p>
+        <form class="sub" data-mock="notes-status" novalidate><label class="sr" for="notes-email">Email</label><input id="notes-email" type="email" placeholder="you@example.com" autocomplete="email"><button class="btn fill" type="submit">Send it to me</button></form>
+        <p class="status" id="notes-status" aria-live="polite"></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="studies-h">
   <div class="wrap narrow">
     <div class="sec-head"><p class="eyebrow"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-report"/></svg>studies</p><h2 id="studies-h">One note a week, one study a month</h2></div>
     <ol class="studies">
@@ -63,20 +78,6 @@
   </div>
 </section>
 
-<section class="sec" aria-labelledby="report-h">
-  <div class="wrap">
-    <article class="block">
-      <div class="art"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><rect class="s-mu" x="12" y="30" width="96" height="62" rx="7"/><path class="s-mu" d="M15 34L60 66L105 34"/><path class="s-w" d="M22 84H44M76 84H98"/><circle class="f-cu" cx="60" cy="66" r="5.5"/></svg></div>
-      <div class="body">
-        <p class="eyebrow"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>free</p>
-        <h2 id="report-h">Monthly report, by email</h2>
-        <p class="say">Studies and walk-forward optimisations of the sample strategies. The Novice plan, at no cost.</p>
-        <form class="sub" data-mock="notes-status" novalidate><label class="sr" for="notes-email">Email</label><input id="notes-email" type="email" placeholder="you@example.com" autocomplete="email"><button class="btn fill" type="submit">Send it to me</button></form>
-        <p class="status" id="notes-status" aria-live="polite"></p>
-      </div>
-    </article>
-  </div>
-</section>
 
 </main>
 <footer>
@@ -84,6 +85,7 @@
     <div class="mark"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle class="f-fg" cx="25.06" cy="92.50" r="7.14"/><circle class="f-fg" cx="38.45" cy="105.87" r="8.71"/><circle class="f-fg" cx="60.88" cy="105.37" r="10.63"/><circle class="f-cu" cx="81.51" cy="88.51" r="12.97"/><circle class="f-cu" cx="86.26" cy="57.23" r="15.82"/><circle class="f-cu" cx="68.89" cy="23.30" r="19.30"/></svg><p>© 2026 Abaco. Nothing on this site is investment advice. We publish measurements and tools; we do not give signals or manage money.</p></div>
     <div><h4>Elsewhere</h4><a href="https://x.com/AbacoLab" target="_blank" rel="noopener">X</a> · <a href="https://www.tradingview.com/u/AbacoLab/" target="_blank" rel="noopener">TradingView</a> · <a href="https://github.com/AbacoLab" target="_blank" rel="noopener">GitHub</a></div>
     <div><h4>Write</h4><div class="mail"><span id="mail-addr">ciao.abaco@gmail.com</span><button class="copy-btn" type="button" data-copy="mail-addr"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg><span class="lb">Copy</span></button></div></div>
+    <div class="foot-sub"><h4>Monthly report</h4><form class="sub" data-mock="foot-status" novalidate><label class="sr" for="foot-email">Email</label><input id="foot-email" type="email" placeholder="you@example.com" autocomplete="email"><button class="btn" type="submit">Send it to me</button></form><p class="status" id="foot-status" aria-live="polite"></p></div>
   </div>
 </footer>
 </body>
