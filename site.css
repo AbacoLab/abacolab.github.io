@@ -576,3 +576,6 @@ footer{border-top:1px solid var(--line);background:var(--deep);margin-top:clamp(
 .tvgrid .head .tag{margin-left:auto}
 .tvform{margin-top:28px;max-width:820px}
 .tier li a{color:inherit;text-decoration-color:var(--cu-line);text-underline-offset:3px}
+
+/* three tiles side by side where there is room */
+@media (min-width:980px){.pair.three{grid-template-columns:repeat(3,minmax(0,1fr))}}
