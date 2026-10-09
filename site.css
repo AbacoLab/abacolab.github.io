@@ -89,22 +89,23 @@ h4{font-size:20px;line-height:1.15;letter-spacing:.02em}
 .hero-claim h1 span{display:block;white-space:nowrap}
 .hero-claim .l1{color:var(--cu)}
 .hero-claim .l2{font-size:1.08em}
-.chain{margin:22px 0 0;font:600 clamp(20px,2.2vw,26px)/1.2 var(--display);letter-spacing:.07em;color:var(--muted)}
+.chain{white-space:nowrap;margin:22px 0 0;font:600 clamp(20px,2.2vw,26px)/1.2 var(--display);letter-spacing:.07em;color:var(--muted)}
+.hero-claim .chain{font-size:min(7.6cqi,47px)}
 .chain a{text-decoration:none;border-radius:4px}
 .chain a:hover{color:var(--fg)}
 .chain i{font-style:normal;color:var(--cu);padding-inline:.32em}
 .hero-band{margin:-24px 0 0;background:var(--deep);border:1px solid var(--line);border-radius:22px;padding:calc(24px + 20px) 16px 20px;min-width:0}
 .hero-band img{display:block;width:100%;height:auto}
 .hero-under{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:24px 40px;padding-top:28px}
-.hero-under .lede{max-width:34ch}
+.hero-under .copy{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px}
 .hero-under .ctas{margin-top:20px}
 @media (min-width:900px){
   .hero{grid-template-columns:repeat(12,minmax(0,1fr));align-items:center}
   .hero-claim{grid-column:1 / 6;grid-row:1}
   .hero-band{grid-column:5 / -1;grid-row:1;margin:0;padding:clamp(28px,3vw,44px) clamp(20px,2.6vw,40px) clamp(28px,3vw,44px) calc(12.5% + clamp(28px,3vw,48px))}
   .hero-under{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px 0}
-  .hero-under > .copy{grid-column:1 / 6}
-  .hero-under > .legend{grid-column:6 / -1;justify-content:flex-end;padding-top:6px}
+  .hero-under > .copy{grid-column:1 / -1}
+  .hero-under .lede{white-space:nowrap;flex:none;max-width:none}
 }
 .legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:0;padding:0;list-style:none;font-size:14.5px;line-height:1.3;color:var(--dim)}
 .legend li{display:inline-flex;align-items:center;gap:8px}
@@ -595,6 +596,10 @@ footer{border-top:1px solid var(--line);background:var(--deep);margin-top:clamp(
 /* a title set in whole lines: each span stays on one line */
 h1.lines{font-size:clamp(38px,5.2vw,72px)}
 h1.lines span{display:block;white-space:nowrap}
+/* home blocks: each title on its two lines, sized so the longer line fits the column */
+.block > .body{container-type:inline-size}
+h2.lines{font-size:min(var(--t-h2),10cqi)}
+h2.lines span{display:block;white-space:nowrap}
 
 /* phisys, for whom: a portrait of beads for each profile */
 .whogrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,236px),1fr));gap:16px}

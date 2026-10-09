@@ -13,6 +13,37 @@
   ready(function () {
     document.querySelectorAll('[data-mail]').forEach(function (n) { n.textContent = MAIL; });
 
+    // The hero lockup: its three lines start and end on the same verticals. Letter-spacing closes the gap,
+    // and the glyphs' side bearings come from a canvas, so the ink lines up and not just the boxes.
+    var lockup = document.querySelector('.hero-claim');
+    if (lockup && document.fonts && window.CanvasRenderingContext2D) {
+      var lines = ['.l1', '.l2', '.chain'].map(function (q) { return lockup.querySelector(q); });
+      var ctx = document.createElement('canvas').getContext('2d');
+      var ink = function (el) {
+        var cs = getComputedStyle(el), t = el.textContent, rg = document.createRange();
+        rg.selectNodeContents(el);
+        var b = rg.getBoundingClientRect();
+        ctx.font = cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily;
+        var first = ctx.measureText(t.charAt(0)), last = ctx.measureText(t.charAt(t.length - 1));
+        var ls = parseFloat(cs.letterSpacing) || 0;
+        return { left: b.left - first.actualBoundingBoxLeft, right: b.right - ls - (last.width - last.actualBoundingBoxRight), ls: ls, n: t.length };
+      };
+      var align = function () {
+        lines.forEach(function (el) { el.style.letterSpacing = ''; el.style.marginLeft = ''; });
+        var a = ink(lines[0]), w = a.right - a.left;
+        lines.slice(1).forEach(function (el) {
+          var m = ink(el);
+          el.style.letterSpacing = (m.ls + (w - (m.right - m.left)) / (m.n - 1)) + 'px';
+          el.style.marginLeft = (a.left - m.left) + 'px';
+        });
+      };
+      document.fonts.ready.then(function () {
+        align();
+        if (window.ResizeObserver) new ResizeObserver(function () { requestAnimationFrame(align); }).observe(lockup);
+        else window.addEventListener('resize', function () { requestAnimationFrame(align); });
+      });
+    }
+
     // Only the drawing nearest the middle of the screen moves; every other one rests.
     var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
     var anims = Array.prototype.slice.call(document.querySelectorAll('.anim'));
