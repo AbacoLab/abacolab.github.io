@@ -485,7 +485,6 @@ details p{color:var(--muted);font-size:16.5px;margin-top:10px;max-width:68ch}
 .sign{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:center}
 .sign svg{width:clamp(64px,9vw,104px);height:auto;display:block}
 .sign p{color:var(--muted);margin-top:14px;max-width:56ch}
-.motto{font:600 clamp(20px,2.2vw,24px)/1.2 var(--display) !important;letter-spacing:.06em;color:var(--cu) !important}
 @media (max-width:560px){.sign{grid-template-columns:minmax(0,1fr)}}
 
 /* footer */
@@ -600,5 +599,7 @@ h1.lines span{display:block;white-space:nowrap}
 /* phisys, for whom: a portrait of beads for each profile */
 .whogrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,236px),1fr));gap:16px}
 .whogrid .tile{padding:24px 22px 26px;gap:12px}
-.whogrid .art svg{max-width:150px}
+.whogrid .tile > .ic{width:44px;height:44px;margin-bottom:4px}
+.sec-head.full{max-width:none}
+@media (min-width:720px){h2.one{white-space:nowrap}}
 .whogrid .say{font-size:16px;line-height:1.5}
