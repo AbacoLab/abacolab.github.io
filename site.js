@@ -7,7 +7,12 @@
     else document.addEventListener('DOMContentLoaded', fn);
   }
 
+  // The address never appears whole in the files: harvesters read the HTML and the scripts.
+  var MAIL = atob('Y2lhby5hYmFjb0BnbWFpbC5jb20=');
+
   ready(function () {
+    document.querySelectorAll('[data-mail]').forEach(function (n) { n.textContent = MAIL; });
+
     // Only the drawing nearest the middle of the screen moves; every other one rests.
     var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
     var anims = Array.prototype.slice.call(document.querySelectorAll('.anim'));
@@ -72,13 +77,13 @@
           var user = f.querySelector('input[type="text"]');
           var name = user ? user.value.trim() : '';
           if (!name) { if (s) s.textContent = 'Write your TradingView username first.'; if (user) user.focus(); return; }
-          location.href = 'mailto:ciao.abaco@gmail.com?subject=' + encodeURIComponent('TradingView access') +
+          location.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('TradingView access') +
             '&body=' + encodeURIComponent('Please add me to the Abaco invite-only scripts.\nTradingView username: ' + name +
             '\nEmail: ' + (who || '-'));
           if (s) s.textContent = 'Your mail app opens with the request: send it and we add you.';
           return;
         }
-        location.href = 'mailto:ciao.abaco@gmail.com?subject=' + encodeURIComponent('Monthly report') +
+        location.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('Monthly report') +
           '&body=' + encodeURIComponent('Please send the monthly report to ' + (who || 'this address') + '.');
         if (s) { s.hidden = false; s.textContent = 'Your mail app opens with the request: send it and you are on the list.'; }
       });
