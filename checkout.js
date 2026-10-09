@@ -75,7 +75,7 @@
     var s = state(), paid = s.plan !== 'novice', c = cfg();
     var price = s.bill === 'y' ? euro(s.p.y) + ' a year, one month free' : euro(s.p.m) + ' a month';
     $('co-title').textContent = 'Begin ' + s.p.name;
-    $('co-lede').textContent = !paid ? 'Free: the monthly report, and our indicators and screeners on TradingView'
+    $('co-lede').textContent = !paid ? 'Free: the monthly report, and our indicators, self-optimising strategies and screeners on TradingView'
       : s.ref ? 'First month free with referral, then ' + euro(s.p[s.bill]) + (s.bill === 'y' ? ' a year' : ' a month') : price;
     document.querySelectorAll('#co-plan b[data-m]').forEach(function (b) { b.textContent = b.getAttribute('data-' + s.bill); });
     $('co-bill').hidden = !paid;

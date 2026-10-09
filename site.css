@@ -566,3 +566,13 @@ footer{border-top:1px solid var(--line);background:var(--deep);margin-top:clamp(
 .check a,.co .status a,.wallet a{color:var(--cu)}
 .co .card .btn{justify-self:start}
 .co .status{font-size:14px;color:var(--muted)}
+
+/* pricing: the lede on one line where it fits */
+.phero.one .copy.wide{max-width:none}
+.lede.line{max-width:none}
+
+/* code: what we publish on TradingView */
+.tvgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.tvgrid .head .tag{margin-left:auto}
+.tvform{margin-top:28px;max-width:820px}
+.tier li a{color:inherit;text-decoration-color:var(--cu-line);text-underline-offset:3px}
