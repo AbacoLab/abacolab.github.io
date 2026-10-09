@@ -579,3 +579,22 @@ footer{border-top:1px solid var(--line);background:var(--deep);margin-top:clamp(
 
 /* three tiles side by side where there is room */
 @media (min-width:980px){.pair.three{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* data: the bars that pay two round trips, one row of 55 beads per timeframe */
+.trips{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.trips li{display:grid;grid-template-columns:42px minmax(0,1fr) 62px;align-items:center;gap:12px}
+.trips .tf{font:500 14px/1 var(--mono);color:var(--muted)}
+.trips svg{display:block;width:100%;height:auto}
+.trips circle.on{fill:var(--fg)}
+.trips circle.off{fill:var(--b2)}
+.trips b{font:600 18px/1 var(--display);text-align:right;font-variant-numeric:tabular-nums}
+.trips-note{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:22px 0 12px;padding-top:16px;border-top:1px solid var(--line)}
+.trips-note b{font:600 30px/1 var(--display)}
+.trips-note span{color:var(--muted);font-size:15.5px}
+.frag-body .small a{color:var(--cu)}
+/* data: the crypto chips in two rows of three where the tile is wide enough */
+.chips li{font-size:15px;padding:6px 13px 6px 9px}
+@media (min-width:1040px){.chips.c3{display:grid;grid-template-columns:repeat(3,max-content)}}
+/* a title set in whole lines: each span stays on one line */
+h1.lines{font-size:clamp(38px,5.2vw,72px)}
+h1.lines span{display:block;white-space:nowrap}
