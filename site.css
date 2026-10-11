@@ -55,7 +55,8 @@ h4{font-size:20px;line-height:1.15;letter-spacing:.02em}
 .nav a:hover{color:var(--fg)}
 .nav a[aria-current="page"]{color:var(--cu)}
 .nav .sep{color:var(--b3);padding-inline:8px}
-@media (max-width:520px){.logo svg{height:30px}.nav{font-size:17px}.nav .sep{padding-inline:5px}}
+.nav .sep.bar{align-self:center;width:1px;height:.9em;padding:0;margin-inline:12px;background:var(--b3)}
+@media (max-width:520px){.logo svg{height:30px}.nav{font-size:17px}.nav .sep{padding-inline:5px}.nav .sep.bar{padding:0;margin-inline:7px}}
 
 /* buttons and links */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:600 17px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg);background:transparent;border:1px solid var(--cu);border-radius:999px;padding:13px 22px;cursor:pointer}
@@ -394,6 +395,8 @@ h4{font-size:20px;line-height:1.15;letter-spacing:.02em}
 .studies time,.studies .when{font:600 15px/1.3 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--cu)}
 .studies .when.next{color:var(--dim)}
 .studies h3{font-size:clamp(24px,2.6vw,30px)}
+.studies h3 a{color:inherit;text-decoration:none}
+.studies h3 a:hover{color:var(--cu)}
 .studies p{color:var(--muted);max-width:62ch;margin-top:8px}
 @media (min-width:720px){.studies li{grid-template-columns:150px minmax(0,1fr)}}
 
