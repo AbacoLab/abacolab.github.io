@@ -191,9 +191,9 @@ h4{font-size:20px;line-height:1.15;letter-spacing:.02em}
 
 /* mini drawings */
 .f-fg{fill:var(--fg)} .f-cu{fill:var(--cu)} .f-b1{fill:var(--b1)} .f-b2{fill:var(--b2)} .f-b3{fill:var(--b3)} .f-mu{fill:var(--muted)} .f-bg{fill:var(--art-bg)}
-.s-w,.s-mu,.s-fg,.s-dim,.s-b3,.s-cu,.s-line{fill:none}
+.s-w,.s-mu,.s-fg,.s-dim,.s-b3,.s-cu,.s-line{fill:none;vector-effect:non-scaling-stroke}
 .s-w{stroke:var(--wire)} .s-mu{stroke:var(--muted)} .s-fg{stroke:var(--fg)} .s-dim{stroke:var(--dim)} .s-b3{stroke:var(--b3)} .s-cu{stroke:var(--cu)} .s-line{stroke:var(--line)}
-.art svg *{vector-effect:non-scaling-stroke;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.art svg *{vector-effect:non-scaling-stroke;stroke-width:1;stroke-linecap:round;stroke-linejoin:round}
 .art .dash{stroke-dasharray:2 4}
 .code-t{font:500 7.5px var(--mono);fill:var(--fg)}
 .cl-t{font:600 46px var(--display);fill:var(--fg)}
@@ -282,7 +282,7 @@ h4{font-size:20px;line-height:1.15;letter-spacing:.02em}
 .ib{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,3fr);gap:clamp(10px,2vw,20px);align-items:end}
 .ib figure{margin:0;min-width:0}
 .ib svg{display:block;width:100%;height:auto}
-.ib svg *{vector-effect:non-scaling-stroke}
+.ib svg *{vector-effect:non-scaling-stroke;stroke-width:1}
 .ib figcaption{margin-top:8px;font:500 12.5px/1.3 var(--mono);color:var(--dim)}
 .ib figcaption b{color:var(--fg);font-weight:500}
 
@@ -517,13 +517,13 @@ footer{border-top:1px solid var(--line);background:var(--deep);margin-top:clamp(
 .sizes b.w{font-size:clamp(24px,2.6vw,32px);line-height:1.45}
 
 /* drawn demos */
-.dw{fill:none;stroke:var(--b3);stroke-width:1.4;vector-effect:non-scaling-stroke}
-.dw.strong{stroke:var(--fg);stroke-width:1.6}
+.dw{fill:none;stroke:var(--b3);stroke-width:1;vector-effect:non-scaling-stroke}
+.dw.strong{stroke:var(--fg)}
 .dfg{fill:var(--fg)} .db3{fill:var(--b3)} .dcu{fill:var(--cu)}
-.dstop{fill:none;stroke:var(--b3);stroke-width:1.3;stroke-dasharray:4 4;vector-effect:non-scaling-stroke}
-.dtgt{fill:none;stroke:var(--cu);stroke-width:1.3;stroke-dasharray:4 4;vector-effect:non-scaling-stroke}
-.dring{fill:none;stroke:var(--b3);stroke-width:1.4;vector-effect:non-scaling-stroke}
-.dring-cu{fill:none;stroke:var(--cu);stroke-width:1.4;vector-effect:non-scaling-stroke}
+.dstop{fill:none;stroke:var(--b3);stroke-width:1;stroke-dasharray:4 4;vector-effect:non-scaling-stroke}
+.dtgt{fill:none;stroke:var(--cu);stroke-width:1;stroke-dasharray:4 4;vector-effect:non-scaling-stroke}
+.dring{fill:none;stroke:var(--b3);stroke-width:1;vector-effect:non-scaling-stroke}
+.dring-cu{fill:none;stroke:var(--cu);stroke-width:1;vector-effect:non-scaling-stroke}
 .dring.dash{stroke:var(--dim);stroke-dasharray:3 4}
 .dtick{font:400 11px var(--mono);fill:var(--dim)}
 .bd.lp{background:var(--fg);box-shadow:0 0 0 2px var(--bg),0 0 0 3px var(--dim)}

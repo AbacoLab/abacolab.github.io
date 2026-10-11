@@ -37,7 +37,7 @@
   .counts .tf { color: var(--cu); font-family: "IBM Plex Mono", monospace; font-size: 13px; }
   .counts .n { font-size: 30px; font-weight: 500; line-height: 1.1; font-variant-numeric: tabular-nums; }
   .counts small { color: var(--dim); font-size: 13px; display: block; }
-  @media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  @media (max-width: 640px) { .wrap { padding-inline: 16px; } .counts { grid-template-columns: repeat(2, minmax(0,1fr)); } }
   .tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; margin: 20px 0; }
   table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 15px; font-variant-numeric: tabular-nums; }
   th, td { text-align: right; padding: 7px 12px; border-top: 1px solid var(--line); }
@@ -76,12 +76,12 @@
 
   <p>A "5-minute strategy" on BTC that pays its costs has to hold for an hour: it is an hourly strategy with 5-minute stops, which is the worst of both.</p>
 
-  <h2>The exceptions, so nobody has to point them out</h2>
+  <h2>Exceptions, so nobody has to point them out</h2>
   <ul>
     <li><strong>Makers.</strong> At 1.5 bps per side and no spread, the 5-minute bar is worth two round trips on 53 of the 55. Below 15 minutes the job is getting filled, not hitting the book.</li>
     <li><strong>Events.</strong> A 5-minute bar inside a liquidation cascade moves ten round trips. That is an occasion, not a cadence.</li>
     <li><strong>Fee tiers and referrals</strong> move the threshold by a few minutes, not by a timeframe.</li>
-    <li><strong>The asset matters more than the timeframe.</strong> HYPE pays the trip at 5 minutes; TRX does not pay it at 1 hour.</li>
+    <li><strong>Asset matters more than timeframe.</strong> HYPE pays the trip at 5 minutes; TRX does not pay it at 1 hour.</li>
   </ul>
 
   <figure><img src="img/3-majors.png" alt="Median move of one bar in basis points for BTC, ETH, SOL, XRP, DOGE and HYPE at four timeframes, against the taker round trip."><figcaption>Six majors. The line is the taker round trip for that asset.</figcaption></figure>
@@ -150,8 +150,8 @@
   </table></div>
 
   <h2>What this does not say</h2>
-  <p>Nothing about where to enter. An event bar moves three to ten times the median, and that is the bar a strategy looks for. We measured that separately: after a 15-minute shock the gross move beats the round trip in 11 cases out of 110. The right entry does not rescue the timeframe.</p>
-  <p>Nothing about an edge either. Above two round trips there is room; room is not an advantage. Whether a rule has one is answered out of sample, and only there.</p>
+  <p>Nothing about where to enter. An event bar moves three to ten times the median, and that is the bar a strategy looks for. We measured that separately: after a 15-minute shock the gross move beats the round trip in 11 cases out of 110. In our measurement, the right entry did not rescue the timeframe.</p>
+  <p>Nothing about an edge either. Above two round trips there is room; room is not an advantage. Whether a rule may have one is indicated out of sample, and only there.</p>
 
   <h2>Method</h2>
   <p>Bars at 15m, 1h and 4h are built from the 5-minute bars (first open, highest high, lowest low, last close), and a bar counts only when all its 5-minute pieces are there. Fees are Hyperliquid's base tier. The impact spread is the distance between Hyperliquid's impact bid and ask, median over the period, measured by us at 5 minutes. The 36 HIP-3 perps on stocks, indices and commodities are left out of this page: their bars include the hours when the underlying is closed, and need a session-only reading.</p>
