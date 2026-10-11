@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How much a timeframe costs · Abaco</title>
-<meta name="description" content="The typical move of one bar against the cost of one round trip, for 55 Hyperliquid crypto perps at 5m, 15m, 1h and 4h. At 5 minutes the bar does not pay the trip; the trade must last about half an hour whatever the entry.">
+<meta name="description" content="The typical move of one bar against the cost of one round trip, for 55 Hyperliquid crypto perps at 5m, 15m, 1h and 4h. At 5 minutes the bar does not pay the trip; the trade must last from 10 minutes on HYPE to almost five hours on TRX, whatever the entry.">
 <meta property="og:title" content="How much a timeframe costs">
-<meta property="og:description" content="At 5 minutes the typical bar does not pay the round trip on any of 55 crypto perps. The trade must last about half an hour, whatever the entry. Measured, asset by asset.">
+<meta property="og:description" content="At 5 minutes the typical bar does not pay the round trip on any of 55 crypto perps. The trade must last from 10 minutes on HYPE to almost five hours on TRX, whatever the entry. Measured, asset by asset.">
 <meta property="og:image" content="https://abacolab.github.io/test/img/1-minutes.png">
 <meta property="og:url" content="https://abacolab.github.io/test/timeframe-cost.html">
 <meta name="twitter:card" content="summary_large_image">
@@ -70,9 +70,9 @@
 
   <h2>Why the typical bar, when nobody enters on a typical bar</h2>
   <p>Because the bar is the unit everything in a strategy is measured in. The stop is one or two ATRs of that bar, the target a multiple of the stop, the trailing moves bar by bar. If the bar is smaller than the cost, a stop set at one bar is hit by ordinary noise, and every hit costs a full round trip.</p>
-  <p>And the bar sets the scale of every holding period: the move grows with the square root of the bars held. We measured it: from 5m to 1h the median move grows 3.55× (√12 = 3.46), from 5m to 4h 7.2× (√48 = 6.9), with little dispersion across the 55. So the 5-minute bar tells how long a trade must last for its move to be worth two round trips, <em>whatever the entry rule</em>.</p>
+  <p>And the bar sets the scale of every holding period: the move grows with the square root of the bars held. We measured it asset by asset: from 5m to 1h the move grows between 3.2× on BTC and 4.0× on TRX, around √12 = 3.46. So the 5-minute bar tells how long a trade must last for its move to be worth two round trips, <em>whatever the entry rule</em>.</p>
 
-  <figure><img src="img/1-minutes.png" alt="Minutes a trade must last for the typical move to equal two round trips, for 55 crypto perps."><figcaption>Median across the 55: 29 minutes. BTC 56, ETH 30, SOL 20, HYPE 10, TRX almost five hours.</figcaption></figure>
+  <figure><img src="img/1-minutes.png" alt="Minutes a trade must last for the typical move to equal two round trips, for 55 crypto perps."><figcaption>HYPE 10 minutes, SOL 20, ETH 30, BTC 56, TRX almost five hours.</figcaption></figure>
 
   <p>A "5-minute strategy" on BTC that pays its costs has to hold for an hour: it is an hourly strategy with 5-minute stops, which is the worst of both.</p>
 
