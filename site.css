@@ -617,8 +617,9 @@ h2.lines span{display:block;white-space:nowrap}
 .whogrid .say{font-size:16px;line-height:1.5}
 
 /* five plans: a row of the tetractys for each paid plan */
-@media (min-width:1061px){.plans.five{grid-template-columns:repeat(5,minmax(0,1fr))}}
-@media (min-width:621px) and (max-width:1060px){.plans.five,.tiers.five{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:880px){.plans.five{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.plans.five .plan{padding:18px 16px}}
+@media (min-width:621px) and (max-width:879px){.plans.five{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:621px) and (max-width:1060px){.tiers.five{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (min-width:1061px){.tiers.five{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.tiers.five .tier{padding:22px 16px 18px}.tiers.five .tname{font-size:26px}.tiers.five ul{font-size:14.5px}}
 .tbl.cmp table{min-width:860px}
 
