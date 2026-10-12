@@ -565,9 +565,9 @@ footer{border-top:1px solid var(--line);background:var(--deep);margin-top:clamp(
 .seg.tiny span{font-size:14px;padding:9px 13px}
 .fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
 .fld{display:grid;gap:6px;font-size:15px;color:var(--muted)}
-.fld input{font:400 16px/1.2 var(--body);color:var(--fg);background:var(--deep);border:1px solid var(--line);border-radius:999px;padding:13px 18px;width:100%;min-width:0}
-.fld input:focus{outline:none;border-color:var(--cu)}
-.fld input[aria-invalid="true"]{border-color:var(--cu)}
+.fld input,.fld select{font:400 16px/1.2 var(--body);color:var(--fg);background:var(--deep);border:1px solid var(--line);border-radius:999px;padding:13px 18px;width:100%;min-width:0}
+.fld input:focus,.fld select:focus{outline:none;border-color:var(--cu)}
+.fld input[aria-invalid="true"],.fld select[aria-invalid="true"]{border-color:var(--cu)}
 .check{display:flex;gap:12px;align-items:flex-start;font-size:16px;color:var(--muted);cursor:pointer}
 .check input{accent-color:var(--cu);width:18px;height:18px;margin-top:4px;flex:none}
 .check a,.co .status a,.wallet a{color:var(--cu)}

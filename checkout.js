@@ -101,17 +101,52 @@
     } catch (e) {}
   }
 
+  // Where the buyer lives: declared in the form, and checked against the country of the connection.
+  var CC = 'AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS YE YT ZA ZM ZW'.split(' ');
+  var seen = null;  // the country of the connection, when a lookup answers
+  function countryName(c) {
+    try { return new Intl.DisplayNames(['en'], { type: 'region' }).of(c); } catch (e) { return c; }
+  }
+  function fillCountries() {
+    var sel = $('co-country');
+    CC.map(function (c) { return [countryName(c), c]; }).sort(function (a, b) { return a[0].localeCompare(b[0]); })
+      .forEach(function (p) { var o = document.createElement('option'); o.value = p[1]; o.textContent = p[0]; sel.appendChild(o); });
+  }
+  function lookCountry() {
+    var srcs = [
+      ['https://api.country.is/', function (r) { return r.json().then(function (j) { return j.country; }); }],
+      ['https://ipapi.co/country/', function (r) { return r.text(); }]
+    ];
+    (function next(i) {
+      if (i >= srcs.length) return;
+      fetch(srcs[i][0]).then(function (r) { return r.ok ? srcs[i][1](r) : Promise.reject(); }).then(function (c) {
+        c = String(c || '').trim().toUpperCase();
+        if (CC.indexOf(c) < 0) return Promise.reject();
+        seen = c;
+        if (!$('co-country').value) $('co-country').value = c;
+      }).catch(function () { next(i + 1); });
+    })(0);
+  }
+  function needCountry() {
+    var el = $('co-country'), ok = !!el.value;
+    el.setAttribute('aria-invalid', ok ? 'false' : 'true');
+    if (!ok) { say('Choose the country you live in.'); el.focus(); }
+    return ok;
+  }
   function email() { return $('co-email').value.trim(); }
   function needEmail() {
     var el = $('co-email'), ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email());
     el.setAttribute('aria-invalid', ok ? 'false' : 'true');
     if (!ok) { say('Write your email first: the licence key goes there.'); el.focus(); }
-    return ok;
+    return ok && needCountry();
   }
   function lines(s, extra) {
     var out = ['Plan: ' + s.p.name];
     if (s.plan !== 'novice') out.push('Billing: ' + (s.bill === 'y' ? 'yearly' : 'monthly'));
-    out.push('Email: ' + email(), 'TradingView username: ' + ($('co-tv').value.trim() || '-'));
+    var c = $('co-country').value;
+    out.push('Email: ' + email(), 'Country: ' + countryName(c) + ' (' + c + ')',
+             'Country of the connection: ' + (seen ? countryName(seen) + ' (' + seen + ')' + (seen === c ? ', matches' : ', differs') : 'not available'),
+             'TradingView username: ' + ($('co-tv').value.trim() || '-'));
     return out.concat(extra || []).join('\n');
   }
   function mail(subject, body) {
@@ -208,6 +243,8 @@
       $('co').hidden = true;
       return;
     }
+    fillCountries();
+    lookCountry();
     var bill = q.get('bill') === 'y' ? 'y' : 'm';
     setRadio('plan', PLANS[q.get('plan')] ? q.get('plan') : 'adept');
     setRadio('bill', bill);
