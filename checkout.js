@@ -9,7 +9,8 @@
     novice: { name: 'Novice', m: 0, y: 0 },
     apprentice: { name: 'Apprentice', m: 34, y: 374 },
     adept: { name: 'Adept', m: 55, y: 605 },
-    magister: { name: 'Magister', m: 89, y: 979 }
+    magister: { name: 'Magister', m: 89, y: 979 },
+    doctor: { name: 'Doctor', m: 144, y: 1584 }
   };
   // Native USDC (Circle) on each network; the euro price is converted at the rate of the day.
   var NETS = {
