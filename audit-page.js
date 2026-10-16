@@ -155,7 +155,7 @@
         kpi('Ulcer index', R.ulcer !== null ? R.ulcer.toFixed(1) : '–', '', 'depth and length of drawdowns') +
         kpi('Longest under water', dur(R.longest)) + kpi('Under water now', R.current > 0 ? dur(R.current) : 'at a high') +
         kpi('Yearly growth', R.cagr !== null ? pct(R.cagr, 0, true) : '–', sign(R.cagr), R.cagr === null ? 'under a month of history' : 'CAGR') +
-        kpi('Sortino', ratio(R.sortino), '', R.sortino !== null ? 'on ' + R.days + ' daily returns' : 'needs 20 days') + kpi('Sharpe', ratio(R.sharpe)) +
+        kpi('Sortino', ratio(R.sortino), '', R.sortino !== null ? 'on ' + R.days + ' daily returns' : 'needs 20 days, 5 of them down') + kpi('Sharpe', ratio(R.sharpe)) +
         kpi('Calmar', ratio(R.calmar), '', 'growth ÷ deepest drawdown') + kpi('Worst day', pct(R.worstDay), R.worstDay < 0 ? 'down' : '') + '</div>' +
         src('Source: Hyperliquid portfolio history' + (a.rebuilt ? ' and daily closes' : '') + ' · ' + (a.rebuilt ? 'daily returns over the fills' : 'daily returns over the last month') + ' ' + EST)));
     }

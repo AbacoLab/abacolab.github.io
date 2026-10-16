@@ -20,7 +20,7 @@
         var t = Date.now();
         spent = spent.filter(function (x) { return t - x[0] < 60000; });
         var used = spent.reduce(function (a, x) { return a + x[1]; }, 0);
-        if (used + w <= 1000) { spent.push([t, w]); resolve(); } else setTimeout(check, 1500);
+        if (used + w <= 1150) { spent.push([t, w]); resolve(); } else setTimeout(check, 1500);
       })();
     });
   }
@@ -208,7 +208,7 @@
     return {
       total: total, cagr: cagr, maxDD: maxDD, maxDDAt: maxT, avgDD: ddSum / span, ulcer: ulcer,
       longest: longest, current: current,
-      sortino: down > 0 && r.length >= 20 ? mean / down * Math.sqrt(365) : null,
+      sortino: down > 0 && r.length >= 20 && r.filter(function (x) { return x < 0; }).length >= 5 ? mean / down * Math.sqrt(365) : null,
       sharpe: sd > 0 && r.length >= 20 ? mean / sd * Math.sqrt(365) : null,
       calmar: cagr !== null && maxDD < 0 ? cagr / -maxDD : null,
       upi: cagr !== null && ulcer > 0 ? cagr * 100 / ulcer : null,
@@ -250,7 +250,7 @@
     }
     var startOfData = fills.length ? fills[0].time : NOW;
     report({ step: 'Reading funding', pct: 55 });
-    var fund = await fundingFrom(user, startOfData, 6, null);
+    var fund = await fundingFrom(user, startOfData, 3, null);
     var a = build(user, vault, portfolio, fills, state, hip3, fund, null);
     a.mode = fund.done ? 'deep-funding' : 'light';
     return { audit: a, more: async function (onPct) {
