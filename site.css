@@ -125,7 +125,7 @@ h4{font-size:20px;line-height:1.15;letter-spacing:.02em}
 @media (max-width:859px){.phero .art{--art-bg:var(--bg)}}
 
 /* sections and blocks */
-.sec{padding-block:clamp(48px,8vw,112px)}
+.sec{padding-block:clamp(40px,6.5vw,88px)}
 .sec.first{padding-top:clamp(16px,3vw,32px)}
 .sec-head{display:grid;gap:16px;margin-bottom:clamp(28px,4vw,48px);max-width:780px}
 .stack{display:grid;gap:clamp(28px,4vw,48px)}
@@ -492,7 +492,7 @@ details[open] summary::after{content:"\2212"}
 details p{color:var(--muted);font-size:16.5px;margin-top:10px;max-width:68ch}
 
 /* signature */
-.sign{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:center}
+.sign{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(14px,2vw,24px);align-items:center}
 .sign svg{width:clamp(64px,9vw,104px);height:auto;display:block}
 .sign h2 .cu{color:var(--cu)}
 .sign p{color:var(--muted);margin-top:14px;max-width:56ch}
