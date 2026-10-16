@@ -23,6 +23,7 @@
   };
   // phisys.app checks the transfer on chain and issues the licence, or renews the one this email holds
   var PAY_API = 'https://phisys.app/pay/usdc';
+  var PRICES_API = 'https://phisys.app/pay/prices';   // the table phisys.app decides with: the page reads the same
   // The rate of the day: ExchangeRate-API's open endpoint (it asks for the credit shown beside the rate),
   // then the ECB reference rate through Frankfurter, which some browsers fail to reach.
   var RATES = [
@@ -121,6 +122,17 @@
       ['https://api.country.is/', function (r) { return r.json().then(function (j) { return j.country; }); }],
       ['https://ipapi.co/country/', function (r) { return r.text(); }]
     ];
+    fetch(PRICES_API).then(function (r) { return r.json(); }).then(function (j) {
+      if (!j || !j.ok || !j.eur) return;
+      Object.keys(PLANS).forEach(function (k) {
+        var e = j.eur[k]; if (!e || !(e.month > 0) || !(e.year > 0)) return;
+        PLANS[k].m = e.month; PLANS[k].y = e.year;
+        var b = document.querySelector('#co-plan input[value="' + k + '"] + span b');
+        if (b) { b.setAttribute('data-m', '€' + e.month.toLocaleString('en-US')); b.setAttribute('data-y', '€' + e.year.toLocaleString('en-US')); }
+      });
+      render();
+    }).catch(function () { /* the prices in the page stand */ });
+
     (function next(i) {
       if (i >= srcs.length) return;
       fetch(srcs[i][0]).then(function (r) { return r.ok ? srcs[i][1](r) : Promise.reject(); }).then(function (c) {
@@ -201,6 +213,8 @@
       var hash = await eth.request({ method: 'eth_sendTransaction', params: [{
         from: acc[0], to: s.net.usdc, value: '0x0', data: transferData(to, s.cents) }] });
       lastTx = { s: s, hash: hash, url: s.net.explorer + '/tx/' + hash };
+      try { await signPay(eth, acc[0], lastTx); }
+      catch (e) { noSig(lastTx, e && e.code === 4001 ? 'Signature declined: the USDC are sent, but without it we cannot match them to you.' : ''); return; }
       claim(lastTx, 0);
     } catch (e) {
       say(e && e.code === 4001 ? 'Cancelled in the wallet: nothing was sent.' : 'The wallet stopped: ' + ((e && e.message) || e));
@@ -209,14 +223,30 @@
     }
   }
 
+  // The hash is public: the wallet that paid signs the email and the hash, so the licence goes to who paid
+  function payMessage(hash) {
+    return 'Phisys payment\nemail: ' + email().toLowerCase().replace(/\s+/g, '') + '\ntx: ' + hash.toLowerCase();
+  }
+  function hexUtf8(t) {
+    return '0x' + Array.prototype.map.call(new TextEncoder().encode(t), function (b) { return ('0' + b.toString(16)).slice(-2); }).join('');
+  }
+  async function signPay(eth, from, tx) {
+    say('Sent. Now sign in your wallet: it confirms the payment is yours (no cost, nothing moves).', tx.url);
+    tx.sig = await eth.request({ method: 'personal_sign', params: [hexUtf8(payMessage(tx.hash)), from] });
+  }
+  function noSig(tx, why) {
+    $('co-receipt').hidden = false;
+    say((why || 'Without the wallet’s signature we cannot match the payment to you.') + ' Send us the receipt and the licence key follows.', tx.url);
+  }
+
   // The transfer, handed to phisys.app: it waits for the block, checks address, network and amount, and answers
   // with the licence issued (or renewed). Until it answers, the receipt leaves by email as before.
   function claim(tx, tries) {
     var s = tx.s;
     say(tries ? 'Waiting for the network to confirm the transfer…' : 'Sent. Checking the transfer on ' + s.net.name + '…', tx.url);
-    var body = { email: email(), country: $('co-country').value, seen: seen || '', tv: $('co-tv').value.trim(),
-                 plan: s.plan, months: s.months, net: radio('net') || 'arbitrum', tx: tx.hash, eur: s.eur, cents: s.cents,
-                 rate: rate, rateDate: rateDate };
+    var body = { email: email().toLowerCase().replace(/\s+/g, ''), country: $('co-country').value, seen: seen || '', tv: $('co-tv').value.trim(),
+                 plan: s.plan, months: s.months, net: radio('net') || 'arbitrum', tx: tx.hash.toLowerCase(), eur: s.eur, cents: s.cents,
+                 rate: rate, rateDate: rateDate, sig: tx.sig || '' };
     fetch(PAY_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
       .then(function (r) { return r.json().then(function (j) { return { code: r.status, j: j }; }); })
       .then(function (x) {
@@ -241,8 +271,13 @@
     var h = ($('co-tx').value || '').trim(), s = state();
     var m = h.match(/0x[0-9a-fA-F]{64}/);
     if (!m) { say('Paste the transaction hash: 0x and 64 characters, from your wallet or the explorer.'); $('co-tx').focus(); return; }
-    lastTx = { s: s, hash: m[0], url: s.net.explorer + '/tx/' + m[0] };
-    claim(lastTx, 0);
+    var tx = lastTx = { s: s, hash: m[0], url: s.net.explorer + '/tx/' + m[0] };
+    var eth = window.ethereum;
+    if (!eth || !eth.request) { noSig(tx, 'To check it here, open this page where the wallet that paid is connected.'); return; }
+    eth.request({ method: 'eth_requestAccounts' })
+      .then(function (acc) { return signPay(eth, acc[0], tx); })
+      .then(function () { claim(tx, 0); })
+      .catch(function (e) { noSig(tx, e && e.code === 4001 ? 'Signature declined.' : ''); });
   }
 
   function payCard() {
