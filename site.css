@@ -649,3 +649,4 @@ h2.lines span{display:block;white-space:nowrap}
 .txpaste summary{cursor:pointer;color:var(--muted);font-size:15px}
 .txpaste .sub{margin-top:10px}
 .txpaste input{font-family:var(--mono);font-size:13px}
+.soon-line a{color:var(--cu)}

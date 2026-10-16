@@ -302,7 +302,7 @@
       render();
     });
     $('co').addEventListener('submit', function (e) { e.preventDefault(); });
-    if ($('co-card')) $('co-card').addEventListener('click', function () { if (needEmail()) payCard(); });
+    if ($('co-card')) $('co-card').addEventListener('click', function (e) { e.preventDefault(); if (needEmail()) payCard(); });
     $('co-mm').addEventListener('click', function () { if (!busy && needEmail()) payUsdc(); });
     $('co-check').addEventListener('click', function () { if (needEmail()) claimHash(); });
     $('co-free').addEventListener('click', function () { if (needEmail()) freeStart(); });

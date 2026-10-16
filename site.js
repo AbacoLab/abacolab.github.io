@@ -30,6 +30,7 @@
 
   ready(function () {
     document.querySelectorAll('[data-mail]').forEach(function (n) { n.textContent = MAIL; });
+    document.querySelectorAll('a[data-mailto]').forEach(function (a) { a.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent(a.getAttribute('data-mailto')); });
 
     // The hero lockup: its three lines start and end on the same verticals. Letter-spacing closes the gap,
     // and the glyphs' side bearings come from a canvas, so the ink lines up and not just the boxes.
