@@ -4,6 +4,8 @@
 (function () {
   'use strict';
 
+  // Novice has its own form on the mailing list: its own confirmation email, the TradingView username required
+  var NOVICE = 'https://35dd6c9c.sibforms.com/serve/MUIFAH4m-LrUUpCpM1t9H2eMAYbGePtQDCynUQEwgq1qh5CEqMSSvTSioig_JMrKRlVj3cC394ED_qGtGbfuMaWCWf2WMxqJUXTFljt7p5GTRPD8XABKa_X5ZfJ3qYJBkznLfvVj5lUXmBIyzw-LwYzOcYGqkS_jkqjD_V_f2ECVZ0T5k_46s50ctGduATGx9wl_9yIutIVgvGTxew==';
   var MAIL = atob('YWJhY29AcGhpc3lzLmFwcA==');  // never whole in the files: harvesters read them
   var PLANS = {
     novice: { name: 'Novice', m: 0, y: 0 },
@@ -223,7 +225,7 @@
       var tv = $('co-tv').value.trim();
       if (!tv) { say('Write your TradingView username: Novice is the report plus our invite-only scripts there. For the report alone, use the form below.'); $('co-tv').focus(); return; }
       if (window.abacoSubscribe) window.abacoSubscribe($('co-email'), $('co-status'), 'novice', { TV_USERNAME: tv },
-        'Almost there: check your inbox and click the link to confirm. Access to the invite-only scripts follows for ' + tv + '.');
+        'Almost there: check your inbox and click the link to confirm. Access to the invite-only scripts follows for ' + tv + '.', NOVICE);
       return;
     }
     var el = $('co-addr'), a = el.value.trim();
