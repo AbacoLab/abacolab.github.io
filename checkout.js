@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  var MAIL = atob('Y29udGFjdEBwaGlzeXMuYXBw');  // never whole in the files: harvesters read them
+  var MAIL = atob('YWJhY29AcGhpc3lzLmFwcA==');  // never whole in the files: harvesters read them
   var PLANS = {
     novice: { name: 'Novice', m: 0, y: 0 },
     apprentice: { name: 'Apprentice', m: 34, y: 374 },
