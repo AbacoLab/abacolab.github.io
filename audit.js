@@ -124,7 +124,10 @@
     });
     pts.sort(function (a, b) { return a.t - b.t; });
     rets.sort(function (a, b) { return a.t - b.t; });
-    return { pts: pts, rets: rets };
+    // the account's life in dollars, from Hyperliquid's all-time window: what went in, what it made, what it holds
+    var life = null, at = byName.allTime && wins[0] && order[0] === 'allTime' ? wins[0] : null;
+    if (at && at.length) { var z = at[at.length - 1]; life = { from: at[0].t, av: z.av, pnl: z.pnl, netIn: z.av - z.pnl }; }
+    return { pts: pts, rets: rets, life: life };
   }
   function avAt(pts, t) {
     if (!pts.length) return 0;
@@ -395,7 +398,7 @@
 
     return {
       user: user, now: NOW, from: startOfData, nFills: fills.length, capped: fills.length >= 9990, vault: V,
-      curve: pts, index: idx, rebuilt: rebuilt, fundingDone: fund.done, fundingFrom: fund.rows.length ? fund.rows[0].time : null, fundingTo: fund.rows.length ? fund.rows[fund.rows.length - 1].time : null,
+      curve: pts, life: CV.life, index: idx, rebuilt: rebuilt, fundingDone: fund.done, fundingFrom: fund.rows.length ? fund.rows[0].time : null, fundingTo: fund.rows.length ? fund.rows[fund.rows.length - 1].time : null,
       costs: { gross: gross, fees: fees, builder: builder, funding: funding, net: net, unreal: unreal, loose: loose },
       maker: { takerShare: tN + mN ? tN / (tN + mN) : null, takerRate: takerRate, makerRate: makerRate, extra: takerExtra },
       stats: stats, byAsset: byAsset, bySide: bySide, byStyle: byStyle, hours: hours, hoursN: hoursN, dows: dows, dowsN: dowsN,

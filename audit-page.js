@@ -62,8 +62,13 @@
     }).join('');
     var base = opts.base !== undefined && opts.base >= y0 && opts.base <= y1 ? '<path class="s-line" d="M0 ' + Y(opts.base).toFixed(1) + 'H' + W + '"/>' : '';
     var ticks = '', yr0 = new Date(x0).getUTCFullYear(), yr1 = new Date(x1).getUTCFullYear(), span = x1 - x0;
-    if (span > 400 * DAY) for (var y = yr0 + 1; y <= yr1; y++) { var t = Date.UTC(y, 0, 1); ticks += '<span style="left:' + (X(t) / W * 100).toFixed(2) + '%">' + y + '</span>'; }
-    else for (var m = new Date(Date.UTC(yr0, new Date(x0).getUTCMonth() + 1, 1)).getTime(); m < x1; m = Date.UTC(new Date(m).getUTCFullYear(), new Date(m).getUTCMonth() + 1, 1)) ticks += '<span style="left:' + (X(m) / W * 100).toFixed(2) + '%">' + MONTHS[new Date(m).getUTCMonth()] + '</span>';
+    var tick = function (t, label, cls) { ticks += '<span class="' + (cls || '') + '" style="left:' + (X(t) / W * 100).toFixed(2) + '%">' + label + '</span>'; };
+    var step = span > 6 * 365 * DAY ? 12 : span > 25 * 30 * DAY ? 3 : 1;   // every month up to two years, then quarters, then years
+    for (var m = Date.UTC(yr0, new Date(x0).getUTCMonth() + 1, 1); m < x1; m = Date.UTC(new Date(m).getUTCFullYear(), new Date(m).getUTCMonth() + 1, 1)) {
+      var mo = new Date(m).getUTCMonth(), yr = new Date(m).getUTCFullYear();
+      if (mo % step) continue;
+      tick(m, step === 12 ? String(yr) : (mo === 0 ? MONTHS[0] + ' ' + yr : MONTHS[mo]), step === 1 && mo % 3 ? 'minor' : '');
+    }
     return '<figure class="chart"><div class="plot"><svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" role="img" aria-label="' + esc(opts.label) + '">' + base + paths + '</svg>' +
       '<p class="ylab top">' + opts.fmt(y1) + '</p><p class="ylab bot">' + opts.fmt(y0) + '</p></div><div class="xticks">' + ticks + '</div></figure>';
   }
@@ -78,19 +83,23 @@
     h.push('<p class="period">' + (a.nFills ? 'Trades and costs: ' + (a.capped ? 'the latest ' : '') + a.nFills.toLocaleString('en-US') + ' fills, from ' + date(a.from) + ' to today. ' : 'No fills on record. ') +
       'Curve, drawdowns and months: the account since ' + date(firstT) + ', net of deposits and withdrawals.' + (deep ? '' : ' <span class="refine">Refining…</span>') + '</p>');
 
-    // headline
-    h.push('<div class="kpis">' +
-      kpi('Net from trades', money(c.net, true), sign(c.net), 'Closed trades, after fees and funding') +
-      kpi('Paid in fees', money(c.fees), '', c.gross > 0 ? pct(c.fees / c.gross, 0) + ' of the gross' : '') +
-      kpi('Return since ' + new Date(firstT).getUTCFullYear(), R.total !== undefined ? pct(R.total, 0, true) : '–', sign(R.total), 'Net of deposits') +
-      kpi('Deepest drawdown', pct(R.maxDD, 1), R.maxDD < 0 ? 'down' : '', R.maxDDAt ? date(R.maxDDAt) : '') + '</div>');
+    // headline: the account's own arithmetic, in dollars — put in, plus what it made, is what it holds
+    var L = a.life;
+    h.push('<div class="kpis eq">' +
+      (L ? kpi('Put in, net', money(L.netIn), '', L.netIn < 0 ? 'More withdrawn than deposited, all time' : 'Deposits less withdrawals, all time') +
+           kpi('<b>+</b> Profit and loss', money(L.pnl, true), sign(L.pnl), 'Everything it made or lost, fees and funding included') +
+           kpi('<b>=</b> Account value', money(L.av), '', 'Today, on Hyperliquid') : '') +
+      kpi('Return, time-weighted', R.total !== undefined ? pct(R.total, 0, true) : '–', sign(R.total), 'What $1,000 below became: deposits do not count') +
+      kpi('Deepest drawdown', pct(R.maxDD, 1), R.maxDD < 0 ? 'down' : '', R.maxDDAt ? 'On ' + date(R.maxDDAt) : '') + '</div>');
 
     // curve and drawdown
     if (a.index.length > 2) {
       var peak = -Infinity, dd = a.index.map(function (p) { peak = Math.max(peak, p.I); return [p.t, p.I / peak - 1]; });
       var logS = Math.max.apply(null, a.index.map(function (p) { return p.I; })) / Math.min.apply(null, a.index.map(function (p) { return p.I; })) > 8;
-      h.push(sec('curve', 'Growth of $1', (logS ? 'Log scale. ' : '') + 'Each step is the account’s return on what it held, deposits and withdrawals taken out.',
-        lineChart([{ pts: a.index.map(function (p) { return [p.t, logS ? Math.log(p.I) : p.I]; }), cls: 's-fg' }], { label: 'Growth of one dollar', h: 220, base: logS ? 0 : 1, fmt: function (v) { return '$' + (logS ? Math.exp(v) : v).toFixed((logS ? Math.exp(v) : v) < 10 ? 2 : 0); } }) +
+      h.push(sec('curve', 'Growth of $1,000', (logS ? 'Log scale. ' : '') + 'What $1,000 put in on ' + date(a.index[0].t) + ' would be worth, following the account’s returns step by step: its deposits and withdrawals do not move the line.',
+        '<h3 class="ch">Equity: $1,000 at the start</h3>' +
+        lineChart([{ pts: a.index.map(function (p) { return [p.t, logS ? Math.log(p.I * 1000) : p.I * 1000]; }), cls: 's-fg' }], { label: 'Growth of 1,000 dollars', h: 220, base: logS ? Math.log(1000) : 1000, fmt: function (v) { return money(logS ? Math.exp(v) : v); } }) +
+        '<h3 class="ch">Drawdown: how far below its previous high</h3>' +
         lineChart([{ pts: dd, cls: 's-down' }], { label: 'Drawdown from the previous high', h: 90, zeroTop: true, base: 0, fmt: function (v) { return pct(v, 0); } }) +
         src('Source: Hyperliquid portfolio history · returns ' + (a.rebuilt ? 'daily over the fills, rebuilt from trades, funding and daily closes; before them ' : '') + 'between Hyperliquid’s own points ' + EST)));
     }
@@ -99,7 +108,7 @@
     if (a.nFills) {
       var rows = [['Gross from closed trades', c.gross], ['Fees', -c.fees], ['Funding', c.funding], ['Net', c.net]];
       var mx = Math.max.apply(null, rows.map(function (r) { return Math.abs(r[1]); })) || 1;
-      h.push(sec('costs', 'Where the money went', 'From the first fill in view to today.',
+      h.push(sec('costs', 'Where the money went', 'From ' + date(a.from) + (a.capped ? ', the first of the latest ' + a.nFills.toLocaleString('en-US') + ' fills Hyperliquid serves,' : '') + ' to today. Not the account’s whole life: that is the profit and loss above.',
         '<div class="fall">' + rows.map(function (r, i) {
           return '<div class="row' + (i === 3 ? ' tot' : '') + '"><span class="k">' + r[0] + '</span><span class="track"><i class="' + (r[1] >= 0 ? 'bu' : 'bd') + '" style="width:' + (Math.abs(r[1]) / mx * 100).toFixed(1) + '%"></i></span>' + n(money(r[1], true), sign(r[1])) + '</div>';
         }).join('') + '</div>' +

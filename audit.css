@@ -44,7 +44,7 @@
 .fall .row.tot{border-top:1px solid var(--line);padding-top:10px}
 .fall .k{color:var(--muted);font-size:16px}
 .fall .track{height:10px;background:var(--b1);border-radius:2px;overflow:hidden}
-.fall .track i{display:block;height:100%}
+.fall .track i{display:block;height:100%;border-radius:2px}
 .fall .bu{background:var(--u3)} .fall .bd{background:var(--d3)}
 .fall .v{font:500 16px/1 var(--mono);text-align:right}
 
@@ -106,3 +106,10 @@
   .tw th,.tw td{padding:7px 8px}
   .tw caption{padding:10px 8px 2px}
 }
+
+/* the headline sums: put in + profit = value */
+.kpis.eq .k b{color:var(--cu);font-weight:600;margin-right:4px}
+.ares h3.ch{font:600 12px/1.2 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:6px 0 -6px}
+@media (max-width:640px){.xticks span.minor{display:none}}
+.xticks span{font-size:10.5px}
+@media (min-width:900px){.kpis.eq{grid-template-columns:repeat(5,minmax(0,1fr))}}
