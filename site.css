@@ -703,3 +703,19 @@ h2.lines span{display:block;white-space:nowrap}
   .tier.novice .name{grid-area:name}.tier.novice .for{grid-area:for}.tier.novice ul{grid-area:list}
   .tier.novice .price{grid-area:price;text-align:right}.tier.novice .price-sub{grid-area:sub;text-align:right}.tier.novice .btn{grid-area:btn}
 }
+
+/* home: Phisys in three tiles */
+.trio{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+@media (min-width:860px){.trio{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.trio h3 a,.tvrow h3 a{color:inherit;text-decoration:none}
+.trio h3 a:hover,.tvrow h3 a:hover{color:var(--cu)}
+.trio .say{color:var(--muted)}
+/* header: open the app */
+.hdr-app{display:inline-flex;align-items:center;font:600 15px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--bg);background:var(--cu);border:1px solid var(--cu);border-radius:999px;padding:8px 14px;text-decoration:none;white-space:nowrap}
+.hdr-app:hover{background:var(--fg);border-color:var(--fg)}
+.hdr-cta{margin-left:-14px}
+@media (max-width:640px){
+  .top{grid-template-columns:auto auto auto}
+  .hdr-cta{grid-column:2;margin-left:0;justify-self:end}
+  .hdr-app{grid-column:3;grid-row:1;font-size:13px;padding:7px 12px}
+}
