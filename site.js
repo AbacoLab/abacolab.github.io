@@ -17,7 +17,7 @@
     var say = function (t) { if (s) { s.hidden = false; s.textContent = t; } };
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(who)) { say('That email does not look right.'); if (input) input.focus(); return; }
     say('Sending…');
-    var body = new URLSearchParams({ EMAIL: who, email_address_check: '', locale: 'en' });
+    var body = new FormData(); body.append('EMAIL', who); body.append('email_address_check', ''); body.append('locale', 'en');   // as Brevo's own form sends it
     fetch(LIST + '?isAjax=1', { method: 'POST', body: body }).then(function (r) { return r.json(); }).then(function (j) {
       if (!j || !j.success) throw new Error('refused');
       say('Almost there: check your inbox and click the link to confirm.');
