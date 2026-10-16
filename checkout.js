@@ -82,14 +82,14 @@
     var price = euro(s.p.m) + ' a month, or ' + euro(s.p.y) + ' for 12 months, one month free';
     $('co-title').textContent = 'Begin ' + s.p.name;
     $('co-lede').textContent = !paid ? 'Free: the monthly report, and our indicators, self-optimising strategies and screeners on TradingView'
-      : s.ref ? 'First month free with referral, then ' + euro(s.p[s.bill]) + (s.bill === 'y' ? ' a year' : ' a month') : price;
+      : s.ref ? 'First two months free with referral, then ' + euro(s.p[s.bill]) + (s.bill === 'y' ? ' a year' : ' a month') : price;
     document.querySelectorAll('#co-plan b[data-m]').forEach(function (b) { b.textContent = b.getAttribute('data-' + s.bill); });
     $('co-bill').hidden = true;   // one payment for 1, 3 or 12 months: the months pick the price
     $('co-ref-row').hidden = !paid;
     $('co-addr-row').hidden = !s.ref;
     $('co-pay').hidden = !paid || s.ref;
     $('co-go').hidden = paid && !s.ref;
-    $('co-free').textContent = paid ? 'Start my free month' : 'Create my account';
+    $('co-free').textContent = paid ? 'Start my two free months' : 'Create my account';
     $('co-usdc').textContent = s.cents !== null ? usdc(s.cents) : euro(s.eur) + ' at the day’s rate';
     $('co-eur').textContent = euro(s.eur) + ' for ' + months(s.months);
     var rt = $('co-rate');
@@ -303,7 +303,7 @@
     var el = $('co-addr'), a = el.value.trim();
     el.setAttribute('aria-invalid', isAddr(a) ? 'false' : 'true');
     if (!isAddr(a)) { say('Write the Hyperliquid address you opened through our link: 0x and 40 characters.'); el.focus(); return; }
-    mail('Free month: ' + s.p.name, lines(s, ['Hyperliquid address: ' + a]));
+    mail('Two free months: ' + s.p.name, lines(s, ['Hyperliquid address: ' + a]));
     say('Your mail app opens with the request: we check the referral and send your licence key.');
   }
 
