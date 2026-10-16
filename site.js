@@ -8,7 +8,7 @@
   }
 
   // The address never appears whole in the files: harvesters read the HTML and the scripts.
-  var MAIL = atob('Y2lhby5hYmFjb0BnbWFpbC5jb20=');
+  var MAIL = atob('Y29udGFjdEBwaGlzeXMuYXBw');
 
   // Monthly report: the address goes to the mailing list (Brevo), which asks for a confirmation by email.
   var LIST = 'https://35dd6c9c.sibforms.com/serve/MUIFAEFhO9EZELir6NqGhKsngp3EXFMzBvMjPDtG9MMZLekzKFx8e1N-hRSxwh7QCAszshEdR6L0g5EHMMFi5AUza7EM6RaMdH_5t4cSm6Hjl2PixzHbtVUJHatXateY7UetuI_fnTcyPeBJDFapIwg5ZP02HF34vgnTyMGF373F-hYhME1FmWZ5zsrh_CCMzfp3rBSXydwVDGwhCA==';
