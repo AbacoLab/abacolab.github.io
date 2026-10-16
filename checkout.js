@@ -30,7 +30,6 @@
       read: function (j) { return j.rates && { usd: j.rates.USD, day: j.date }; } }
   ];
 
-  var USDC_OFF = 0.05;   // paying in USDC costs 5% less: no card fees for us
   var rate = null, rateDate = '', rateBy = null, rateFailed = false, busy = false, lastTx = null;
 
   function $(id) { return document.getElementById(id); }
@@ -59,8 +58,7 @@
     return {
       plan: plan, p: p, bill: bill, months: n, eur: eur,
       net: NETS[radio('net')] || NETS.arbitrum,
-      usdcEur: Math.round(eur * (1 - USDC_OFF) * 100) / 100,
-      cents: rate ? Math.ceil(Math.round(eur * (1 - USDC_OFF) * 100) / 100 * rate * 100 - 1e-6) : null,
+      cents: rate ? Math.ceil(eur * rate * 100 - 1e-6) : null,
       ref: plan !== 'novice' && $('co-ref').checked
     };
   }
@@ -78,7 +76,7 @@
 
   function render() {
     var s = state(), paid = s.plan !== 'novice', c = cfg();
-    var price = euro(s.p.m) + ' a month, or ' + euro(s.p.y) + ' for 12 months, one month free. In USDC, 5% off';
+    var price = euro(s.p.m) + ' a month, or ' + euro(s.p.y) + ' for 12 months, one month free';
     $('co-title').textContent = 'Begin ' + s.p.name;
     $('co-lede').textContent = !paid ? 'Free: the monthly report, and our indicators, self-optimising strategies and screeners on TradingView'
       : s.ref ? 'First month free with referral, then ' + euro(s.p[s.bill]) + (s.bill === 'y' ? ' a year' : ' a month') : price;
@@ -89,8 +87,8 @@
     $('co-pay').hidden = !paid || s.ref;
     $('co-go').hidden = paid && !s.ref;
     $('co-free').textContent = paid ? 'Start my free month' : 'Create my account';
-    $('co-usdc').textContent = s.cents !== null ? usdc(s.cents) : euro(s.usdcEur) + ' at the day’s rate';
-    $('co-eur').textContent = euro(s.usdcEur) + ' for ' + months(s.months) + ', 5% off ' + euro(s.eur);
+    $('co-usdc').textContent = s.cents !== null ? usdc(s.cents) : euro(s.eur) + ' at the day’s rate';
+    $('co-eur').textContent = euro(s.eur) + ' for ' + months(s.months);
     var rt = $('co-rate');
     rt.textContent = rate ? '1 EUR = ' + rate.toFixed(4) + ' USD, ' + rateDate + ', rates by '
       : rateFailed ? 'the day’s rate, in our reply' : 'loading…';
@@ -183,7 +181,7 @@
     var s = state(), to = cfg().usdc_to;
     if (!isAddr(to) || s.cents === null) {
       mail('Pay in USDC: ' + s.p.name + ', ' + months(s.months),
-           lines(s, ['Months: ' + s.months, 'Network: ' + s.net.name, 'Price: ' + euro(s.usdcEur) + ' (5% off ' + euro(s.eur) + ')']));
+           lines(s, ['Months: ' + s.months, 'Network: ' + s.net.name, 'Price: ' + euro(s.eur)]));
       say('Your mail app opens with the request: we reply with the address and the amount in USDC.');
       return;
     }
