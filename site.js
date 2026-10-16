@@ -158,6 +158,31 @@
       });
     });
 
+    // Prices: phisys.app's table, the one the payments are checked against (/pay/prices). The page's own stand if it is silent.
+    if (document.querySelector('.tier .price[data-m], .plan .pp')) {
+      fetch('https://phisys.app/pay/prices').then(function (r) { return r.json(); }).then(function (j) {
+        if (!j || !j.ok || !j.eur) return;
+        var eu = function (n) { return '€' + (n % 1 ? n.toFixed(2) : n.toLocaleString('en-US')); };
+        document.querySelectorAll('.tier').forEach(function (t) {
+          var h = t.querySelector('.tname'), e = h && j.eur[h.textContent.trim().toLowerCase()];
+          var pr = t.querySelector('.price[data-m]'), sub = t.querySelector('.price-sub[data-m]');
+          if (!e || !pr) return;
+          var byEl = document.getElementById('bill-y'), mode = byEl && byEl.getAttribute('aria-pressed') === 'true' ? 'y' : 'm';
+          pr.setAttribute('data-m', eu(e.month)); pr.setAttribute('data-y', eu(e.year));
+          pr.firstChild.nodeValue = pr.getAttribute('data-' + mode);
+          if (sub) {
+            sub.setAttribute('data-m', 'or ' + eu(e.year) + ' a year');
+            sub.setAttribute('data-y', 'that is ' + eu(Math.round(e.year / 12 * 100) / 100) + ' a month');
+            sub.textContent = sub.getAttribute('data-' + mode);
+          }
+        });
+        document.querySelectorAll('.plan').forEach(function (a) {
+          var n = a.querySelector('.pn'), pp = a.querySelector('.pp'), e = n && j.eur[n.textContent.trim().toLowerCase()];
+          if (e && pp && pp.firstChild && pp.firstChild.nodeType === 3) pp.firstChild.nodeValue = eu(e.month);
+        });
+      }).catch(function () { /* the prices written in the page stand */ });
+    }
+
     // Pricing: monthly or yearly.
     var bm = document.getElementById('bill-m'), by = document.getElementById('bill-y');
     if (bm && by) {
