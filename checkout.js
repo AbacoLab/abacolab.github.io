@@ -219,8 +219,10 @@
   function freeStart() {
     var s = state();
     if (s.plan === 'novice') {
-      mail('Novice sign-up', lines(s));
-      say('Your mail app opens with the request: send it and we open your account.');
+      // Novice is the monthly report: the same list, the same confirmation email; the TradingView username rides along
+      var tv = $('co-tv').value.trim();
+      if (window.abacoSubscribe) window.abacoSubscribe($('co-email'), $('co-status'), 'novice', { TRADINGVIEW: tv },
+        'Almost there: check your inbox and click the link to confirm.' + (tv ? ' Access to the invite-only scripts follows for ' + tv + '.' : ''));
       return;
     }
     var el = $('co-addr'), a = el.value.trim();

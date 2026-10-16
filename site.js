@@ -12,16 +12,17 @@
 
   // Monthly report: the address goes to the mailing list (Brevo), which asks for a confirmation by email.
   var LIST = 'https://35dd6c9c.sibforms.com/serve/MUIFAEFhO9EZELir6NqGhKsngp3EXFMzBvMjPDtG9MMZLekzKFx8e1N-hRSxwh7QCAszshEdR6L0g5EHMMFi5AUza7EM6RaMdH_5t4cSm6Hjl2PixzHbtVUJHatXateY7UetuI_fnTcyPeBJDFapIwg5ZP02HF34vgnTyMGF373F-hYhME1FmWZ5zsrh_CCMzfp3rBSXydwVDGwhCA==';
-  function subscribe(input, s, from) {
+  function subscribe(input, s, from, extra, done) {
     var who = input ? input.value.trim() : '';
     var say = function (t) { if (s) { s.hidden = false; s.textContent = t; } };
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(who)) { say('That email does not look right.'); if (input) input.focus(); return; }
     say('Sending…');
     var body = new FormData(); body.append('EMAIL', who); body.append('email_address_check', ''); body.append('locale', 'en');   // as Brevo's own form sends it
+    Object.keys(extra || {}).forEach(function (k) { if (extra[k]) body.append(k, extra[k]); });
     fetch(LIST + '?isAjax=1', { method: 'POST', body: body }).then(function (r) { return r.json(); }).then(function (j) {
       if (!j || !j.success) throw new Error('refused');
-      say('Almost there: check your inbox and click the link to confirm.');
-      if (input) input.value = '';
+      say(done || 'Almost there: check your inbox and click the link to confirm.');
+      if (input && !done) input.value = '';
       try { if (window.umami) window.umami.track('newsletter', { from: from || '' }); } catch (e) { /* counting is optional */ }
     }).catch(function () { say('It did not go through. Try again in a minute.'); });
   }
