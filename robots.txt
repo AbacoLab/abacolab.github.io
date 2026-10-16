@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://abacolab.github.io/sitemap.xml
+Sitemap: https://abaco.phisys.app/sitemap.xml

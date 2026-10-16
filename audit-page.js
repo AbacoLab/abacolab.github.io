@@ -233,7 +233,7 @@
       '<p class="say">One study a month by email: what a cost or a habit does to results, measured. Free.</p>' +
       '<form class="sub" data-mock="hook-status" novalidate><label class="sr" for="hook-email">Email</label><input id="hook-email" type="email" placeholder="you@example.com" autocomplete="email"><button class="btn fill" type="submit" data-cta="newsletter">Send it</button></form>' +
       '<p class="status" id="hook-status" aria-live="polite"></p>' +
-      '<div class="acts">' + cta + '<a class="btn ghost" data-cta="share" target="_blank" rel="noopener" href="https://x.com/intent/post?text=' + encodeURIComponent('Hyperliquid Account Audit: fees, funding, maker or taker, drawdowns, month by month. Free, in the browser, by @AbacoLab') + '&url=' + encodeURIComponent('https://abacolab.github.io/hyperliquid-audit.html') + '">Share on X</a></div></section>';
+      '<div class="acts">' + cta + '<a class="btn ghost" data-cta="share" target="_blank" rel="noopener" href="https://x.com/intent/post?text=' + encodeURIComponent('Hyperliquid Account Audit: fees, funding, maker or taker, drawdowns, month by month. Free, in the browser, by @AbacoLab') + '&url=' + encodeURIComponent('https://abaco.phisys.app/hyperliquid-audit.html') + '">Share on X</a></div></section>';
   }
 
   /* ---------- running ---------- */
