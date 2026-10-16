@@ -650,3 +650,13 @@ h2.lines span{display:block;white-space:nowrap}
 .txpaste .sub{margin-top:10px}
 .txpaste input{font-family:var(--mono);font-size:13px}
 .soon-line a{color:var(--cu)}
+
+/* studies: the studies on the left, the free tools on the right */
+.split{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(48px,6vw,80px)}
+@media (min-width:980px){.split{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:start}}
+.split .sec-head{margin-bottom:clamp(20px,3vw,32px)}
+.tools{display:grid;gap:16px}
+a.card.tool{text-decoration:none;color:inherit;transition:border-color .15s}
+a.card.tool:hover,a.card.tool:focus-visible{border-color:var(--cu)}
+a.card.tool:hover h3{color:var(--cu)}
+@media (min-width:720px) and (max-width:979px){.tools{grid-template-columns:1fr 1fr}}
