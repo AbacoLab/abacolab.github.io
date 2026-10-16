@@ -46,13 +46,20 @@
 <section class="wrap phero one">
   <div class="copy wide">
     <p class="eyebrow"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>monthly report</p>
-    <h1>You are on the list</h1>
-    <p class="lede">The next study arrives by email, once a month. One cost or one habit, measured on real data; no advice.</p>
+    <h1 id="sub-h">You are on the list</h1>
+    <p class="lede" id="sub-p">The next study arrives by email, once a month. One cost or one habit, measured on real data; no advice.</p>
     <div class="acts" style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn fill" href="test/timeframe-cost.html">Read the latest study</a><a class="btn ghost" href="hyperliquid-audit.html">Audit a Hyperliquid account</a></div>
   </div>
 </section>
 
 
+<script>
+  // Novice confirmations land here too, with ?plan=novice
+  if (/[?&]plan=novice\b/.test(location.search)) {
+    document.getElementById('sub-h').textContent = 'Welcome, Novice';
+    document.getElementById('sub-p').textContent = 'The monthly report arrives by email, and our invite-only scripts are added to your TradingView username within a day.';
+  }
+</script>
 </main>
 <footer>
   <div class="wrap foot">
