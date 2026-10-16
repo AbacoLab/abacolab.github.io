@@ -681,3 +681,16 @@ h2.lines span{display:block;white-space:nowrap}
 @media (min-width:900px){.tvrow{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}}
 /* studies beside the tools: the month above the title, not in a column of its own */
 .split .studies li{grid-template-columns:minmax(0,1fr)!important;gap:6px;padding-block:20px}
+
+/* the header's pill: the Hyperliquid Account Audit, on every page */
+.hdr-cta{display:inline-flex;align-items:center;gap:8px;font:600 15px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--fg);text-decoration:none;border:1px solid var(--cu);border-radius:999px;padding:8px 14px;white-space:nowrap}
+.hdr-cta .dot{width:6px;height:6px;border-radius:50%;background:var(--cu)}
+.hdr-cta:hover,.hdr-cta[aria-current="page"]{background:var(--cu);color:var(--bg)}
+.hdr-cta:hover .dot,.hdr-cta[aria-current="page"] .dot{background:var(--bg)}
+.top .nav{margin-left:auto}
+@media (max-width:640px){
+  .top{display:grid;grid-template-columns:auto auto;justify-content:space-between;align-items:center}
+  .top .nav{grid-column:1 / -1;grid-row:2;margin-left:0}
+  .hdr-cta{grid-column:2;grid-row:1;font-size:13px;padding:7px 12px}
+}
+.block h2#report-h{font-size:clamp(30px,3.4vw,44px)}
