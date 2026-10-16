@@ -57,6 +57,7 @@ h4{font-size:20px;line-height:1.15;letter-spacing:.02em}
 .nav .sep{color:var(--b3);padding-inline:8px}
 .nav .sep.bar{align-self:center;width:1px;height:.9em;padding:0;margin-inline:12px;background:var(--b3)}
 @media (max-width:520px){.logo svg{height:30px}.nav{font-size:17px}.nav .sep{padding-inline:5px}.nav .sep.bar{padding:0;margin-inline:7px}}
+@media (max-width:400px){.nav{font-size:15.5px;letter-spacing:.02em}.nav .sep.bar{margin-inline:5px}}
 
 /* buttons and links */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:600 17px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg);background:transparent;border:1px solid var(--cu);border-radius:999px;padding:13px 22px;cursor:pointer}
