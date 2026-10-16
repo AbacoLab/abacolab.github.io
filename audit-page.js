@@ -104,6 +104,23 @@
         src('Source: Hyperliquid portfolio history · returns ' + (a.rebuilt ? 'daily over the fills, rebuilt from trades, funding and daily closes; before them ' : '') + 'between Hyperliquid’s own points ' + EST)));
     }
 
+    // months
+    if (a.months.length) {
+      var years = {}; a.months.forEach(function (m) { (years[m.y] = years[m.y] || {})[m.m] = m; });
+      var ys = Object.keys(years).sort();
+      var grid = ys.map(function (y) {
+        var tot = 1; Object.keys(years[y]).forEach(function (k) { tot *= 1 + years[y][k].r; });
+        return '<div class="yr">' + y + '</div>' + MONTHS.map(function (_, i) {
+          var m = years[y][i];
+          if (!m) return '<div class="cell z empty"></div>';
+          return '<div class="cell ' + cellClass(m.r, monthStep(m.r)) + (m.partial ? ' part' : '') + '" title="' + MONTHS[i] + ' ' + y + ' · ' + pct(m.r, 1, true) + (m.partial ? ' · part of the month' : '') + '"><span>' + Math.round(m.r * 100) + '</span></div>';
+        }).join('') + '<div class="yt ' + sign(tot - 1) + '">' + pct(tot - 1, 0, true) + '</div>';
+      }).join('');
+      h.push(sec('months', 'Month by month', 'Return of each calendar month, in %. Steps at 2, 5, 10 and 20%; a dotted edge is a part month.',
+        '<div class="heat months"><div></div>' + MONTHS.map(function (m) { return '<div class="mh">' + m.charAt(0) + '<span>' + m.slice(1) + '</span></div>'; }).join('') + '<div class="mh">year</div>' + grid + '</div>' +
+        src('Source: Hyperliquid portfolio history · month ends read between its points ' + EST)));
+    }
+
     // costs
     if (a.nFills) {
       var rows = [['Gross from closed trades', c.gross], ['Fees', -c.fees], ['Funding', c.funding], ['Net', c.net]];
@@ -167,23 +184,6 @@
         kpi('Sortino', ratio(R.sortino), '', R.sortino !== null ? 'on ' + R.days + ' daily returns' : 'needs 20 days, 5 of them down') + kpi('Sharpe', ratio(R.sharpe)) +
         kpi('Calmar', ratio(R.calmar), '', 'growth ÷ deepest drawdown') + kpi('Worst day', pct(R.worstDay), R.worstDay < 0 ? 'down' : '') + '</div>' +
         src('Source: Hyperliquid portfolio history' + (a.rebuilt ? ' and daily closes' : '') + ' · ' + (a.rebuilt ? 'daily returns over the fills' : 'daily returns over the last month') + ' ' + EST)));
-    }
-
-    // months
-    if (a.months.length) {
-      var years = {}; a.months.forEach(function (m) { (years[m.y] = years[m.y] || {})[m.m] = m; });
-      var ys = Object.keys(years).sort();
-      var grid = ys.map(function (y) {
-        var tot = 1; Object.keys(years[y]).forEach(function (k) { tot *= 1 + years[y][k].r; });
-        return '<div class="yr">' + y + '</div>' + MONTHS.map(function (_, i) {
-          var m = years[y][i];
-          if (!m) return '<div class="cell z empty"></div>';
-          return '<div class="cell ' + cellClass(m.r, monthStep(m.r)) + (m.partial ? ' part' : '') + '" title="' + MONTHS[i] + ' ' + y + ' · ' + pct(m.r, 1, true) + (m.partial ? ' · part of the month' : '') + '"><span>' + Math.round(m.r * 100) + '</span></div>';
-        }).join('') + '<div class="yt ' + sign(tot - 1) + '">' + pct(tot - 1, 0, true) + '</div>';
-      }).join('');
-      h.push(sec('months', 'Month by month', 'Return of each calendar month, in %. Steps at 2, 5, 10 and 20%; a dotted edge is a part month.',
-        '<div class="heat months"><div></div>' + MONTHS.map(function (m) { return '<div class="mh">' + m.charAt(0) + '<span>' + m.slice(1) + '</span></div>'; }).join('') + '<div class="mh">year</div>' + grid + '</div>' +
-        src('Source: Hyperliquid portfolio history · month ends read between its points ' + EST)));
     }
 
     // use of risk
