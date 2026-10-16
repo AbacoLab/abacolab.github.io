@@ -642,3 +642,7 @@ h2.lines span{display:block;white-space:nowrap}
 
 .phero h1.motto{white-space:nowrap;font-size:clamp(20px,6.4vw,84px)}
 .phero.one .copy.wide .lede{max-width:820px}
+
+/* checkout: one way to pay for now, the card line beneath */
+.pay-one{display:grid;gap:14px;max-width:560px}
+.soon-line{color:var(--dim)}

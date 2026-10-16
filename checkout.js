@@ -78,12 +78,12 @@
 
   function render() {
     var s = state(), paid = s.plan !== 'novice', c = cfg();
-    var price = s.bill === 'y' ? euro(s.p.y) + ' a year, one month free' : euro(s.p.m) + ' a month';
+    var price = euro(s.p.m) + ' a month, or ' + euro(s.p.y) + ' for 12 months, one month free. In USDC, 5% off';
     $('co-title').textContent = 'Begin ' + s.p.name;
     $('co-lede').textContent = !paid ? 'Free: the monthly report, and our indicators, self-optimising strategies and screeners on TradingView'
       : s.ref ? 'First month free with referral, then ' + euro(s.p[s.bill]) + (s.bill === 'y' ? ' a year' : ' a month') : price;
     document.querySelectorAll('#co-plan b[data-m]').forEach(function (b) { b.textContent = b.getAttribute('data-' + s.bill); });
-    $('co-bill').hidden = !paid;
+    $('co-bill').hidden = true;   // one payment for 1, 3 or 12 months: the months pick the price
     $('co-ref-row').hidden = !paid;
     $('co-addr-row').hidden = !s.ref;
     $('co-pay').hidden = !paid || s.ref;
@@ -264,7 +264,7 @@
       render();
     });
     $('co').addEventListener('submit', function (e) { e.preventDefault(); });
-    $('co-card').addEventListener('click', function () { if (needEmail()) payCard(); });
+    if ($('co-card')) $('co-card').addEventListener('click', function () { if (needEmail()) payCard(); });
     $('co-mm').addEventListener('click', function () { if (!busy && needEmail()) payUsdc(); });
     $('co-free').addEventListener('click', function () { if (needEmail()) freeStart(); });
     $('co-send').addEventListener('click', function () {
