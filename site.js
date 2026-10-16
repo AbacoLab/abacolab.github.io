@@ -14,17 +14,17 @@
   var LIST = 'https://35dd6c9c.sibforms.com/serve/MUIFAEFhO9EZELir6NqGhKsngp3EXFMzBvMjPDtG9MMZLekzKFx8e1N-hRSxwh7QCAszshEdR6L0g5EHMMFi5AUza7EM6RaMdH_5t4cSm6Hjl2PixzHbtVUJHatXateY7UetuI_fnTcyPeBJDFapIwg5ZP02HF34vgnTyMGF373F-hYhME1FmWZ5zsrh_CCMzfp3rBSXydwVDGwhCA==';
   function subscribe(input, s, from, extra, done, url) {
     var who = input ? input.value.trim() : '';
-    var say = function (t) { if (s) { s.hidden = false; s.textContent = t; } };
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(who)) { say('That email does not look right.'); if (input) input.focus(); return; }
+    var say = function (t, cls) { if (s) { s.hidden = false; s.textContent = t; s.classList.remove('hit', 'miss'); if (cls) s.classList.add(cls); } };
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(who)) { say('That email does not look right.', 'miss'); if (input) input.focus(); return; }
     say('Sending…');
     var body = new FormData(); body.append('EMAIL', who); body.append('email_address_check', ''); body.append('locale', 'en');   // as Brevo's own form sends it
     Object.keys(extra || {}).forEach(function (k) { if (extra[k]) body.append(k, extra[k]); });
     fetch((url || LIST) + '?isAjax=1', { method: 'POST', body: body }).then(function (r) { return r.json(); }).then(function (j) {
       if (!j || !j.success) throw new Error('refused');
-      say(done || 'Almost there: check your inbox and click the link to confirm.');
+      say(done || 'Almost there: check your inbox and click the link to confirm.', 'hit');
       if (input && !done) input.value = '';
       try { if (window.umami) window.umami.track('newsletter', { from: from || '' }); } catch (e) { /* counting is optional */ }
-    }).catch(function () { say('It did not go through. Try again in a minute.'); });
+    }).catch(function () { say('It did not go through. Try again in a minute.', 'miss'); });
   }
   window.abacoSubscribe = subscribe;
 

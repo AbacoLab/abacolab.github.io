@@ -407,6 +407,8 @@ h4{font-size:20px;line-height:1.15;letter-spacing:.02em}
 .sub input::placeholder{color:var(--dim)}
 .sub input:focus{outline:none;border-color:var(--cu)}
 .status{min-height:1.4em;font:400 13px/1.4 var(--mono);color:var(--dim)}
+.status.hit{color:var(--cu);font-size:14px;border-left:2px solid var(--cu);padding-left:10px}
+.status.miss{color:var(--fg);border-left:2px solid var(--b3);padding-left:10px}
 
 /* plans */
 .plans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
