@@ -21,6 +21,8 @@
     base: { name: 'Base', chainId: '0x2105', chainName: 'Base', rpc: 'https://mainnet.base.org',
             explorer: 'https://basescan.org', usdc: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913' }
   };
+  // phisys.app checks the transfer on chain and issues the licence, or renews the one this email holds
+  var PAY_API = 'https://phisys.app/pay/usdc';
   // The rate of the day: ExchangeRate-API's open endpoint (it asks for the credit shown beside the rate),
   // then the ECB reference rate through Frankfurter, which some browsers fail to reach.
   var RATES = [
@@ -188,7 +190,7 @@
     var eth = window.ethereum;
     if (!eth || !eth.request) {
       say('No wallet in this browser. Send ' + usdc(s.cents) + ' on ' + s.net.name +
-          ' to the address above from any wallet, then email us the transaction.');
+          ' to the address above from any wallet, then paste the transaction below.');
       return;
     }
     busy = true; $('co-mm').disabled = true;
@@ -198,14 +200,49 @@
       await onNet(eth, s.net);
       var hash = await eth.request({ method: 'eth_sendTransaction', params: [{
         from: acc[0], to: s.net.usdc, value: '0x0', data: transferData(to, s.cents) }] });
-      lastTx = { s: s, url: s.net.explorer + '/tx/' + hash };
-      $('co-receipt').hidden = false;
-      say('Sent: ' + usdc(s.cents) + ' on ' + s.net.name + '. Send us the receipt and the licence key follows.', lastTx.url);
+      lastTx = { s: s, hash: hash, url: s.net.explorer + '/tx/' + hash };
+      claim(lastTx, 0);
     } catch (e) {
       say(e && e.code === 4001 ? 'Cancelled in the wallet: nothing was sent.' : 'The wallet stopped: ' + ((e && e.message) || e));
     } finally {
       busy = false; $('co-mm').disabled = false;
     }
+  }
+
+  // The transfer, handed to phisys.app: it waits for the block, checks address, network and amount, and answers
+  // with the licence issued (or renewed). Until it answers, the receipt leaves by email as before.
+  function claim(tx, tries) {
+    var s = tx.s;
+    say(tries ? 'Waiting for the network to confirm the transfer…' : 'Sent. Checking the transfer on ' + s.net.name + '…', tx.url);
+    var body = { email: email(), country: $('co-country').value, seen: seen || '', tv: $('co-tv').value.trim(),
+                 plan: s.plan, months: s.months, net: radio('net') || 'arbitrum', tx: tx.hash, eur: s.eur, cents: s.cents,
+                 rate: rate, rateDate: rateDate };
+    fetch(PAY_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().then(function (j) { return { code: r.status, j: j }; }); })
+      .then(function (x) {
+        if (x.code === 202 && tries < 18) { setTimeout(function () { claim(tx, tries + 1); }, 10000); return; }
+        if (x.j && x.j.ok) {
+          say(x.j.message || ('Paid. Your licence code is on its way to ' + email() + '.'), tx.url);
+          $('co-status').classList.add('hit');
+          try { if (window.umami) window.umami.track('paid', { plan: s.plan, months: s.months }); } catch (e) {}
+          return;
+        }
+        throw new Error((x.j && x.j.message) || 'not checked');
+      })
+      .catch(function (e) {
+        $('co-receipt').hidden = false;
+        say('Sent: ' + usdc(s.cents) + ' on ' + s.net.name + '. ' + (e && e.message && e.message !== 'Failed to fetch' && e.message !== 'not checked' ? e.message + ' ' : '') +
+            'Send us the receipt and the licence key follows.', tx.url);
+      });
+  }
+
+  // Paid from a wallet outside this browser: the transaction's hash does the same
+  function claimHash() {
+    var h = ($('co-tx').value || '').trim(), s = state();
+    var m = h.match(/0x[0-9a-fA-F]{64}/);
+    if (!m) { say('Paste the transaction hash: 0x and 64 characters, from your wallet or the explorer.'); $('co-tx').focus(); return; }
+    lastTx = { s: s, hash: m[0], url: s.net.explorer + '/tx/' + m[0] };
+    claim(lastTx, 0);
   }
 
   function payCard() {
@@ -254,6 +291,9 @@
     setRadio('plan', PLANS[q.get('plan')] ? q.get('plan') : 'adept');
     setRadio('bill', bill);
     setRadio('months', bill === 'y' ? '12' : '1');
+    // a renewal reminder links here with the plan, the months and the email filled in
+    if (/^(1|3|12)$/.test(q.get('months') || '')) setRadio('months', q.get('months'));
+    if (q.get('email')) $('co-email').value = q.get('email');
 
     $('co').addEventListener('change', function (e) {
       var n = e.target.name;
@@ -264,6 +304,7 @@
     $('co').addEventListener('submit', function (e) { e.preventDefault(); });
     if ($('co-card')) $('co-card').addEventListener('click', function () { if (needEmail()) payCard(); });
     $('co-mm').addEventListener('click', function () { if (!busy && needEmail()) payUsdc(); });
+    $('co-check').addEventListener('click', function () { if (needEmail()) claimHash(); });
     $('co-free').addEventListener('click', function () { if (needEmail()) freeStart(); });
     $('co-send').addEventListener('click', function () {
       if (!lastTx) return;
