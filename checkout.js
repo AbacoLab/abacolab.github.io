@@ -221,8 +221,9 @@
     if (s.plan === 'novice') {
       // Novice is the monthly report: the same list, the same confirmation email; the TradingView username rides along
       var tv = $('co-tv').value.trim();
+      if (!tv) { say('Write your TradingView username: Novice is the report plus our invite-only scripts there. For the report alone, use the form below.'); $('co-tv').focus(); return; }
       if (window.abacoSubscribe) window.abacoSubscribe($('co-email'), $('co-status'), 'novice', { TV_USERNAME: tv },
-        'Almost there: check your inbox and click the link to confirm.' + (tv ? ' Access to the invite-only scripts follows for ' + tv + '.' : ''));
+        'Almost there: check your inbox and click the link to confirm. Access to the invite-only scripts follows for ' + tv + '.');
       return;
     }
     var el = $('co-addr'), a = el.value.trim();
