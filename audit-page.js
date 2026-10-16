@@ -270,14 +270,11 @@
 
   out.addEventListener('click', function (e) { var t = e.target.closest('[data-cta]'); if (t && t.tagName === 'A') track('audit_cta', { to: t.getAttribute('data-cta') }); });
   // the newsletter form inside the report arrives after site.js has wired the others
+  // the newsletter form inside the report arrives after site.js has wired the others
   out.addEventListener('submit', function (e) {
     var f = e.target; if (!f.matches('form[data-mock]')) return;
-    e.preventDefault(); track('newsletter', { from: 'audit' });
-    var em = f.querySelector('input[type=email]'), s = document.getElementById(f.getAttribute('data-mock'));
-    // until the mailing list is live, the request leaves as an email, as on the rest of the site
-    location.href = 'mailto:' + atob('Y2lhby5hYmFjb0BnbWFpbC5jb20=') + '?subject=' + encodeURIComponent('Monthly report') +
-      '&body=' + encodeURIComponent('Please send the monthly report to ' + (em.value.trim() || 'this address') + '.');
-    s.textContent = 'Your mail app opens with the request: send it and you are on the list.';
+    e.preventDefault();
+    if (window.abacoSubscribe) window.abacoSubscribe(f.querySelector('input[type=email]'), document.getElementById(f.getAttribute('data-mock')), 'audit');
   });
 
   var q = new URLSearchParams(location.search).get('address');

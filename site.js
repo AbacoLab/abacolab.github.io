@@ -10,6 +10,23 @@
   // The address never appears whole in the files: harvesters read the HTML and the scripts.
   var MAIL = atob('Y2lhby5hYmFjb0BnbWFpbC5jb20=');
 
+  // Monthly report: the address goes to the mailing list (Brevo), which asks for a confirmation by email.
+  var LIST = 'https://35dd6c9c.sibforms.com/serve/MUIFAEFhO9EZELir6NqGhKsngp3EXFMzBvMjPDtG9MMZLekzKFx8e1N-hRSxwh7QCAszshEdR6L0g5EHMMFi5AUza7EM6RaMdH_5t4cSm6Hjl2PixzHbtVUJHatXateY7UetuI_fnTcyPeBJDFapIwg5ZP02HF34vgnTyMGF373F-hYhME1FmWZ5zsrh_CCMzfp3rBSXydwVDGwhCA==';
+  function subscribe(input, s, from) {
+    var who = input ? input.value.trim() : '';
+    var say = function (t) { if (s) { s.hidden = false; s.textContent = t; } };
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(who)) { say('That email does not look right.'); if (input) input.focus(); return; }
+    say('Sending…');
+    var body = new URLSearchParams({ EMAIL: who, email_address_check: '', locale: 'en' });
+    fetch(LIST + '?isAjax=1', { method: 'POST', body: body }).then(function (r) { return r.json(); }).then(function (j) {
+      if (!j || !j.success) throw new Error('refused');
+      say('Almost there: check your inbox and click the link to confirm.');
+      if (input) input.value = '';
+      try { if (window.umami) window.umami.track('newsletter', { from: from || '' }); } catch (e) { /* counting is optional */ }
+    }).catch(function () { say('It did not go through. Try again in a minute.'); });
+  }
+  window.abacoSubscribe = subscribe;
+
   ready(function () {
     document.querySelectorAll('[data-mail]').forEach(function (n) { n.textContent = MAIL; });
 
@@ -114,9 +131,7 @@
           if (s) s.textContent = 'Your mail app opens with the request: send it and we add you.';
           return;
         }
-        location.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('Monthly report') +
-          '&body=' + encodeURIComponent('Please send the monthly report to ' + (who || 'this address') + '.');
-        if (s) { s.hidden = false; s.textContent = 'Your mail app opens with the request: send it and you are on the list.'; }
+        subscribe(input, s, f.id || f.getAttribute('data-mock'));
       });
     });
 
