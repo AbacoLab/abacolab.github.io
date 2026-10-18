@@ -30,6 +30,21 @@
 
   ready(function () {
     document.querySelectorAll('[data-mail]').forEach(function (n) { n.textContent = MAIL; });
+    // TradingView: one picture, three strategies — the tabs and the names in the list choose which
+    document.querySelectorAll('[data-swapbox]').forEach(function (box) {
+      var row = box.closest('.tvrow') || document;
+      function show(k) {
+        box.querySelectorAll('img[data-pane]').forEach(function (im) { im.hidden = im.getAttribute('data-pane') !== k; });
+        row.querySelectorAll('[data-swap]').forEach(function (el) {
+          var on = el.getAttribute('data-swap') === k; el.classList.toggle('on', on);
+          if (el.tagName === 'BUTTON') el.setAttribute('aria-pressed', String(on));
+        });
+      }
+      row.querySelectorAll('[data-swap]').forEach(function (el) {
+        el.addEventListener('click', function () { show(el.getAttribute('data-swap')); });
+        if (el.tagName === 'LI') { el.tabIndex = 0; el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(el.getAttribute('data-swap')); } }); }
+      });
+    });
     document.querySelectorAll('a[data-mailto]').forEach(function (a) { a.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent(a.getAttribute('data-mailto')); });
 
     // The hero lockup: its three lines start and end on the same verticals. Letter-spacing closes the gap,

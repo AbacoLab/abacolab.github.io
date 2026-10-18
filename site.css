@@ -747,3 +747,14 @@ h2.lines span{display:block;white-space:nowrap}
 /* the TradingView picture whole, never cropped */
 .tvrow .tvimg{display:flex;align-items:center;background:#131316}
 .tvrow .tvimg img{height:auto;aspect-ratio:auto;object-fit:contain}
+
+/* TradingView: three strategies in one picture */
+.tvimg.swap{flex-direction:column;align-items:stretch;justify-content:center;gap:0}
+.swap-tabs{display:flex;gap:6px;padding:12px;flex-wrap:wrap}
+.swap-tab{font:600 13px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:transparent;border:1px solid var(--b2);border-radius:999px;padding:7px 12px;cursor:pointer}
+.swap-tab:hover{color:var(--fg);border-color:var(--b3)}
+.swap-tab.on{color:var(--bg);background:var(--cu);border-color:var(--cu)}
+.tvlist li[data-swap]{cursor:pointer;border-left:2px solid transparent;padding-left:12px;margin-left:-14px}
+.tvlist li[data-swap]:hover b{color:var(--cu)}
+.tvlist li[data-swap].on{border-left-color:var(--cu)}
+.tvlist li[data-swap].on b{color:var(--cu)}
