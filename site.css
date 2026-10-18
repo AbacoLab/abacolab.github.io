@@ -739,3 +739,9 @@ h2.lines span{display:block;white-space:nowrap}
 .bigshot{margin:20px 0 0;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--deep)}
 .bigshot .shot{aspect-ratio:16/9}
 .bigshot img{display:block;width:100%;height:auto}
+
+/* the φ right after «Let it run.», on the title's own line */
+.phi-inline{height:.95em;width:auto;margin-left:.06em;vertical-align:-0.1em}
+/* the TradingView picture whole, never cropped */
+.tvrow .tvimg{display:flex;align-items:center;background:#131316}
+.tvrow .tvimg img{height:auto;aspect-ratio:auto;object-fit:contain}
