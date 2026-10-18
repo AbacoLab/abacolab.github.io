@@ -174,7 +174,12 @@ ul.notes { margin: 0; padding-left: 18px; display: grid; gap: 8px; color: var(--
 details.more > summary, details.box > summary { cursor: pointer; font-family: var(--display); font-weight: 600; font-size: 17px; letter-spacing: .03em; color: var(--text-2); list-style: none; padding: 6px 0; }
 details.more > summary::before, details.box > summary::before { content: '+ '; color: var(--copper); }
 details[open].more > summary::before, details[open].box > summary::before { content: '− '; }
-details.more > .rest { margin-top: 10px; }
+details.more > .rest, details.more > .trio { margin-top: 10px; }
+.trio { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 12px; }
+.trio .card .where { font-size: 19px; }
+.trio table.st th { white-space: normal; font-size: 11.5px; line-height: 1.25; }
+.trio table.st th, .trio table.st td { padding: 7px 8px; }
+.trio table.st td.num { font-size: 12.5px; }
 .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 12px; }
 .tiles > div { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; display: grid; gap: 6px; align-content: start; }
 .tiles > div > b { font-family: var(--display); font-weight: 600; font-size: 19px; }
@@ -271,7 +276,7 @@ a.btn.ghost { background: transparent; border-color: var(--line-strong); }
     </div>
   </section>
 
-  <section id="sec-tv">
+  <section id="sec-tv" data-only="report">
     <span class="lbl">Try them</span>
     <h2>The strategies on TradingView</h2>
     <div class="btns" id="btns-end"></div>
@@ -284,9 +289,8 @@ a.btn.ghost { background: transparent; border-color: var(--line-strong); }
       <div><b>A deeper walk-forward</b><p>Entry, stop, target and break-even tuned together, on thirty coins in one run.</p></div>
       <div><b>Four tests for every coin</b><p>Unseen bars, most windows, a plateau, the choice ahead of the fixed settings.</p></div>
       <div><b>The costs of the venue</b><p>Fees, spread, funding and slippage, every trade settled on the 5-minute path.</p></div>
-      <div><b>The Books, ready</b><p><b>Albedo Apprentice</b> (three pairs) and <b>Albedo Adept</b> (all nine), run by the executor on Hyperliquid.</p></div>
+      <div><b>The Book, ready</b><p>The nine setups, run by the executor on your Hyperliquid account.</p></div>
     </div>
-    <p class="muted">Albedo Apprentice comes with the Apprentice plan, Albedo Adept from Adept up.</p>
     <div class="btns"><a class="btn" href="phisys.html">Phisys <span class="arr">→</span></a><a class="btn ghost" href="pricing.html">The plans <span class="arr">→</span></a></div>
   </section>
 
@@ -398,16 +402,34 @@ rows.insertAdjacentHTML('beforeend', `<span class="lbl">Equity curves</span><h2>
   <p class="cap">For each strategy, ${word(D.keep_n)} coins picked after the readings: the one in evidence first, then the other two. The grey line is the Fixed setup over the whole history. The copper line branches off it at the walk-forward's first choice, after a year of training (the shaded band), and the tables measure both modes from there.</p>
   <div class="legend"><span><span class="sw fx"></span>Fixed setup</span><span><span class="sw wf"></span>Walk-forward</span>
   <span style="color:var(--up)">better</span><span style="color:var(--down)">worse</span></div>`);
+// on the site the three in evidence side by side, the other pairs folded below (Gio, 18 Oct 2026: «metti le 3 equity
+// in fila orizzontale»), drawn again when opened
+const TRIO = D.site ? (() => {
+  const top = document.createElement('div'); top.className = 'trio';
+  const more = document.createElement('details'); more.className = 'more';
+  more.innerHTML = `<summary>The other ${word(D.shows.length - D.strategies.length)} pairs</summary><div class="trio"></div>`;
+  more.addEventListener('toggle', () => { if (more.open) REDRAW.forEach(f => f()); });
+  rows.append(top, more);
+  return { top, rest: more.querySelector('.trio') };
+})() : null;
 for (const st of D.strategies) {
+  const ss = D.shows.filter(x => x.strategy === st.name);
+  if (TRIO) {
+    let lo = 0, hi = 0;
+    for (const s of ss) for (const m of ['fixed', 'wf']) for (const p of s[m].curve) { lo = Math.min(lo, p[1]); hi = Math.max(hi, p[1]); }
+    for (const s of ss) (s.highlight ? TRIO.top : TRIO.rest).appendChild(card(s, lo, hi, false, true));
+    continue;
+  }
+}
+// the cards were drawn before they sat in the grid: drawn again on their real width
+if (TRIO) REDRAW.forEach(f => f());
+for (const st of (TRIO ? [] : D.strategies)) {
   const ss = D.shows.filter(x => x.strategy === st.name);
   let lo = 0, hi = 0;
   for (const s of ss) for (const m of ['fixed', 'wf']) for (const p of s[m].curve) { lo = Math.min(lo, p[1]); hi = Math.max(hi, p[1]); }
   const row = document.createElement('div'); row.className = 'row';
   // on the site the other coins fold away (a page, not a report), and are drawn again when opened
-  row.innerHTML = `<h3>${esc(st.label)}</h3><div class="hl-slot"></div>` + (D.site
-    ? `<details class="more"><summary>The other ${word(ss.length - 1)} coins</summary><div class="rest"></div></details>` : `<div class="rest"></div>`);
-  const more = row.querySelector('details.more');
-  if (more) more.addEventListener('toggle', () => { if (more.open) REDRAW.forEach(f => f()); });
+  row.innerHTML = `<h3>${esc(st.label)}</h3><div class="hl-slot"></div><div class="rest"></div>`;
   rows.appendChild(row);
   // one card alone in the second row spans it: drawn at the wide size, or its text would scale up with it
   const alone = ss.filter(x => !x.highlight).length === 1;
@@ -421,15 +443,15 @@ function statTable(cols) {
     MEASURES.map(([k, f, t]) => `<tr><td class="m">${k}</td>${cols.map(([, x]) => `<td class="num ${t(x)}">${f(x)}</td>`).join('')}</tr>`).join('') + `</tbody></table></div>`;
 }
 
-function card(s, lo, hi, alone = false) {
+function card(s, lo, hi, alone = false, small = false) {
   const el = document.createElement('div'); el.className = 'card' + (s.highlight ? ' hl' : '');
   const st = D.strategies.find(x => x.name === s.strategy);
-  const head = s.highlight
+  const head = small ? `<div class="mode"><b>${esc(st.label)}</b></div>` : s.highlight
     ? (st.top_gain ? `<div class="mode">Where the <b>Walk-forward</b> improved most on the <b>Fixed setup</b></div>` : `<div class="mode">In evidence</div>`)
     : `<div class="mode">Also kept</div>`;
   el.innerHTML = `<div>${head}<div class="where">${esc(s.name)} <small>· ${D.tf} · from ${month(s.t0)}</small></div></div>
     <div class="chart"></div>${statTable([['fixed', s.fixed.stats], ['wf', s.wf.stats]])}`;
-  const big = s.highlight || alone;
+  const big = !small && (s.highlight || alone);
   draw(el.querySelector('.chart'), [{ m: 'fixed', c: s.fixed.curve }, { m: 'wf', c: s.wf.curve }], s.t0, s.t1, lo, hi,
     `${s.label} on ${s.name}`, big ? 1000 : 580, big ? 320 : 260, s.start);
   return el;
