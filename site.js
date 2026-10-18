@@ -45,6 +45,27 @@
         if (el.tagName === 'LI') { el.tabIndex = 0; el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(el.getAttribute('data-swap')); } }); }
       });
     });
+    // Every picture of the work opens large: click or Enter to open, click, Esc or × to close
+    (function () {
+      var pics = Array.prototype.filter.call(document.querySelectorAll('main img'), function (im) {
+        return /(^|\/)img\//.test(im.getAttribute('src') || '') && !im.closest('a') && !im.classList.contains('phi-inline') && !im.classList.contains('phisys-mark');
+      });
+      if (!pics.length) return;
+      var box = document.createElement('div'), big = document.createElement('img'), x = document.createElement('button');
+      box.className = 'zoom'; box.hidden = true; box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true');
+      x.type = 'button'; x.className = 'zoom-x'; x.setAttribute('aria-label', 'Close'); x.textContent = '×';
+      box.appendChild(big); box.appendChild(x); document.body.appendChild(box);
+      var back = null;
+      function close() { box.hidden = true; big.removeAttribute('src'); document.documentElement.classList.remove('zoomed'); if (back) back.focus(); }
+      function open(im) { back = im; big.src = im.currentSrc || im.src; big.alt = im.alt || ''; box.hidden = false; document.documentElement.classList.add('zoomed'); x.focus(); }
+      pics.forEach(function (im) {
+        im.classList.add('zoomable'); im.tabIndex = 0;
+        im.addEventListener('click', function () { open(im); });
+        im.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(im); } });
+      });
+      box.addEventListener('click', close);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !box.hidden) close(); });
+    })();
     document.querySelectorAll('a[data-mailto]').forEach(function (a) { a.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent(a.getAttribute('data-mailto')); });
 
     // The hero lockup: its three lines start and end on the same verticals. Letter-spacing closes the gap,
