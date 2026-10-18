@@ -753,6 +753,8 @@ h2.lines span{display:block;white-space:nowrap}
 /* TradingView: three strategies in one picture */
 .tvimg.swap{flex-direction:column;align-items:stretch;justify-content:center;gap:0}
 .swap-tabs{display:flex;gap:6px;padding:12px;flex-wrap:wrap}
+/* the Albedo set's page (albedo-set.html, reached only from here), in the free corner under the picture */
+.tvimg.swap .setlink{align-self:flex-end;margin:12px}
 .swap-tab{font:600 13px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:transparent;border:1px solid var(--b2);border-radius:999px;padding:7px 12px;cursor:pointer}
 .swap-tab:hover{color:var(--fg);border-color:var(--b3)}
 .swap-tab.on{color:var(--bg);background:var(--cu);border-color:var(--cu)}
