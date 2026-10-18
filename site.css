@@ -725,3 +725,17 @@ h2.lines span{display:block;white-space:nowrap}
 @media (max-width:520px){.nav{font-size:14px}}
 @media (max-width:400px){.nav{font-size:12.5px;letter-spacing:.05em}}
 @media (max-width:640px){.top .hdr-cta{margin-left:0}}
+
+/* pricing: the Fibonacci line on one line where it fits */
+@media (min-width:1000px){.phero .lede.line{white-space:nowrap}}
+/* home: the Phisys mark beside the title, under the hero's button */
+.split-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;max-width:none}
+.split-head .phisys-mark{width:clamp(48px,6vw,76px);height:auto;flex:none;margin-right:clamp(0px,1vw,16px)}
+/* home: a picture at the foot of each tile, edge to edge */
+.trio .tile{padding:clamp(22px,2.6vw,32px) clamp(22px,2.6vw,32px) 0;overflow:hidden;grid-template-rows:auto auto 1fr auto auto}
+.trio .tile-img{margin:10px calc(-1 * clamp(22px,2.6vw,32px)) 0;border-top:1px solid var(--line)}
+.trio .tile-img .shot,.bigshot .shot{border:0;border-radius:0;aspect-ratio:16/10}
+.trio .tile-img img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.bigshot{margin:20px 0 0;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--deep)}
+.bigshot .shot{aspect-ratio:16/9}
+.bigshot img{display:block;width:100%;height:auto}
