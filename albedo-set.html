@@ -180,6 +180,14 @@ details.more > .rest { margin-top: 10px; }
 .tiles > div > b { font-family: var(--display); font-weight: 600; font-size: 19px; }
 .tiles p { font-size: 15.5px; color: var(--text-2); }
 a.btn.ghost { background: transparent; border-color: var(--line-strong); }
+/* the site's thread, TradingView → Book → Phisys, under the title and on each step's label */
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 10px; margin-top: 20px; }
+.steps a { display: grid; grid-template-columns: 34px 1fr; gap: 2px 10px; align-items: center; text-decoration: none; color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; }
+.steps a:hover { border-color: var(--copper); }
+.steps .n { grid-row: span 2; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--copper); color: var(--copper); display: grid; place-items: center; font: 700 18px/1 var(--display); }
+.steps b { font-family: var(--display); font-weight: 600; font-size: 18px; line-height: 1.1; }
+.steps span:last-child { font-size: 13.5px; color: var(--text-2); line-height: 1.3; }
+.lbl .n { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--copper); margin-right: 8px; font-size: 11px; }
 </style>
 
 </head>
@@ -193,6 +201,11 @@ a.btn.ghost { background: transparent; border-color: var(--line-strong); }
     <p class="lede" data-only="report">Can the walk-forward improve on the canonical setup, not in profit alone, but in <b>profit against drawdown</b> and in <b>linearity of the equity</b>? Like a systematic trader building a book, we kept the <b>most promising coins</b> for each strategy<span id="ledemc">.</span></p>
     <p class="lede" data-only="site">Band Break, MA Cross and Stoch Cross on TradingView, each tuned walk-forward. Nine pairs, one Book, <span id="sitepaths"></span> rebuilt histories.</p>
     <div class="btns" id="btns-top" style="margin-top:18px"></div>
+    <nav class="steps" data-only="site" aria-label="The thread of the page">
+      <a href="#rows"><span class="n">1</span><b>On TradingView</b><span>Each script tunes itself walk-forward</span></a>
+      <a href="#sec-book"><span class="n">2</span><b>One Book</b><span>The nine best pairs, traded together</span></a>
+      <a href="#sec-phisys"><span class="n">3</span><b>In Phisys</b><span>The same Book, ready to run</span></a>
+    </nav>
   </header>
 
   <div class="brief" id="brief" data-only="report"></div>
@@ -243,7 +256,7 @@ a.btn.ghost { background: transparent; border-color: var(--line-strong); }
     <p id="mclede"></p>
     <div class="fans" id="mcfans"></div>
     <div class="legend" id="mckey"></div>
-    <div class="card" id="mccard"></div>
+    <div class="card" id="mccard" data-only="report"></div>
     <p id="mcsay"></p>
   </section>
 
@@ -258,13 +271,13 @@ a.btn.ghost { background: transparent; border-color: var(--line-strong); }
     </div>
   </section>
 
-  <section>
+  <section id="sec-tv">
     <span class="lbl">Try them</span>
     <h2>The strategies on TradingView</h2>
     <div class="btns" id="btns-end"></div>
   </section>
 
-  <section data-only="site">
+  <section data-only="site" id="sec-phisys">
     <span class="lbl">In Phisys</span>
     <h2>The same nine setups, as a Book that runs</h2>
     <div class="tiles">
@@ -295,7 +308,7 @@ if (D.site) { document.documentElement.classList.add('site'); document.getElemen
 // the site opens with the end (Gio, 18 Oct 2026: «apri con la fine.. con il montecarlo», «più grafico meno testo»)
 if (D.site) {
   const hd = document.querySelector('.page > header');
-  hd.after(document.getElementById('sec-mc'), document.getElementById('sec-book'), document.getElementById('rows'), document.getElementById('sec-corr'));
+  hd.after(document.getElementById('sec-mc'), document.getElementById('rows'), document.getElementById('sec-tv'), document.getElementById('sec-book'), document.getElementById('sec-corr'), document.getElementById('sec-phisys'));
   for (const id of ['heatcap', 'worstcap']) document.getElementById(id).setAttribute('data-only', 'report');
 }
 const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -719,7 +732,17 @@ if (D.site) {
   document.getElementById('mclede').innerHTML = `The Book's history rebuilt ${PATHS} times from pieces of ${word(MC.block_weeks)} weeks, the same pieces for both modes. On a bad run, the walk-forward Book falls <b>${DEEP}</b> the Fixed setup's.`;
   document.getElementById('booklede').innerHTML = `The ${N_KEPT} pairs at once, each trade risking 1 R: ${mem.join('; ')}.`;
   const cap = document.querySelector('#rows .cap'); if (cap) cap.remove();
-  document.querySelector('#rows h2').textContent = 'Each strategy on its best coin';
+  // the thread: what the page ends with first, then the three steps that lead there
+  const step = (sec, n, lbl, h2, p) => { const el = document.getElementById(sec);
+    el.querySelector('.lbl').innerHTML = n ? `<span class="n">${n}</span>${lbl}` : lbl; if (h2) el.querySelector('h2').textContent = h2;
+    if (p) el.querySelector('h2').insertAdjacentHTML('afterend', `<p>${p}</p>`); };
+  document.querySelector('#sec-mc .lbl').textContent = 'Where it leads';
+  step('rows', 1, 'On TradingView', 'Each script tunes itself, on its best coin',
+    'Grey, the Fixed setup the script opens with. Copper, its own walk-forward, choosing again every six months on the bars before.');
+  document.querySelector('#sec-tv .lbl').textContent = 'Try them';
+  step('sec-book', 2, 'One Book', 'The nine pairs, traded together');
+  document.querySelector('#sec-corr .lbl').textContent = 'The Book, inside';
+  step('sec-phisys', 3, 'In Phisys', 'The same Book, ready to run', 'In Phisys the nine setups are a Book from your first login, and the walk-forward goes deeper.');
 }
 </script>
 </body>
