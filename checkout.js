@@ -86,6 +86,7 @@
     document.querySelectorAll('#co-plan b[data-m]').forEach(function (b) { b.textContent = b.getAttribute('data-' + s.bill); });
     $('co-bill').hidden = true;   // one payment for 1, 3 or 12 months: the months pick the price
     $('co-ref-row').hidden = !paid;
+    $('co-terms-pay').hidden = !paid;
     $('co-addr-row').hidden = !s.ref;
     $('co-pay').hidden = !paid || s.ref;
     $('co-go').hidden = paid && !s.ref;
@@ -154,7 +155,12 @@
     var el = $('co-email'), ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email());
     el.setAttribute('aria-invalid', ok ? 'false' : 'true');
     if (!ok) { say('Write your email first: the licence key goes there.'); el.focus(); }
-    return ok && needCountry();
+    return ok && needCountry() && needTerms();
+  }
+  function needTerms() {
+    var el = $('co-terms'), ok = el.checked;
+    if (!ok) { say('Tick the box to accept the Legal page first.'); el.focus(); }
+    return ok;
   }
   function lines(s, extra) {
     var out = ['Plan: ' + s.p.name];
