@@ -804,3 +804,4 @@ html.zoomed{overflow:hidden}
 .tier li a{color:var(--fg)}
 @media (max-width:1023px){.allpaid ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:640px){.allpaid ul{grid-template-columns:minmax(0,1fr)}}
+@media (min-width:1000px){.claims.grid.wide4{grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,1.35fr);column-gap:24px}}
