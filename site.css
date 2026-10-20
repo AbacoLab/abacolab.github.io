@@ -808,3 +808,4 @@ html.zoomed{overflow:hidden}
 /* phisys page: the three step intros on two lines on a computer */
 .sec-head:has(.lede.wide2){max-width:none}
 .lede.wide2{max-width:none}
+.claims span a{color:var(--fg);text-decoration:underline;text-decoration-color:var(--cu);text-underline-offset:3px}
