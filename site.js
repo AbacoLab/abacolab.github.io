@@ -27,6 +27,9 @@
     }).catch(function () { say('It did not go through. Try again in a minute.', 'miss'); });
   }
   window.abacoSubscribe = subscribe;
+  // Novice has its own form on the mailing list: its own confirmation email, the TradingView username required
+  var NOVICE = 'https://35dd6c9c.sibforms.com/serve/MUIFAH4m-LrUUpCpM1t9H2eMAYbGePtQDCynUQEwgq1qh5CEqMSSvTSioig_JMrKRlVj3cC394ED_qGtGbfuMaWCWf2WMxqJUXTFljt7p5GTRPD8XABKa_X5ZfJ3qYJBkznLfvVj5lUXmBIyzw-LwYzOcYGqkS_jkqjD_V_f2ECVZ0T5k_46s50ctGduATGx9wl_9yIutIVgvGTxew==';
+  window.abacoNovice = NOVICE;
 
   ready(function () {
     document.querySelectorAll('[data-mail]').forEach(function (n) { n.textContent = MAIL; });
@@ -160,13 +163,12 @@
         var input = f.querySelector('input[type="email"]');
         var who = input ? input.value.trim() : '';
         if (f.getAttribute('data-kind') === 'tv') {
+          // The invite-only scripts are Novice: the request joins the mailing list with its username, as the checkout does
           var user = f.querySelector('input[type="text"]');
           var name = user ? user.value.trim() : '';
           if (!name) { if (s) s.textContent = 'Write your TradingView username first.'; if (user) user.focus(); return; }
-          location.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('TradingView access') +
-            '&body=' + encodeURIComponent('Please add me to the Abaco invite-only scripts.\nTradingView username: ' + name +
-            '\nEmail: ' + (who || '-'));
-          if (s) s.textContent = 'Your mail app opens with the request: send it and we add you.';
+          subscribe(input, s, 'tv', { TV_USERNAME: name },
+            'Almost there: check your inbox and click the link to confirm. Access to the invite-only scripts follows for ' + name + '.', NOVICE);
           return;
         }
         subscribe(input, s, f.id || f.getAttribute('data-mock'));

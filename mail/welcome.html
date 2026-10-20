@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="supported-color-schemes" content="dark">
+<title>Welcome to Abaco</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Jost:wght@400&display=swap" rel="stylesheet">
+</head>
+<body style="margin:0;padding:0;background:#1b1d22;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#1b1d22;">
+  <tr><td align="center" style="padding:40px 16px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px;">
+      <tr><td style="padding:0 0 32px 0;">
+        <img src="https://abaco.phisys.app/mail/abaco-logo.png" width="152" height="56" alt="abaco" style="display:block;border:0;width:152px;height:56px;">
+      </td></tr>
+      <tr><td style="background:#22252b;border:1px solid #33363e;border-radius:18px;padding:36px 32px;">
+        <p style="margin:0 0 12px 0;font-family:'Barlow Condensed','Avenir Next Condensed','Roboto Condensed','Arial Narrow',sans-serif;font-weight:600;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#e07c4e;">Welcome</p>
+        <h1 style="margin:0 0 16px 0;font-family:'Barlow Condensed','Avenir Next Condensed','Roboto Condensed','Arial Narrow',sans-serif;font-weight:600;font-size:34px;line-height:1.1;color:#ece8df;">You are in</h1>
+        <p style="margin:0 0 16px 0;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#a8abb2;">Thank you for confirming. Once a month you get the Abaco report: one study on what costs and habits do to trading results, measured on real data. Between reports we write only when a tool of ours is new or changes.</p>
+        {% if contact.TV_USERNAME %}
+        <p style="margin:0 0 16px 0;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#a8abb2;">We add <b style="color:#ece8df;">{{ contact.TV_USERNAME }}</b> to our invite-only scripts on TradingView. Once it is done, you find them in the indicators panel of any chart, under Invite-only scripts.</p>
+        {% endif %}
+        <p style="margin:12px 0 8px 0;font-family:'Barlow Condensed','Avenir Next Condensed','Roboto Condensed','Arial Narrow',sans-serif;font-weight:600;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#e07c4e;">Where to start</p>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 28px 0;">
+          <tr><td style="padding:10px 0;border-top:1px solid #33363e;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;color:#a8abb2;"><a href="https://abaco.phisys.app/studies.html" style="color:#ece8df;text-decoration:none;font-weight:600;">Studies</a> · what we have measured so far</td></tr>
+          <tr><td style="padding:10px 0;border-top:1px solid #33363e;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;color:#a8abb2;"><a href="https://abaco.phisys.app/tradingview.html" style="color:#ece8df;text-decoration:none;font-weight:600;">TradingView</a> · our indicators and the Albedo strategies, free</td></tr>
+          <tr><td style="padding:10px 0;border-top:1px solid #33363e;border-bottom:1px solid #33363e;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;color:#a8abb2;"><a href="https://abaco.phisys.app/hyperliquid-audit.html" style="color:#ece8df;text-decoration:none;font-weight:600;">Hyperliquid Account Audit</a> · what an account made, and what it paid to make it</td></tr>
+        </table>
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-radius:999px;background:#e07c4e;">
+          <a href="https://abaco.phisys.app" style="display:inline-block;padding:14px 26px;font-family:'Barlow Condensed','Avenir Next Condensed','Roboto Condensed','Arial Narrow',sans-serif;font-weight:600;font-size:17px;letter-spacing:2px;text-transform:uppercase;color:#1b1d22;text-decoration:none;border-radius:999px;">Visit Abaco</a>
+        </td></tr></table>
+        <p style="margin:28px 0 0 0;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;color:#8d9099;">A question, or a study you would like to see? Reply to this email: a person reads it.</p>
+      </td></tr>
+      <tr><td style="padding:24px 4px 0 4px;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:12px;line-height:1.6;color:#8d9099;">
+        Abaco · <a href="https://abaco.phisys.app" style="color:#a8abb2;">abaco.phisys.app</a> · Nothing here is investment advice. · <a href="{{ unsubscribe }}" style="color:#a8abb2;">Unsubscribe</a>
+      </td></tr>
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>
