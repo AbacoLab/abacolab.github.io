@@ -795,3 +795,12 @@ html.zoomed{overflow:hidden}
 .foot .links{white-space:nowrap}
 .foot-sub .status{font:400 13px/1.45 var(--body);color:var(--dim);margin:8px 0 0}
 .foot-sub .btn{white-space:nowrap;flex:none}
+/* pricing: what every paid plan has, once, under the four tiers */
+.allpaid{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 22px;display:grid;gap:12px}
+.allpaid ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px 16px;color:var(--muted);font-size:15.5px;line-height:1.45}
+.allpaid li{padding-left:20px;position:relative}
+.allpaid li::before{content:"";position:absolute;left:2px;top:.6em;width:8px;height:8px;border-radius:50%;background:var(--b2)}
+.allpaid b{color:var(--fg);font-weight:500}
+.tier li a{color:var(--fg)}
+@media (max-width:1023px){.allpaid ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.allpaid ul{grid-template-columns:minmax(0,1fr)}}
