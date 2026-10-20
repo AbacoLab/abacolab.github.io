@@ -687,9 +687,11 @@ h2.lines span{display:block;white-space:nowrap}
 .split .studies li{grid-template-columns:minmax(0,1fr)!important;gap:6px;padding-block:20px}
 
 /* the header's pill: the Hyperliquid Account Audit, on every page */
-.hdr-cta{display:inline-flex;align-items:center;gap:8px;font:600 15px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--fg);text-decoration:none;border:1px solid var(--cu);border-radius:999px;padding:8px 14px;white-space:nowrap}
-.hdr-cta .dot{width:6px;height:6px;border-radius:50%;background:var(--cu)}
-.hdr-cta:hover,.hdr-cta[aria-current="page"]{background:var(--cu);color:var(--bg)}
+/* Hyperliquid mint for the audit button */
+.hdr-cta{--hl:#97fce4}
+.hdr-cta{display:inline-flex;align-items:center;gap:8px;font:600 15px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--fg);text-decoration:none;border:1px solid var(--hl);border-radius:999px;padding:8px 14px;white-space:nowrap}
+.hdr-cta .dot{width:6px;height:6px;border-radius:50%;background:var(--hl)}
+.hdr-cta:hover,.hdr-cta[aria-current="page"]{background:var(--hl);color:var(--bg)}
 .hdr-cta:hover .dot,.hdr-cta[aria-current="page"] .dot{background:var(--bg)}
 .top .hdr-cta{margin-left:auto}
 @media (max-width:640px){
