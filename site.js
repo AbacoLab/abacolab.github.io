@@ -171,6 +171,21 @@
             'Almost there: check your inbox and click the link to confirm. Access to the invite-only scripts follows for ' + name + '.', NOVICE);
           return;
         }
+        if (f.getAttribute('data-kind') === 'beta') {
+          // The beta: phisys.app makes the licence and Brevo sends its code (`edge.mjs`, `betaJoin`)
+          var say = function (t, cls) { if (s) { s.hidden = false; s.textContent = t; s.classList.remove('hit', 'miss'); if (cls) s.classList.add(cls); } };
+          if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(who)) { say('That email does not look right.', 'miss'); if (input) input.focus(); return; }
+          var tvIn = f.querySelector('input[type="text"]:not([name="website"])'), trap = f.querySelector('input[name="website"]');
+          say('Making your licence…');
+          fetch('https://phisys.app/beta/join', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: who, tv: tvIn ? tvIn.value.trim() : '', website: trap ? trap.value : '' }) })
+            .then(function (r) { return r.json(); }).then(function (j) {
+              if (!j || !j.ok) { say((j && j.error) || 'It did not go through. Try again in a minute.', 'miss'); return; }
+              say('Done: your licence code is on its way to ' + who + '. Check your inbox (and spam) and open phisys.app.', 'hit');
+              try { if (window.umami) window.umami.track('beta', { from: 'pricing' }); } catch (e) { /* counting is optional */ }
+            }).catch(function () { say('It did not go through. Try again in a minute.', 'miss'); });
+          return;
+        }
         subscribe(input, s, f.id || f.getAttribute('data-mock'));
       });
     });

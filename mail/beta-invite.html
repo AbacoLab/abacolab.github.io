@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="supported-color-schemes" content="dark">
+<title>Your Phisys beta access</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Jost:wght@400&display=swap" rel="stylesheet">
+</head>
+<!-- beta-invite.html — the email a beta tester gets when they ask for access on the pricing page (20 October 2026, task
+     `beta-tester`). Sent by the Worker through Brevo's transactional API (`edge.mjs`, `betaJoin`), the template
+     `BETA_TEMPLATE`; `{{ params.CODE }}` is the licence code. A service email: no unsubscribe link. -->
+<body style="margin:0;padding:0;background:#1b1d22;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#1b1d22;">
+  <tr><td align="center" style="padding:40px 16px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px;">
+      <tr><td style="padding:0 0 32px 0;">
+        <img src="https://abaco.phisys.app/mail/abaco-logo.png" width="152" height="56" alt="abaco" style="display:block;border:0;width:152px;height:56px;">
+      </td></tr>
+      <tr><td style="background:#22252b;border:1px solid #33363e;border-radius:18px;padding:36px 32px;">
+        <p style="margin:0 0 12px 0;font-family:'Barlow Condensed','Avenir Next Condensed','Roboto Condensed','Arial Narrow',sans-serif;font-weight:600;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#e07c4e;">Beta</p>
+        <h1 style="margin:0 0 16px 0;font-family:'Barlow Condensed','Avenir Next Condensed','Roboto Condensed','Arial Narrow',sans-serif;font-weight:600;font-size:34px;line-height:1.1;color:#ece8df;">Your Phisys access</h1>
+        <p style="margin:0 0 16px 0;font-size:16px;line-height:1.6;color:#a8abb2;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;">Thank you for helping test Phisys. Your access is ready: a licence for Apprentice, valid for three months and renewable.</p>
+
+        <p style="margin:0 0 6px 0;font-family:'Barlow Condensed','Avenir Next Condensed','Roboto Condensed','Arial Narrow',sans-serif;font-weight:600;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#e07c4e;">Your licence code</p>
+        <p style="margin:0 0 24px 0;padding:14px 16px;background:#1b1d22;border:1px solid #33363e;border-radius:10px;font-family:'SFMono-Regular',Menlo,Consolas,monospace;font-size:18px;letter-spacing:1px;color:#ece8df;">{{ params.CODE }}</p>
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 28px 0;"><tr>
+          <td style="border-radius:999px;background:#e07c4e;white-space:nowrap;"><a href="https://phisys.app" style="display:inline-block;padding:6px 14px;font-family:'Barlow Condensed','Avenir Next Condensed','Roboto Condensed','Arial Narrow',sans-serif;font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;color:#1b1d22;text-decoration:none;">Open Phisys</a></td>
+          <td style="padding:0 0 0 14px;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:14px;line-height:1.4;color:#a8abb2;">In Chrome, Brave or Edge.</td>
+        </tr></table>
+        <p style="margin:12px 0 8px 0;font-family:'Barlow Condensed','Avenir Next Condensed','Roboto Condensed','Arial Narrow',sans-serif;font-weight:600;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#e07c4e;">First time</p>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 28px 0;">
+          <tr><td style="padding:10px 0;border-top:1px solid #33363e;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;color:#a8abb2;">Open phisys.app, then choose <b style="color:#ece8df;">First time here? Use your licence code</b>.</td></tr>
+          <tr><td style="padding:10px 0;border-top:1px solid #33363e;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;color:#a8abb2;">Paste the code, choose a user name and a password of at least 8 characters.</td></tr>
+          <tr><td style="padding:10px 0;border-top:1px solid #33363e;border-bottom:1px solid #33363e;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;color:#a8abb2;">The first visit is slow, 40 to 70 seconds on a slow line, while the engine loads in your browser. The next ones take about 12.</td></tr>
+        </table>
+        <p style="margin:12px 0 8px 0;font-family:'Barlow Condensed','Avenir Next Condensed','Roboto Condensed','Arial Narrow',sans-serif;font-weight:600;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#e07c4e;">Good to know</p>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 28px 0;">
+          <tr><td style="padding:10px 0;border-top:1px solid #33363e;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;color:#a8abb2;">Your work stays in your browser. <b style="color:#ece8df;">Settings › Work file</b> exports it as a file you can keep.</td></tr>
+          <tr><td style="padding:10px 0;border-top:1px solid #33363e;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;color:#a8abb2;">The agent answers on your own Claude key (Settings › Keys). Without one, the rest of Phisys works as usual.</td></tr>
+          <tr><td style="padding:10px 0;border-top:1px solid #33363e;border-bottom:1px solid #33363e;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;color:#a8abb2;">This is a beta: not investment advice, the data may have gaps, and live trading from a Book (Go LIVE) is switched off for now.</td></tr>
+        </table>
+        <p style="margin:12px 0 8px 0;font-family:'Barlow Condensed','Avenir Next Condensed','Roboto Condensed','Arial Narrow',sans-serif;font-weight:600;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#e07c4e;">Tell us what breaks</p>
+        <p style="margin:0 0 16px 0;font-size:16px;line-height:1.6;color:#a8abb2;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;">Press the speech-bubble button in the right column, just above Help. Write what happened and what you expected: your browser and the last errors the page caught go with it, and the report reaches us directly.</p>
+
+        <p style="margin:28px 0 0 0;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;color:#8d9099;">Lost your password? Reply to this email: a person resets it by hand.</p>
+      </td></tr>
+      <tr><td style="padding:24px 4px 0 4px;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:12px;line-height:1.6;color:#8d9099;">
+        Abaco · <a href="https://abaco.phisys.app" style="color:#a8abb2;">abaco.phisys.app</a> · Nothing here is investment advice.
+      </td></tr>
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>
