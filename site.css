@@ -815,3 +815,11 @@ html.zoomed{overflow:hidden}
 .beta-top .tvask{max-width:1040px;gap:16px}
 .beta-top h2#beta-h{font-size:var(--t-h1);font-weight:700;line-height:.94}
 .beta-top .say{font-size:var(--t-lede);max-width:none}
+/* pricing: the beta's places, one dot each (update data-taken and the dots by hand) */
+.seats{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:8px}
+.seats .dots{display:grid;grid-template-columns:repeat(30,10px);gap:5px}
+.seats .dots i{width:10px;height:10px;border-radius:50%;background:var(--b2)}
+.seats .dots i.on{background:var(--cu)}
+.seats p{margin:0;font:600 14px/1 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.seats p b{color:var(--cu);font-weight:600}
+@media (max-width:640px){.seats .dots{grid-template-columns:repeat(15,10px)}}
