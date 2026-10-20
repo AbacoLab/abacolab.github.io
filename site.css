@@ -823,3 +823,7 @@ html.zoomed{overflow:hidden}
 .seats p{margin:0;font:600 14px/1 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .seats p b{color:var(--cu);font-weight:600}
 @media (max-width:640px){.seats .dots{grid-template-columns:repeat(15,10px)}}
+/* the beta form: room for "TradingView username (access to scripts, optional)" */
+.beta-top .tvform{max-width:none}
+.beta-top #beta-tv{flex:1.4 1 380px}
+@media (max-width:640px){.beta-top #beta-tv{flex-basis:100%}.beta-top #beta-tv::placeholder{font-size:14.5px}}

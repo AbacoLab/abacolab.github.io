@@ -211,6 +211,20 @@
       });
     });
 
+    // The beta's places: phisys.app counts the beta licences (/beta/seats → {taken, total}). The page's own count if it is silent.
+    var seats = document.querySelector('.seats');
+    if (seats) {
+      fetch('https://phisys.app/beta/seats').then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+        if (!j || typeof j.taken !== 'number') return;
+        var total = j.total || 30, taken = Math.min(j.taken, total);
+        var dots = seats.querySelectorAll('.dots i');
+        dots.forEach(function (d, k) { d.classList.toggle('on', k < taken); });
+        var b = seats.querySelector('p b'); if (b) b.textContent = taken;
+        seats.setAttribute('aria-label', taken + ' of ' + total + ' places taken');
+        if (taken >= total) { var p = seats.querySelector('p'); if (p) p.textContent = 'The beta is full'; }
+      }).catch(function () { /* the page's own count stands */ });
+    }
+
     // Prices: phisys.app's table, the one the payments are checked against (/pay/prices). The page's own stand if it is silent.
     if (document.querySelector('.tier .price[data-m], .plan .pp')) {
       fetch('https://phisys.app/pay/prices').then(function (r) { return r.json(); }).then(function (j) {
