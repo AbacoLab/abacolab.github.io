@@ -28,10 +28,12 @@
           <tr><td style="padding:10px 0;border-top:1px solid #33363e;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;color:#a8abb2;"><a href="https://abaco.phisys.app/tradingview.html" style="color:#ece8df;text-decoration:none;font-weight:600;">TradingView</a> · our indicators and the Albedo strategies, free</td></tr>
           <tr><td style="padding:10px 0;border-top:1px solid #33363e;border-bottom:1px solid #33363e;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;color:#a8abb2;"><a href="https://abaco.phisys.app/hyperliquid-audit.html" style="color:#ece8df;text-decoration:none;font-weight:600;">Hyperliquid Account Audit</a> · what an account made, and how, honestly</td></tr>
         </table>
+        {% if contact.LEVEL == "adept" or contact.LEVEL == "magister" or contact.LEVEL == "doctor" %}
         <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 28px 0;"><tr>
           <td style="border-radius:999px;background:#e07c4e;white-space:nowrap;"><a href="https://phisys.app" style="display:inline-block;padding:6px 14px;font-family:'Barlow Condensed','Avenir Next Condensed','Roboto Condensed','Arial Narrow',sans-serif;font-weight:600;font-size:13px;line-height:1.2;letter-spacing:1.5px;white-space:nowrap;text-transform:uppercase;color:#1b1d22;text-decoration:none;border-radius:999px;">Open Phisys</a></td>
           <td style="padding:0 0 0 14px;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:14px;line-height:1.4;color:#a8abb2;">Draw the trade, prove the rule out of sample with real costs.</td>
         </tr></table>
+        {% endif %}
         <p style="margin:28px 0 0 0;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;color:#8d9099;">A question, or a study you would like to see? Reply to this email: a person reads it.</p>
       </td></tr>
       <tr><td style="padding:24px 4px 0 4px;font-family:Jost,Futura,'Futura PT','Century Gothic','Avenir Next',Helvetica,Arial,sans-serif;font-size:12px;line-height:1.6;color:#8d9099;">
