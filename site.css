@@ -784,3 +784,5 @@ html.zoomed{overflow:hidden}
 .block.compact h2#report-h{font-size:clamp(24px,2.4vw,30px)}
 @media (min-width:820px){.block.compact{grid-template-columns:140px minmax(0,1fr)}}
 @media (max-width:819px){.block.compact .art svg{max-width:90px}}
+.lede.two{max-width:none}
+@media (min-width:860px){.phero.wide-copy{grid-template-columns:minmax(0,9fr) minmax(0,3fr)}}
