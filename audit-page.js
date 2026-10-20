@@ -149,7 +149,7 @@
         h.push(sec('short', 'Shorter than the costs', 'On each asset we measured how long the typical move takes to pay two taker round trips.',
           '<div class="kpis three">' + kpi('Trades shorter than that', sh.n + ' of ' + sh.studied, '', pct(sh.n / sh.studied, 0)) +
           kpi('Their net', money(sh.net, true), sign(sh.net)) + '</div>' +
-          src('Source: Hyperliquid fills · thresholds from <a href="test/timeframe-cost.html">our timeframe study</a>, 55 perps')));
+          src('Source: Hyperliquid fills · thresholds from <a href="studies/timeframe-cost.html">our timeframe study</a>, 55 perps')));
       }
 
       // trades
@@ -230,7 +230,7 @@
       cta = '<a class="btn" href="phisys.html" data-cta="phisys">How Phisys tests rules with costs in</a>';
     } else if (a.short.studied >= 10 && a.short.n / a.short.studied > 0.3) {
       line = a.short.n + ' of ' + a.short.studied + ' trades closed before the typical move covers two round trips.';
-      cta = '<a class="btn" href="test/timeframe-cost.html" data-cta="study">Read the study</a>';
+      cta = '<a class="btn" href="studies/timeframe-cost.html" data-cta="study">Read the study</a>';
     } else if (c.gross > 0 && c.fees > 0.3 * c.gross) {
       line = 'Fees took ' + pct(c.fees / c.gross, 0) + ' of what the trades made.';
       cta = '<a class="btn" href="phisys.html" data-cta="phisys">How Phisys tests rules with costs in</a>';
