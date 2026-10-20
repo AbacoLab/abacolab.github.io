@@ -771,3 +771,9 @@ img.zoomable{cursor:zoom-in}
 .zoom-x{position:absolute;top:14px;right:16px;width:40px;height:40px;border-radius:50%;border:1px solid var(--b2);background:var(--card);color:var(--fg);font:400 24px/1 var(--body);cursor:pointer}
 .zoom-x:hover{border-color:var(--cu);color:var(--cu)}
 html.zoomed{overflow:hidden}
+/* the legal page: room between paragraphs and between sections */
+.legal p,.legal ul{margin:0 0 1em}
+.legal ul{padding-left:1.2em;display:grid;gap:.5em}
+.legal h3{margin:2em 0 .6em}
+.legal h2{margin:2.4em 0 .4em;padding-top:1.2em;border-top:1px solid var(--line)}
+.legal .legal-nav + h2{margin-top:1.2em;border-top:0;padding-top:0}
