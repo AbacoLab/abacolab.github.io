@@ -805,3 +805,6 @@ html.zoomed{overflow:hidden}
 @media (max-width:1023px){.allpaid ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:640px){.allpaid ul{grid-template-columns:minmax(0,1fr)}}
 @media (min-width:1000px){.claims.grid.wide4{grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,1.35fr);column-gap:24px}}
+/* phisys page: the three step intros on two lines on a computer */
+.sec-head:has(.lede.wide2){max-width:none}
+.lede.wide2{max-width:none}
