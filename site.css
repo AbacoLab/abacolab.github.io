@@ -665,9 +665,9 @@ h2.lines span{display:block;white-space:nowrap}
 @media (min-width:720px) and (max-width:979px){.tools{grid-template-columns:1fr 1fr}}
 
 /* tradingview: the access request first, then one script a row, its picture large */
-.tvask{display:grid;gap:12px;max-width:760px;margin-bottom:clamp(40px,6vw,72px)}
+.tvask{display:grid;gap:12px;max-width:1040px;margin-bottom:clamp(40px,6vw,72px)}
 .tvask h2{font-size:var(--t-h3)}
-.tvask .say{color:var(--muted)}
+.tvask .say{color:var(--muted);max-width:none}
 .tvrows{display:grid;gap:20px}
 .tvrow{display:grid;grid-template-columns:minmax(0,1fr);background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden}
 .tvrow .tvimg{margin:0;background:var(--deep)}
