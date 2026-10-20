@@ -810,3 +810,8 @@ html.zoomed{overflow:hidden}
 .lede.wide2{max-width:none}
 .claims span a{color:var(--fg);text-decoration:underline;text-decoration-color:var(--cu);text-underline-offset:3px}
 .card h3 + .claims{margin-top:10px}
+.beta-top{padding-bottom:0}
+/* pricing: the beta block opens the page with a headline as big as the plans' */
+.beta-top .tvask{max-width:1040px;gap:16px}
+.beta-top h2#beta-h{font-size:var(--t-h1);font-weight:700;line-height:.94}
+.beta-top .say{font-size:var(--t-lede);max-width:none}
