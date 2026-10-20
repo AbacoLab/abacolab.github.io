@@ -788,3 +788,10 @@ html.zoomed{overflow:hidden}
 @media (max-width:819px){.block.compact .art svg{max-width:90px}}
 .lede.two{max-width:none}
 @media (min-width:860px){.phero.wide-copy{grid-template-columns:minmax(0,9fr) minmax(0,3fr)}}
+/* footer: legal on the fourth line, links on one row, the report note in the body font */
+.foot{grid-template-columns:minmax(0,1.75fr) minmax(0,.9fr) minmax(0,.8fr) minmax(0,1.55fr);column-gap:32px}
+.foot-sub .sub{flex-wrap:nowrap}
+.foot-sub .sub input{min-width:0;flex:1 1 auto}
+.foot .links{white-space:nowrap}
+.foot-sub .status{font:400 13px/1.45 var(--body);color:var(--dim);margin:8px 0 0}
+.foot-sub .btn{white-space:nowrap;flex:none}
