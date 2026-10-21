@@ -71,13 +71,14 @@
       reel.addEventListener('dragstart', function (e) { e.preventDefault(); });
       mid(); state();
       reel.querySelectorAll('img').forEach(function (im) { if (!im.complete) im.addEventListener('load', mid, { once: true }); });
-      // the nudge: once, when the reel comes into view, so the eye sees there is more to the right
+      // the nudge: once a page, small, when the first reel comes into view, so the eye sees there is more to the right
       if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         var io = new IntersectionObserver(function (es) {
           es.forEach(function (en) {
             if (!en.isIntersecting) return; io.disconnect();
-            if (reel.scrollLeft > 2 || reel.scrollWidth <= reel.clientWidth) return;
-            setTimeout(function () { reel.scrollBy({ left: 90, behavior: 'smooth' }); setTimeout(function () { reel.scrollTo({ left: 0, behavior: 'smooth' }); }, 650); }, 400);
+            if (window.abacoNudged || reel.scrollLeft > 2 || reel.scrollWidth <= reel.clientWidth) return;
+            window.abacoNudged = true;   // one nudge per page, on the first reel seen
+            setTimeout(function () { reel.scrollBy({ left: 40, behavior: 'smooth' }); setTimeout(function () { reel.scrollTo({ left: 0, behavior: 'smooth' }); }, 500); }, 400);
           });
         }, { threshold: 0.6 });
         io.observe(reel);
