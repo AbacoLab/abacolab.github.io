@@ -33,6 +33,56 @@
 
   ready(function () {
     document.querySelectorAll('[data-mail]').forEach(function (n) { n.textContent = MAIL; });
+    // Reels: arrows on the sides, a fade where more waits, drag with the mouse, and one small nudge the first time one is seen
+    document.querySelectorAll('.reel').forEach(function (reel) {
+      var wrap = document.createElement('div'); wrap.className = 'reel-wrap';
+      reel.parentNode.insertBefore(wrap, reel); wrap.appendChild(reel);
+      var arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M14 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      var prev = document.createElement('button'), next = document.createElement('button');
+      prev.type = next.type = 'button'; prev.className = 'reel-btn prev'; next.className = 'reel-btn next';
+      prev.setAttribute('aria-label', 'Previous'); next.setAttribute('aria-label', 'Next');
+      prev.innerHTML = next.innerHTML = arrow;
+      wrap.appendChild(prev); wrap.appendChild(next);
+      function step() { var f = reel.querySelector('figure'); return f ? f.getBoundingClientRect().width + 16 : reel.clientWidth * 0.8; }
+      function mid() { var sh = reel.querySelector('.shot'); if (sh) wrap.style.setProperty('--mid', (sh.offsetTop - reel.offsetTop + sh.offsetHeight / 2) + 'px'); }
+      function state() {
+        var max = reel.scrollWidth - reel.clientWidth - 2;
+        wrap.classList.toggle('at-start', reel.scrollLeft <= 2);
+        wrap.classList.toggle('at-end', reel.scrollLeft >= max);
+      }
+      prev.addEventListener('click', function () { reel.scrollBy({ left: -step(), behavior: 'smooth' }); });
+      next.addEventListener('click', function () { reel.scrollBy({ left: step(), behavior: 'smooth' }); });
+      reel.addEventListener('scroll', state, { passive: true });
+      window.addEventListener('resize', function () { mid(); state(); });
+      reel.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); next.click(); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); prev.click(); }
+      });
+      // drag with the mouse; a drag is not a click on the picture
+      var down = false, x0 = 0, s0 = 0, moved = false;
+      reel.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') return; down = true; moved = false; x0 = e.clientX; s0 = reel.scrollLeft; });
+      window.addEventListener('pointermove', function (e) {
+        if (!down) return; var dx = e.clientX - x0;
+        if (Math.abs(dx) > 5) { moved = true; wrap.classList.add('dragging'); }
+        if (moved) reel.scrollLeft = s0 - dx;
+      });
+      window.addEventListener('pointerup', function () { if (!down) return; down = false; wrap.classList.remove('dragging'); });
+      reel.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+      reel.addEventListener('dragstart', function (e) { e.preventDefault(); });
+      mid(); state();
+      reel.querySelectorAll('img').forEach(function (im) { if (!im.complete) im.addEventListener('load', mid, { once: true }); });
+      // the nudge: once, when the reel comes into view, so the eye sees there is more to the right
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (en) {
+            if (!en.isIntersecting) return; io.disconnect();
+            if (reel.scrollLeft > 2 || reel.scrollWidth <= reel.clientWidth) return;
+            setTimeout(function () { reel.scrollBy({ left: 90, behavior: 'smooth' }); setTimeout(function () { reel.scrollTo({ left: 0, behavior: 'smooth' }); }, 650); }, 400);
+          });
+        }, { threshold: 0.6 });
+        io.observe(reel);
+      }
+    });
     // TradingView: one picture, three strategies — the tabs and the names in the list choose which
     document.querySelectorAll('[data-swapbox]').forEach(function (box) {
       var row = box.closest('.tvrow') || document;
