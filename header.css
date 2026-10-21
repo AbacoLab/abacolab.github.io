@@ -1,0 +1,25 @@
+/* The site's header, for pages that do not load site.css (the studies). Kept in step with site.css by hand. */
+.top{--bg:#1b1d22;--fg:#ece8df;--muted:#a8abb2;--cu:#e07c4e;--b3:#6a6e77;--hl:#97fce4;--display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif}
+.top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 28px;padding-block:22px 6px}
+.top .logo{display:block;line-height:0;border-radius:6px}
+.top .logo svg{height:34px;width:auto;display:block}
+.top .nav{display:flex;flex-wrap:wrap;align-items:baseline;font:600 15.5px/1 var(--display);letter-spacing:.08em;text-transform:uppercase}
+.top .nav a{color:var(--muted);text-decoration:none;padding:8px 1px}
+.top .nav a:hover{color:var(--fg)}
+.top .nav a[aria-current="page"]{color:var(--cu)}
+.top .nav .sep.bar{align-self:center;width:1px;height:.9em;padding:0;margin-inline:12px;background:var(--b3)}
+.top .hdr-cta{display:inline-flex;align-items:center;gap:8px;font:600 15px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--fg);text-decoration:none;border:1px solid var(--hl);border-radius:999px;padding:8px 14px;white-space:nowrap;margin-left:auto}
+.top .hdr-cta .dot{width:6px;height:6px;border-radius:50%;background:var(--hl)}
+.top .hdr-cta:hover{background:var(--hl);color:var(--bg)}
+.top .hdr-cta:hover .dot{background:var(--bg)}
+.top .hdr-app{display:inline-flex;align-items:center;font:600 15px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--bg);background:var(--cu);border:1px solid var(--cu);border-radius:999px;padding:8px 14px;text-decoration:none;white-space:nowrap}
+.top .hdr-app:hover{background:var(--fg);border-color:var(--fg)}
+@media (max-width:640px){
+  .top{display:grid;grid-template-columns:auto auto auto;justify-content:space-between;align-items:center}
+  .top .nav{grid-column:1 / -1;grid-row:2;margin-left:0;font-size:14px}
+  .top .hdr-cta{grid-column:2;grid-row:1;margin-left:0;justify-self:end;font-size:13px;padding:7px 12px}
+  .top .hdr-app{grid-column:3;grid-row:1;font-size:13px;padding:7px 12px}
+}
+@media (max-width:520px){.top .logo svg{height:30px}.top .nav .sep.bar{margin-inline:7px}}
+@media (max-width:400px){.top .nav{font-size:12.5px;letter-spacing:.05em}.top .nav .sep.bar{margin-inline:5px}}
+.top{margin-bottom:clamp(28px,5vw,56px)}
