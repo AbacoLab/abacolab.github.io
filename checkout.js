@@ -377,6 +377,9 @@
     // a renewal reminder links here with the plan, the months and the email filled in
     if (/^(1|3|12)$/.test(q.get('months') || '')) setRadio('months', q.get('months'));
     if (q.get('email')) $('co-email').value = q.get('email');
+    // a renewal reminder carries the referral address: the box is ticked and the address checked again on load
+    var qref = (q.get('ref') || '').trim();
+    if (isAddr(qref)) { $('co-ref').checked = true; $('co-addr').value = qref; setTimeout(function () { checkRef(state(), qref); }, 0); }
 
     $('co').addEventListener('change', function (e) {
       var n = e.target.name;
