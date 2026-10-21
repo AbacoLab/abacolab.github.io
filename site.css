@@ -843,3 +843,8 @@ html.zoomed{overflow:hidden}
 .reel-wrap .reel{cursor:grab}
 .reel-wrap.dragging .reel{cursor:grabbing;scroll-snap-type:none;user-select:none}
 @media (hover:none){.reel-btn{width:42px;height:42px}}
+/* home: the data block */
+.data-trio{margin-top:16px}
+.quality{margin-top:clamp(28px,4vw,44px);display:grid;gap:18px}
+.quality h3{font-size:var(--t-h3)}
+@media (min-width:1000px){.quality .claims.grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:20px 24px}}
