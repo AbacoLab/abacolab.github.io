@@ -170,8 +170,18 @@
              'TradingView username: ' + ($('co-tv').value.trim() || '-'));
     return out.concat(extra || []).join('\n');
   }
-  function mail(subject, body) {
-    location.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  // A request for us: phisys.app forwards it to our inbox, so the buyer sends nothing from their own account.
+  // If the route does not answer, the buyer's mail app opens with the same text, as before.
+  var NOTE_API = 'https://phisys.app/pay/notify';
+  function mail(subject, body, sent, opened) {
+    fetch(NOTE_API, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ subject: subject, body: body, email: email().toLowerCase().replace(/\s+/g, '') }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (!(j && j.ok)) throw new Error('route'); say(sent || 'Sent: we have your request and write back by email.'); $('co-status').classList.add('hit'); })
+      .catch(function () {
+        location.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        if (opened) say(opened);
+      });
   }
 
   // ERC-20 transfer(to, amount): USDC has 6 decimals, so one cent is 10,000 units.
@@ -200,8 +210,9 @@
     var s = state(), to = cfg().usdc_to;
     if (!isAddr(to) || s.cents === null) {
       mail('Pay in USDC: ' + s.p.name + ', ' + months(s.months),
-           lines(s, ['Months: ' + s.months, 'Network: ' + s.net.name, 'Price: ' + euro(s.eur)]));
-      say('Your mail app opens with the request: we reply with the address and the amount in USDC.');
+           lines(s, ['Months: ' + s.months, 'Network: ' + s.net.name, 'Price: ' + euro(s.eur)]),
+           'Sent: we reply by email with the address and the amount in USDC.',
+           'Your mail app opens with the request: we reply with the address and the amount in USDC.');
       return;
     }
     var eth = window.ethereum;
@@ -291,8 +302,8 @@
       location.href = link + (link.indexOf('?') < 0 ? '?' : '&') + 'prefilled_email=' + encodeURIComponent(email());
       return;
     }
-    mail('Pay by card: ' + s.p.name + ', ' + (s.bill === 'y' ? 'yearly' : 'monthly'), lines(s));
-    say('Card payments open soon: your mail app opens and we keep your place.');
+    mail('Pay by card: ' + s.p.name + ', ' + (s.bill === 'y' ? 'yearly' : 'monthly'), lines(s),
+         'Sent: we write back by email with the card link.', 'Your mail app opens with the request: we write back with the card link.');
   }
 
   function freeStart() {
@@ -343,8 +354,9 @@
         say(x.j.message);
       })
       .catch(function () {
-        mail('Two free months: ' + s.p.name, lines(s, ['Hyperliquid address: ' + a]));
-        say('Your mail app opens with the request: we check the referral and send your licence key.');
+        mail('Two free months: ' + s.p.name, lines(s, ['Hyperliquid address: ' + a]),
+             'Sent: we check the referral and your licence code reaches ' + email() + '.',
+             'Your mail app opens with the request: we check the referral and send your licence key.');
       });
   }
 
@@ -386,7 +398,8 @@
       if (!lastTx) return;
       var s = lastTx.s;
       mail('USDC receipt: ' + s.p.name + ', ' + months(s.months),
-           lines(s, ['Months: ' + s.months, 'Network: ' + s.net.name, 'Amount: ' + usdc(s.cents), 'Transaction: ' + lastTx.url]));
+           lines(s, ['Months: ' + s.months, 'Network: ' + s.net.name, 'Amount: ' + usdc(s.cents), 'Transaction: ' + lastTx.url]),
+           'Sent: we check the transfer and your licence code reaches ' + email() + '.');
     });
     render();
 
