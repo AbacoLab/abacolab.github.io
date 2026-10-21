@@ -338,8 +338,9 @@
           try { if (window.umami) window.umami.track('referral', { plan: s.plan }); } catch (e) {}
           return;
         }
-        if (x.code === 404) throw new Error('route');
-        say((x.j && x.j.message) || 'We could not confirm the referral. Write to us and we check it by hand.');
+        // only the route's own refusal is shown; anything else (no route yet, a server error) falls back to email
+        if (!(x.j && x.j.ok === false && x.j.message) || x.code === 404 || x.code === 405 || x.code >= 500) throw new Error('route');
+        say(x.j.message);
       })
       .catch(function () {
         mail('Two free months: ' + s.p.name, lines(s, ['Hyperliquid address: ' + a]));
