@@ -319,7 +319,10 @@
     var el = $('co-addr'), a = el.value.trim();
     el.setAttribute('aria-invalid', isAddr(a) ? 'false' : 'true');
     if (!isAddr(a)) { say('Write the Hyperliquid address you opened through our link: 0x and 40 characters.'); el.focus(); return; }
-    referral(s, a);
+    // The two free months come with a payment: until that flow is decided, the request reaches us and we answer
+    mail('Two free months: ' + s.p.name, lines(s, ['Hyperliquid address: ' + a]),
+         'Sent: we check the referral and write back to ' + email() + ' with how to start.',
+         'Your mail app opens with the request: we check the referral and write back.');
   }
 
   // The referral, checked by phisys.app on Hyperliquid's own record: the address must have been opened with our
