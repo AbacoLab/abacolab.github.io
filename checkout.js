@@ -21,7 +21,8 @@
   };
   // phisys.app checks the transfer on chain and issues the licence, or renews the one this email holds
   var PAY_API = 'https://phisys.app/pay/usdc';
-  var REF_API = 'https://phisys.app/pay/referral';
+  // The referral discount: 15% on every plan, for as long as the buyer subscribes, once the address is confirmed
+  var REF_OFF = 0.15, REF = null;
   var PRICES_API = 'https://phisys.app/pay/prices';   // the table phisys.app decides with: the page reads the same
   // The rate of the day: ExchangeRate-API's open endpoint (it asks for the credit shown beside the rate),
   // then the ECB reference rate through Frankfurter, which some browsers fail to reach.
@@ -48,6 +49,7 @@
   }
   function isAddr(a) { return /^0x[0-9a-fA-F]{40}$/.test(a || ''); }
   function euro(n) { return '€' + (n % 1 ? n.toFixed(2) : String(n)); }
+  function off(n) { return Math.round(n * (1 - REF_OFF) * 100) / 100; }
   function usdc(cents) { return (cents / 100).toFixed(2) + ' USDC'; }
   function months(n) { return n + (n === 1 ? ' month' : ' months'); }
 
@@ -57,11 +59,14 @@
     var n = +(radio('months') || (bill === 'y' ? 12 : 1));
     var p = PLANS[plan];
     var eur = n === 12 ? p.y : p.m * n;
+    var ref = plan !== 'novice' && $('co-ref').checked, addr = ($('co-addr').value || '').trim().toLowerCase();
+    var refOk = ref && REF !== null && REF === addr;
+    if (refOk) eur = Math.round(eur * (1 - REF_OFF) * 100) / 100;
     return {
       plan: plan, p: p, bill: bill, months: n, eur: eur,
       net: NETS[radio('net')] || NETS.arbitrum,
       cents: rate ? Math.ceil(eur * rate * 100 - 1e-6) : null,
-      ref: plan !== 'novice' && $('co-ref').checked
+      ref: ref, refOk: refOk, addr: addr
     };
   }
 
@@ -81,15 +86,16 @@
     var price = euro(s.p.m) + ' a month, or ' + euro(s.p.y) + ' for 12 months, one month free';
     $('co-title').textContent = 'Begin ' + s.p.name;
     $('co-lede').textContent = !paid ? 'Free: the monthly report, and our indicators, self-optimising strategies and screeners on TradingView'
-      : s.ref ? 'First two months free with referral, then ' + euro(s.p[s.bill]) + (s.bill === 'y' ? ' a year' : ' a month') : price;
+      : s.refOk ? '15% off for life with referral: ' + euro(off(s.p.m)) + ' a month, or ' + euro(off(s.p.y)) + ' for 12 months'
+      : s.ref ? 'Referral: 15% off every plan, for as long as you subscribe. Check your address first' : price;
     document.querySelectorAll('#co-plan b[data-m]').forEach(function (b) { b.textContent = b.getAttribute('data-' + s.bill); });
     $('co-bill').hidden = true;   // one payment for 1, 3 or 12 months: the months pick the price
     $('co-ref-row').hidden = !paid;
     $('co-terms-pay').hidden = !paid;
     $('co-addr-row').hidden = !s.ref;
-    $('co-pay').hidden = !paid || s.ref;
-    $('co-go').hidden = paid && !s.ref;
-    $('co-free').textContent = paid ? 'Start my two free months' : 'Create my account';
+    $('co-pay').hidden = !paid || (s.ref && !s.refOk);
+    $('co-go').hidden = paid && (!s.ref || s.refOk);
+    $('co-free').textContent = paid ? 'Check my referral' : 'Create my account';
     $('co-usdc').textContent = s.cents !== null ? usdc(s.cents) : euro(s.eur) + ' at the day’s rate';
     $('co-eur').textContent = euro(s.eur) + ' for ' + months(s.months) + ', total to pay';
     var rt = $('co-rate');
@@ -168,6 +174,7 @@
     out.push('Email: ' + email(), 'Country: ' + countryName(c) + ' (' + c + ')',
              'Country of the connection: ' + (seen ? countryName(seen) + ' (' + seen + ')' + (seen === c ? ', matches' : ', differs') : 'not available'),
              'TradingView username: ' + ($('co-tv').value.trim() || '-'));
+    if (s.refOk) out.push('Referral: 15% off, Hyperliquid address ' + REF);
     return out.concat(extra || []).join('\n');
   }
   // A request for us: phisys.app forwards it to our inbox, so the buyer sends nothing from their own account.
@@ -262,7 +269,7 @@
     say(tries ? 'Waiting for the network to confirm the transfer…' : 'Sent. Checking the transfer on ' + s.net.name + '…', tx.url);
     var body = { email: email().toLowerCase().replace(/\s+/g, ''), country: $('co-country').value, seen: seen || '', tv: $('co-tv').value.trim(),
                  plan: s.plan, months: s.months, net: radio('net') || 'arbitrum', tx: tx.hash.toLowerCase(), eur: s.eur, cents: s.cents,
-                 rate: rate, rateDate: rateDate, sig: tx.sig || '' };
+                 rate: rate, rateDate: rateDate, sig: tx.sig || '', ref: s.refOk ? REF : '' };
     fetch(PAY_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
       .then(function (r) { return r.json().then(function (j) { return { code: r.status, j: j }; }); })
       .then(function (x) {
@@ -297,7 +304,7 @@
   }
 
   function payCard() {
-    var s = state(), link = ((cfg().stripe || {})[s.plan] || {})[s.bill];
+    var s = state(), link = ((cfg()[s.refOk ? 'stripe_ref' : 'stripe'] || {})[s.plan] || {})[s.bill];
     if (link && /^https:\/\/buy\.stripe\.com\//.test(link)) {
       location.href = link + (link.indexOf('?') < 0 ? '?' : '&') + 'prefilled_email=' + encodeURIComponent(email());
       return;
@@ -319,49 +326,34 @@
     var el = $('co-addr'), a = el.value.trim();
     el.setAttribute('aria-invalid', isAddr(a) ? 'false' : 'true');
     if (!isAddr(a)) { say('Write the Hyperliquid address you opened through our link: 0x and 40 characters.'); el.focus(); return; }
-    // The two free months come with a payment: until that flow is decided, the request reaches us and we answer
-    mail('Two free months: ' + s.p.name, lines(s, ['Hyperliquid address: ' + a]),
-         'Sent: we check the referral and write back to ' + email() + ' with how to start.',
-         'Your mail app opens with the request: we check the referral and write back.');
+    checkRef(s, a);
   }
 
-  // The referral, checked by phisys.app on Hyperliquid's own record: the address must have been opened with our
-  // code, and the wallet that owns it signs that it is yours. Until the route answers, the request leaves by email.
-  function refMessage(addr) {
-    return 'Phisys referral\nemail: ' + email().toLowerCase().replace(/\s+/g, '') + '\naddress: ' + addr.toLowerCase();
-  }
-  async function referral(s, a) {
-    var sig = '', eth = window.ethereum;
-    if (eth && eth.request) {
-      try {
-        say('Sign in your wallet with the address you opened through our link: it confirms the address is yours (no cost, nothing moves).');
-        var acc = await eth.request({ method: 'eth_requestAccounts' });
-        if (acc && acc[0] && acc[0].toLowerCase() === a.toLowerCase())
-          sig = await eth.request({ method: 'personal_sign', params: [hexUtf8(refMessage(a)), acc[0]] });
-      } catch (e) { /* no signature: phisys.app decides */ }
-    }
+  // The referral, read in the browser from Hyperliquid's own record: the address must have been opened with our
+  // code. The discount then shows in both prices; phisys.app checks the same record again before it issues the licence.
+  function checkRef(s, a) {
     say('Checking the referral on Hyperliquid…');
-    var body = { email: email().toLowerCase().replace(/\s+/g, ''), country: $('co-country').value, seen: seen || '', tv: $('co-tv').value.trim(),
-                 plan: s.plan, bill: s.bill, address: a.toLowerCase(), sig: sig };
-    fetch(REF_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
-      .then(function (r) { return r.json().then(function (j) { return { code: r.status, j: j }; }); })
-      .then(function (x) {
-        if (x.j && x.j.ok) {
-          say(x.j.message || ('Done: two free months. Your licence code is on its way to ' + email() + '.'));
-          $('co-status').classList.add('hit');
-          try { if (window.umami) window.umami.track('referral', { plan: s.plan }); } catch (e) {}
+    fetch('https://api.hyperliquid.xyz/info', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({ type: 'referral', user: a.toLowerCase() }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        var code = j && j.referredBy && j.referredBy.code;
+        if (!code || String(code).toUpperCase() !== 'PHISYS') {
+          REF = null; render();
+          say('This address was not opened with the Abaco referral link. Check it, or untick the box to pay the full price.');
           return;
         }
-        // only the route's own refusal is shown; anything else (no route yet, a server error) falls back to email
-        if (!(x.j && x.j.ok === false && x.j.message) || x.code === 404 || x.code === 405 || x.code >= 500) throw new Error('route');
-        say(x.j.message);
+        REF = a.toLowerCase(); render();
+        say('Referral confirmed: 15% off, for as long as you subscribe. Choose how to pay below.');
+        $('co-status').classList.add('hit');
       })
       .catch(function () {
-        mail('Two free months: ' + s.p.name, lines(s, ['Hyperliquid address: ' + a]),
-             'Sent: we check the referral and your licence code reaches ' + email() + '.',
-             'Your mail app opens with the request: we check the referral and send your licence key.');
+        mail('Referral discount: ' + s.p.name, lines(s, ['Hyperliquid address: ' + a]),
+             'Hyperliquid did not answer: we check the referral and write back to ' + email() + ' with your discounted link.',
+             'Hyperliquid did not answer. Your mail app opens: we check the referral and write back with your discounted link.');
       });
   }
+
 
   function ready(fn) {
     if (document.readyState !== 'loading') fn();
