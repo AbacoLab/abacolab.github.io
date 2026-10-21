@@ -848,3 +848,5 @@ html.zoomed{overflow:hidden}
 .quality{margin-top:clamp(28px,4vw,44px);display:grid;gap:18px}
 .quality h3{font-size:var(--t-h3)}
 @media (min-width:1000px){.quality .claims.grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:20px 24px}}
+.data-trio .say b{color:var(--fg);font-weight:500}
+.data-pair{gap:16px}
