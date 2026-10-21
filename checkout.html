@@ -18,9 +18,9 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="abaco-mark-small.svg" type="image/svg+xml">
 <link rel="stylesheet" href="fonts.css">
-<link rel="stylesheet" href="site.css?v=202610211825">
-<script src="site.js?v=202610211825" defer></script>
-<script src="checkout.js?v=202610211825" defer></script>
+<link rel="stylesheet" href="site.css?v=202610211911">
+<script src="site.js?v=202610211911" defer></script>
+<script src="checkout.js?v=202610211911" defer></script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="2d7db150-33e6-42af-9956-b3b92285aff9" data-domains="abaco.phisys.app"></script>
 </head>
 <body>
@@ -112,7 +112,11 @@
               <div class="sub"><label class="sr" for="co-tx">Transaction hash</label><input id="co-tx" type="text" placeholder="0x… transaction hash" autocomplete="off" spellcheck="false"><button class="btn sm" type="button" id="co-check">Check it</button></div>
             </details>
           </article>
-          <p class="small soon-line">By card, through Stripe, renewing on its own: coming soon. <a href="#" id="co-card">Ask for it</a></p>
+          <article class="card">
+            <div class="head"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-card"/></svg><p class="eyebrow">by card</p></div>
+            <p class="small">Through Stripe, monthly or yearly, renewing on its own until you cancel.</p>
+            <button class="btn" type="button" id="co-card">Pay by card</button>
+          </article>
         </div>
       </fieldset>
 
@@ -123,9 +127,8 @@
     </form>
   </div>
 </section>
-<!-- What the page cannot know yet: the Stripe Payment Links (one per plan and billing) and the dedicated USDC
-     address, the same on Arbitrum and Base. Empty means the request leaves as an email. -->
-<script type="application/json" id="pay-config">{"usdc_to": "0x287B4e0a3f613DA6Ea4ac8B51860c09A15a002bC", "stripe": {"apprentice": {"m": "", "y": ""}, "adept": {"m": "", "y": ""}, "magister": {"m": "", "y": ""}, "doctor": {"m": "", "y": ""}}}</script>
+<!-- The Stripe Payment Links (one per plan and billing) and the USDC address, the same on Arbitrum and Base. -->
+<script type="application/json" id="pay-config">{"usdc_to": "0x287B4e0a3f613DA6Ea4ac8B51860c09A15a002bC", "stripe": {"apprentice": {"m": "https://buy.stripe.com/aFa3cueIVfwpbiQb4gco000", "y": "https://buy.stripe.com/14A9AS44hfwpcmU7S4co001"}, "adept": {"m": "https://buy.stripe.com/28E14m30dckddqY7S4co002", "y": "https://buy.stripe.com/8x2bJ01W9ac5aeMegsco003"}, "magister": {"m": "https://buy.stripe.com/9B6aEW30d4RLcmUdcoco004", "y": "https://buy.stripe.com/6oU9AS1W9ckdfz6c8kco005"}, "doctor": {"m": "https://buy.stripe.com/fZu3cucAN981gDa3BOco006", "y": "https://buy.stripe.com/8x2eVcfMZ9811Ig4FSco007"}}}</script>
 </main>
 <footer>
   <div class="wrap foot">
