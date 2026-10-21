@@ -18,9 +18,9 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="abaco-mark-small.svg" type="image/svg+xml">
 <link rel="stylesheet" href="fonts.css">
-<link rel="stylesheet" href="site.css?v=202610211911">
-<script src="site.js?v=202610211911" defer></script>
-<script src="checkout.js?v=202610211911" defer></script>
+<link rel="stylesheet" href="site.css?v=202610211937">
+<script src="site.js?v=202610211937" defer></script>
+<script src="checkout.js?v=202610211937" defer></script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="2d7db150-33e6-42af-9956-b3b92285aff9" data-domains="abaco.phisys.app"></script>
 </head>
 <body>
@@ -82,13 +82,13 @@
         <p class="small">Our indicators, self-optimising strategies and screeners on TradingView are free with sign-up: we add your username to the invite-only scripts</p>
         <label class="check" id="co-ref-row"><input type="checkbox" id="co-ref"><span>I opened my Hyperliquid account through the <a href="https://app.hyperliquid.xyz/join/PHISYS" target="_blank" rel="noopener">Abaco referral link</a>: first two months free</span></label>
         <label class="fld" id="co-addr-row" hidden><span>The Hyperliquid address you opened with our link</span><input id="co-addr" type="text" autocomplete="off" spellcheck="false" placeholder="0x…"></label>
-        <label class="check" id="co-terms-row"><input type="checkbox" id="co-terms" required><span>I have read and accept the <a href="legal.html" target="_blank" rel="noopener">Legal page</a>: terms, privacy and risk, and I buy for personal use.<span id="co-terms-pay" hidden> I ask to start Phisys now.</span></span></label>
+        <label class="check" id="co-terms-row"><input type="checkbox" id="co-terms" required><span>I have read and accept the <a href="legal.html" target="_blank" rel="noopener">Legal page</a>.<span id="co-terms-pay" hidden> I ask to start Phisys now.</span></span></label>
       </fieldset>
 
       <fieldset class="co-step" id="co-pay">
         <legend><span class="n">3</span>Pay</legend>
         <div class="pay-one">
-          <article class="card cu">
+          <article class="card">
             <div class="head"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-coins"/></svg><p class="eyebrow">in usdc</p></div>
             <h3>From your own wallet</h3>
             <div class="seg tiny" id="co-net">
@@ -114,7 +114,8 @@
           </article>
           <article class="card">
             <div class="head"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-card"/></svg><p class="eyebrow">by card</p></div>
-            <p class="small">Through Stripe, monthly or yearly, renewing on its own until you cancel.</p>
+            <h3>With your card</h3>
+            <p class="small">Through Stripe, monthly or yearly, renewing on its own until you cancel. Visa, Mastercard, Amex, Apple Pay and Google Pay.</p>
             <button class="btn" type="button" id="co-card">Pay by card</button>
           </article>
         </div>

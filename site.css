@@ -851,3 +851,10 @@ html.zoomed{overflow:hidden}
 .data-trio .say b{color:var(--fg);font-weight:500}
 .data-pair{gap:16px}
 .vat{color:var(--dim);font-size:13px;letter-spacing:.02em;margin-top:-6px}
+/* checkout: USDC and card side by side, same weight */
+@media (min-width:900px){.pay-one{grid-template-columns:repeat(2,minmax(0,1fr));max-width:none;align-items:stretch}}
+.pay-one .card{align-content:start}
+.pay-one .card > .btn{justify-self:start}
+/* selects: our own chevron, aligned with the text */
+.fld select{-webkit-appearance:none;appearance:none;padding-right:46px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23a8abb2' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 20px center;background-size:12px 8px}
+.pay-one .wallet .rw{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px}.pay-one .wallet .rw > :last-child{text-align:right;min-width:0;overflow-wrap:anywhere}
