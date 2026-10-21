@@ -90,7 +90,7 @@
     $('co-go').hidden = paid && !s.ref;
     $('co-free').textContent = paid ? 'Start my two free months' : 'Create my account';
     $('co-usdc').textContent = s.cents !== null ? usdc(s.cents) : euro(s.eur) + ' at the day’s rate';
-    $('co-eur').textContent = euro(s.eur) + ' for ' + months(s.months);
+    $('co-eur').textContent = euro(s.eur) + ' for ' + months(s.months) + ', total to pay';
     var rt = $('co-rate');
     rt.textContent = rate ? '1 EUR = ' + rate.toFixed(4) + ' USD, ' + rateDate + ', rates by '
       : rateFailed ? 'the day’s rate, in our reply' : 'loading…';
