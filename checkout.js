@@ -21,6 +21,7 @@
   };
   // phisys.app checks the transfer on chain and issues the licence, or renews the one this email holds
   var PAY_API = 'https://phisys.app/pay/usdc';
+  var REF_API = 'https://phisys.app/pay/referral';
   var PRICES_API = 'https://phisys.app/pay/prices';   // the table phisys.app decides with: the page reads the same
   // The rate of the day: ExchangeRate-API's open endpoint (it asks for the credit shown beside the rate),
   // then the ECB reference rate through Frankfurter, which some browsers fail to reach.
@@ -307,8 +308,43 @@
     var el = $('co-addr'), a = el.value.trim();
     el.setAttribute('aria-invalid', isAddr(a) ? 'false' : 'true');
     if (!isAddr(a)) { say('Write the Hyperliquid address you opened through our link: 0x and 40 characters.'); el.focus(); return; }
-    mail('Two free months: ' + s.p.name, lines(s, ['Hyperliquid address: ' + a]));
-    say('Your mail app opens with the request: we check the referral and send your licence key.');
+    referral(s, a);
+  }
+
+  // The referral, checked by phisys.app on Hyperliquid's own record: the address must have been opened with our
+  // code, and the wallet that owns it signs that it is yours. Until the route answers, the request leaves by email.
+  function refMessage(addr) {
+    return 'Phisys referral\nemail: ' + email().toLowerCase().replace(/\s+/g, '') + '\naddress: ' + addr.toLowerCase();
+  }
+  async function referral(s, a) {
+    var sig = '', eth = window.ethereum;
+    if (eth && eth.request) {
+      try {
+        say('Sign in your wallet with the address you opened through our link: it confirms the address is yours (no cost, nothing moves).');
+        var acc = await eth.request({ method: 'eth_requestAccounts' });
+        if (acc && acc[0] && acc[0].toLowerCase() === a.toLowerCase())
+          sig = await eth.request({ method: 'personal_sign', params: [hexUtf8(refMessage(a)), acc[0]] });
+      } catch (e) { /* no signature: phisys.app decides */ }
+    }
+    say('Checking the referral on Hyperliquid…');
+    var body = { email: email().toLowerCase().replace(/\s+/g, ''), country: $('co-country').value, seen: seen || '', tv: $('co-tv').value.trim(),
+                 plan: s.plan, bill: s.bill, address: a.toLowerCase(), sig: sig };
+    fetch(REF_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().then(function (j) { return { code: r.status, j: j }; }); })
+      .then(function (x) {
+        if (x.j && x.j.ok) {
+          say(x.j.message || ('Done: two free months. Your licence code is on its way to ' + email() + '.'));
+          $('co-status').classList.add('hit');
+          try { if (window.umami) window.umami.track('referral', { plan: s.plan }); } catch (e) {}
+          return;
+        }
+        if (x.code === 404) throw new Error('route');
+        say((x.j && x.j.message) || 'We could not confirm the referral. Write to us and we check it by hand.');
+      })
+      .catch(function () {
+        mail('Two free months: ' + s.p.name, lines(s, ['Hyperliquid address: ' + a]));
+        say('Your mail app opens with the request: we check the referral and send your licence key.');
+      });
   }
 
   function ready(fn) {
