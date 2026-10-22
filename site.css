@@ -127,8 +127,9 @@ h4{font-size:20px;line-height:1.15;letter-spacing:.02em}
 /* sections and blocks */
 .sec{padding-block:clamp(40px,6.5vw,88px)}
 .sec.first{padding-top:clamp(16px,3vw,32px)}
-#draw,#prove{padding-bottom:clamp(8px,1.5vw,16px)}
-#prove,#run{padding-top:clamp(16px,2.5vw,32px)}
+#draw,#prove{padding-bottom:clamp(24px,4vw,56px)}
+#prove,#run{padding-top:clamp(40px,6vw,88px)}
+section[aria-labelledby="pricing-h"] .sec-head{margin-bottom:clamp(14px,2vw,22px)}
 .sec-head{display:grid;gap:16px;margin-bottom:clamp(28px,4vw,48px);max-width:780px}
 .stack{display:grid;gap:clamp(28px,4vw,48px)}
 .block{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(24px,4.4vw,64px);display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center;min-width:0}
