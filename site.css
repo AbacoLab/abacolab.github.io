@@ -862,7 +862,30 @@ html.zoomed{overflow:hidden}
 .phero.one .copy.wide .lede.line{max-width:none}
 @media (max-width:1099px){.phero .lede.line{white-space:normal}}
 
-/* a drawing at the foot of a card (phisys: with ai, out of sample) */
-.card.has-art{grid-template-rows:auto auto auto 1fr}
-.card .card-art{align-self:end;place-items:center;margin-top:8px}
-.card .card-art svg{max-width:190px}
+/* a drawing in the top-right corner of a card (phisys: the three steps) */
+.card.has-art{position:relative}
+.card .card-art{position:absolute;top:clamp(20px,3vw,30px);right:clamp(20px,3vw,30px);width:132px;height:100px;display:grid;place-items:center}
+.card .card-art svg{width:100%;height:100%;max-width:none}
+.card.has-art > .head,.card.has-art > h3{padding-right:144px}
+.card .card-art.ph{border:1px dashed var(--line);border-radius:12px}
+.card .card-art.ph span{font:500 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+@media (max-width:560px){.card .card-art{width:84px;height:64px}.card.has-art > .head,.card.has-art > h3{padding-right:92px}}
+
+/* the code typed line by line, then cleared */
+.a-type{transform-box:fill-box;transform-origin:100% 50%;animation:10s linear infinite}
+.a-tc{animation:10s linear infinite}
+.a-type.t0{animation-name:ty0} .a-type.t1{animation-name:ty1} .a-type.t2{animation-name:ty2}
+.a-tc.t0{animation-name:tc0} .a-tc.t1{animation-name:tc1} .a-tc.t2{animation-name:tc2}
+@keyframes ty0{0%,6%{transform:scaleX(1);animation-timing-function:steps(16,end)}18%,88%{transform:scaleX(0)}90%,100%{transform:scaleX(1)}}
+@keyframes ty1{0%,22%{transform:scaleX(1);animation-timing-function:steps(16,end)}34%,88%{transform:scaleX(0)}90%,100%{transform:scaleX(1)}}
+@keyframes ty2{0%,38%{transform:scaleX(1);animation-timing-function:steps(16,end)}50%,88%{transform:scaleX(0)}90%,100%{transform:scaleX(1)}}
+@keyframes tc0{0%,5.9%{opacity:0;transform:translateX(0)}6%{opacity:1;transform:translateX(0);animation-timing-function:steps(16,end)}18%,21.9%{opacity:1;transform:translateX(72px)}22%,100%{opacity:0;transform:translateX(72px)}}
+@keyframes tc1{0%,21.9%{opacity:0;transform:translateX(0)}22%{opacity:1;transform:translateX(0);animation-timing-function:steps(16,end)}34%,37.9%{opacity:1;transform:translateX(72px)}38%,100%{opacity:0;transform:translateX(72px)}}
+@keyframes tc2{0%,37.9%{opacity:0;transform:translateX(0)}38%{opacity:1;transform:translateX(0);animation-timing-function:steps(16,end)}50%{opacity:1;transform:translateX(72px)}56%{opacity:0}62%{opacity:1}68%{opacity:0}74%{opacity:1}80%{opacity:0}86%,88%{opacity:1;transform:translateX(72px)}88.1%,100%{opacity:0;transform:translateX(72px)}}
+
+/* your keys: the key turns, an order leaves your account */
+.a-key{transform-box:fill-box;transform-origin:16% 50%;animation:a-key 6s ease-in-out infinite}
+@keyframes a-key{0%,10%{transform:rotate(0)}18%,30%{transform:rotate(-22deg)}40%,100%{transform:rotate(0)}}
+.a-send{opacity:0;animation:a-send 6s ease-in-out infinite}
+.a-send.k1{animation-delay:1.2s}
+@keyframes a-send{0%,28%{opacity:0;transform:translateX(0)}32%{opacity:1}52%{opacity:1;transform:translateX(30px)}58%,100%{opacity:0;transform:translateX(34px)}}
