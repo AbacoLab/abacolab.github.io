@@ -861,3 +861,8 @@ html.zoomed{overflow:hidden}
 #co-status{font:400 15px/1.45 var(--body);color:var(--muted)}
 .phero.one .copy.wide .lede.line{max-width:none}
 @media (max-width:1099px){.phero .lede.line{white-space:normal}}
+
+/* a drawing at the foot of a card (phisys: with ai, out of sample) */
+.card.has-art{grid-template-rows:auto auto auto 1fr}
+.card .card-art{align-self:end;place-items:center;margin-top:8px}
+.card .card-art svg{max-width:190px}

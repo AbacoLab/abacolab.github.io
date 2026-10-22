@@ -171,7 +171,12 @@
         var d = Math.abs((r.top + r.bottom) / 2 - vh / 2);
         if (d < bestD) { bestD = d; best = a; }
       });
-      anims.forEach(function (a) { a.classList.toggle('play', a === best); });
+      // the drawings on the same row as the nearest one move with it
+      var row = best ? best.getBoundingClientRect() : null;
+      anims.forEach(function (a) {
+        var r = a.getBoundingClientRect();
+        a.classList.toggle('play', !!row && (a === best || (r.width > 0 && Math.abs(r.top - row.top) < 60)));
+      });
     }
     function queue() {
       if (queued) return;
