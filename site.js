@@ -267,6 +267,36 @@
       });
     });
 
+    // Home: the Phisys carousel. One screen at a time, every 5 s; it rests while hovered, out of sight or when motion is reduced.
+    var car = document.querySelector('.carousel');
+    if (car) {
+      var track = car.querySelector('.track'), slides = car.querySelectorAll('.slide');
+      var dotsC = document.querySelectorAll('.car-dots .dot'), at = 0, timer = null, hover = false, seen = true;
+      function show(n) {
+        at = (n + slides.length) % slides.length;
+        track.style.transform = 'translateX(' + (-100 * at) + '%)';
+        slides.forEach(function (s, k) { if (k === at) s.removeAttribute('aria-hidden'); else s.setAttribute('aria-hidden', 'true'); });
+        dotsC.forEach(function (d, k) { d.classList.toggle('on', k === at); if (k === at) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); });
+      }
+      function run() {
+        clearInterval(timer); timer = null;
+        if (!hover && seen && !document.hidden && !reduce.matches) timer = setInterval(function () { show(at + 1); }, 5000);
+      }
+      dotsC.forEach(function (d, k) { d.addEventListener('click', function () { show(k); run(); }); });
+      car.addEventListener('mouseenter', function () { hover = true; run(); });
+      car.addEventListener('mouseleave', function () { hover = false; run(); });
+      document.addEventListener('visibilitychange', run);
+      if (window.IntersectionObserver) new IntersectionObserver(function (e) { seen = e[0].isIntersecting; run(); }).observe(car);
+      var x0 = null;
+      car.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+      car.addEventListener('touchend', function (e) {
+        if (x0 === null) return;
+        var dx = e.changedTouches[0].clientX - x0; x0 = null;
+        if (Math.abs(dx) > 40) { show(at + (dx < 0 ? 1 : -1)); run(); }
+      });
+      run();
+    }
+
     // The beta's places: phisys.app counts the beta licences (/beta/seats → {taken, total}). The page's own count if it is silent.
     var seats = document.querySelector('.seats');
     if (seats) {
