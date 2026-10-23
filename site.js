@@ -271,7 +271,7 @@
     var car = document.querySelector('.carousel');
     if (car) {
       var track = car.querySelector('.track'), slides = car.querySelectorAll('.slide');
-      var dotsC = document.querySelectorAll('.car-dots .dot'), at = 0, timer = null, hover = false, seen = true;
+      var dotsC = car.querySelectorAll('.car-dots .dot'), at = 0, timer = null, hover = false, seen = true;
       function show(n) {
         at = (n + slides.length) % slides.length;
         track.style.transform = 'translateX(' + (-100 * at) + '%)';
@@ -283,6 +283,8 @@
         if (!hover && seen && !document.hidden && !reduce.matches) timer = setInterval(function () { show(at + 1); }, 5000);
       }
       dotsC.forEach(function (d, k) { d.addEventListener('click', function () { show(k); run(); }); });
+      car.querySelector('.reel-btn.prev').addEventListener('click', function () { show(at - 1); run(); });
+      car.querySelector('.reel-btn.next').addEventListener('click', function () { show(at + 1); run(); });
       car.addEventListener('mouseenter', function () { hover = true; run(); });
       car.addEventListener('mouseleave', function () { hover = false; run(); });
       document.addEventListener('visibilitychange', run);
