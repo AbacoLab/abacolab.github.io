@@ -267,7 +267,7 @@
       });
     });
 
-    // Home: the Phisys carousel. One screen at a time, every 5 s; it rests while hovered, out of sight or when motion is reduced.
+    // Home: the Phisys carousel. One screen at a time, every 7 s; it rests while hovered, out of sight or when motion is reduced.
     var car = document.querySelector('.carousel');
     if (car) {
       var track = car.querySelector('.track'), slides = car.querySelectorAll('.slide');
@@ -280,7 +280,7 @@
       }
       function run() {
         clearInterval(timer); timer = null;
-        if (!hover && seen && !document.hidden && !reduce.matches) timer = setInterval(function () { show(at + 1); }, 5000);
+        if (!hover && seen && !document.hidden && !reduce.matches) timer = setInterval(function () { show(at + 1); }, 7000);
       }
       dotsC.forEach(function (d, k) { d.addEventListener('click', function () { show(k); run(); }); });
       car.querySelector('.reel-btn.prev').addEventListener('click', function () { show(at - 1); run(); });
