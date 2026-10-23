@@ -795,7 +795,7 @@ html.zoomed{overflow:hidden}
 .lede.two{max-width:none}
 @media (min-width:860px){.phero.wide-copy{grid-template-columns:minmax(0,9fr) minmax(0,3fr)}}
 /* footer: legal on the fourth line, links on one row, the report note in the body font */
-.foot{grid-template-columns:minmax(0,1.75fr) minmax(0,.9fr) minmax(0,.8fr) minmax(0,1.55fr);column-gap:32px}
+@media (min-width:1024px){.foot{grid-template-columns:minmax(0,1.75fr) minmax(0,.9fr) minmax(0,.8fr) minmax(0,1.55fr);column-gap:32px}}
 .foot-sub .sub{flex-wrap:nowrap}
 .foot-sub .sub input{min-width:0;flex:1 1 auto}
 .foot .links{white-space:nowrap}
