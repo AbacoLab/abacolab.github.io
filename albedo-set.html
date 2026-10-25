@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Albedo set · Abaco</title>
+<title>Albedo set (Adept) · Abaco</title>
 <meta name="robots" content="noindex">
-<meta name="description" content="Band Break, MA Cross and Stoch Cross on TradingView, each with its Fixed setup and its walk-forward, then the nine pairs as a Book in Phisys.">
-<meta property="og:title" content="Albedo set · Abaco">
-<meta property="og:description" content="Three strategies tuned walk-forward on TradingView, then a Book in Phisys.">
+<meta name="description" content="Band Break, MA Cross and Stoch Cross on TradingView, each with its Fixed setup and its walk-forward, then the nine setups as the Albedo Adept Book in Phisys.">
+<meta property="og:title" content="Albedo set (Adept) · Abaco">
+<meta property="og:description" content="Three strategies tuned walk-forward on TradingView, then nine setups as the Albedo Adept Book in Phisys.">
 <meta property="og:image" content="https://abaco.phisys.app/img/og/albedo.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -203,15 +203,15 @@ a.btn.ghost { background: transparent; border-color: var(--line-strong); }
 <div class="page">
   <div class="topbar" data-only="site"><a href="index.html" aria-label="Abaco, home"><img src="abaco-lockup-light.svg" alt="Abaco" width="77" height="30"></a><a class="back" href="tradingview.html">← The scripts on TradingView</a></div>
   <header>
-    <div class="eyebrow"><span data-only="report">Abaco · Albedo pack</span><span data-only="site">Abaco · Albedo set</span></div>
-    <h1><span data-only="report">Three strategies, each on its best coins</span><span data-only="site">Three strategies, tuned walk-forward, then a Book</span></h1>
+    <div class="eyebrow"><span data-only="report">Abaco · Albedo pack</span><span data-only="site">Abaco · Albedo set (Adept)</span></div>
+    <h1><span data-only="report">Three strategies, each on its best coins</span><span data-only="site">Three strategies, tuned walk-forward, then the Albedo Adept Book</span></h1>
     <p class="lede" data-only="report">Three academic strategies on the 4h charts of the <b>largest coins</b>, over their whole history, after costs. Each one with its Fixed setup and with the Walk-forward.</p>
     <p class="lede" data-only="report">Can the walk-forward improve on the canonical setup, not in profit alone, but in <b>profit against drawdown</b> and in <b>linearity of the equity</b>? Like a systematic trader building a book, we kept the <b>most promising coins</b> for each strategy<span id="ledemc">.</span></p>
-    <p class="lede" data-only="site">Band Break, MA Cross and Stoch Cross on TradingView, each tuned walk-forward. Nine pairs, one Book, <span id="sitepaths"></span> rebuilt histories.</p>
+    <p class="lede" data-only="site">Band Break, MA Cross and Stoch Cross on TradingView, each tuned walk-forward. Nine setups make the Albedo Adept Book, put through <span id="sitepaths"></span> rebuilt histories.</p>
     <div class="btns" id="btns-top" style="margin-top:18px" data-only="report"></div>
     <nav class="steps" data-only="site" aria-label="The thread of the page">
       <a href="#rows"><span class="n">1</span><b>On TradingView</b><span>Each script tunes itself walk-forward</span></a>
-      <a href="#sec-book"><span class="n">2</span><b>One Book</b><span>The nine best pairs, traded together</span></a>
+      <a href="#sec-book"><span class="n">2</span><b>One Book</b><span>The nine setups, traded together</span></a>
       <a href="#sec-phisys"><span class="n">3</span><b>In Phisys</b><span>The same Book, ready to run</span></a>
     </nav>
   </header>
@@ -270,7 +270,7 @@ a.btn.ghost { background: transparent; border-color: var(--line-strong); }
 
   <section id="sec-corr">
     <span class="lbl">Correlation</span>
-    <h2>Do the nine lose together?</h2>
+    <h2>Do the nine setups lose together?</h2>
     <p id="corlede"></p>
     <div class="two-col">
       <div><div class="chart heat" id="heat"></div><div class="key" id="heatkey"></div>
@@ -287,12 +287,15 @@ a.btn.ghost { background: transparent; border-color: var(--line-strong); }
 
   <section data-only="site" id="sec-phisys">
     <span class="lbl">In Phisys</span>
-    <h2>The same nine setups, as a Book that runs</h2>
+    <h2>The same nine setups, as the Albedo Adept Book</h2>
+    <p>This is the Albedo Adept Book: nine setups, Band Break, MA Cross and Stoch Cross, each on three coins, all on the 4-hour chart.</p>
+    <p>It comes with Adept, which holds up to 10 setups in the Book, with Magister, up to 15, and with Doctor, with no limit.</p>
+    <p>Apprentice, up to 5, comes with the Albedo Apprentice Book: 3 setups, the best of each strategy, Band Break on TRON, MA Cross on Dogecoin and Stoch Cross on Bitcoin.</p>
     <div class="tiles">
       <div><b>A deeper walk-forward</b><p>Entry, stop, target and break-even tuned together, on thirty coins in one run.</p></div>
       <div><b>Four tests for every coin</b><p>Unseen bars, most windows, a plateau, the choice ahead of the fixed settings.</p></div>
       <div><b>The costs of the venue</b><p>Fees, spread, funding and slippage, every trade settled on the 5-minute path.</p></div>
-      <div><b>The Book, ready</b><p>The nine setups, run by the executor on your Hyperliquid account.</p></div>
+      <div><b>The Book, ready</b><p>The Albedo Adept Book, nine setups, run by the executor on your Hyperliquid account.</p></div>
     </div>
     <div class="btns"><a class="btn" href="phisys.html">Phisys <span class="arr">→</span></a><a class="btn ghost" href="pricing.html">The plans <span class="arr">→</span></a></div>
   </section>
@@ -386,9 +389,9 @@ const straighter = s => s.wf.stats.lin > s.fixed.stats.lin;
   const profit = wr.r >= fr.r ? 'more profit than' : Math.abs(wr.r - fr.r) <= 0.15 * Math.abs(fr.r) ? 'about the same profit as' : 'less profit than';
   const ddx = fr.dd / wr.dd;
   const dd = ddx >= 2 ? '<b>less than half the drawdown</b>' : ddx > 1.1 ? '<b>a smaller drawdown</b>' : ddx >= 0.9 ? 'about the same drawdown' : 'a deeper drawdown';
-  lines.push(`Together as a Book of the ${N_KEPT} pairs kept, the walk-forward setups made ${profit} the Fixed setups, with ${dd}${wr.lin > fr.lin ? ' and a <b>straighter line</b>' : ''}.`);
+  lines.push(`Together as a Book of the ${N_KEPT} setups kept, the walk-forward setups made ${profit} the Fixed setups, with ${dd}${wr.lin > fr.lin ? ' and a <b>straighter line</b>' : ''}.`);
   lines.push(`Put through a <b>Monte Carlo</b>, the walk-forward Book on a bad run falls ${DEEP} the Fixed setup's: for the same pain, it can risk <b>${ROOM}</b> per trade.`);
-  if (D.site) lines.push(`In <b>Phisys</b> the same pairs come as a ready <b>Book</b>, with a deeper walk-forward to take them further.`);
+  if (D.site) lines.push(`In <b>Phisys</b> the same setups come as the ready <b>Albedo Adept Book</b>, with a deeper walk-forward to take them further.`);
   document.getElementById('brief').innerHTML = `<span class="lbl">In short</span><ul>${lines.map(l => `<li>${l}</li>`).join('')}</ul>`;
 }
 
@@ -410,7 +413,7 @@ rows.insertAdjacentHTML('beforeend', `<span class="lbl">Equity curves</span><h2>
 const TRIO = D.site ? (() => {
   const top = document.createElement('div'); top.className = 'trio';
   const more = document.createElement('details'); more.className = 'more';
-  more.innerHTML = `<summary>The other ${word(D.shows.length - D.strategies.length)} pairs</summary><div class="trio"></div>`;
+  more.innerHTML = `<summary>The other ${word(D.shows.length - D.strategies.length)} setups</summary><div class="trio"></div>`;
   more.addEventListener('toggle', () => { if (more.open) REDRAW.forEach(f => f()); });
   rows.append(top, more);
   return { top, rest: more.querySelector('.trio') };
@@ -533,13 +536,13 @@ document.getElementById('ddbars').innerHTML = D.strategies.map(s => `<div class=
 document.getElementById('rec').innerHTML = '<thead><tr><th>Drawdown</th><th class="r">Gain needed to recover</th></tr></thead><tbody>' +
   [10, 20, 30, 40, 50].map(d => `<tr><td class="num">−${d}%</td><td class="num">+${Math.round(100 * d / (100 - d))}%</td></tr>`).join('') + '</tbody>';
 
-// the Book: the pairs kept, the same in both modes
+// the Book: the setups kept, the same in both modes
 const mem = D.strategies.map(st => `${esc(st.label)} on ${and(st.chosen.map(c => esc(name(c))))}`);
-document.getElementById('booklede').innerHTML = `A Book runs all the pairs kept at once, each trade risking 1 R: ${mem.join('; ')}. The same ${N_KEPT} pairs in both modes, each from its walk-forward's first choice. They were picked after the readings, as a trader picks the markets of a book: a <b>chosen</b> Book, not an average.`;
+document.getElementById('booklede').innerHTML = `A Book runs all the setups kept at once, each trade risking 1 R: ${mem.join('; ')}. The same ${N_KEPT} setups in both modes, each from its walk-forward's first choice. They were picked after the readings, as a trader picks the markets of a book: a <b>chosen</b> Book, not an average.`;
 {
   let lo = 0, hi = 0; for (const m of ['fixed', 'wf']) for (const p of B[m].curve) { lo = Math.min(lo, p[1]); hi = Math.max(hi, p[1]); }
   const el = document.getElementById('bookcard');
-  el.innerHTML = `<div><div class="mode">${N_KEPT[0].toUpperCase() + N_KEPT.slice(1)} pairs together</div><div class="where"><b>Walk-forward</b> Book against <b>Fixed setup</b> Book</div></div><div class="chart"></div>${statTable([['fixed', B.fixed.stats], ['wf', B.wf.stats]])}`;
+  el.innerHTML = `<div><div class="mode">${N_KEPT[0].toUpperCase() + N_KEPT.slice(1)} setups together</div><div class="where"><b>Walk-forward</b> Book against <b>Fixed setup</b> Book</div></div><div class="chart"></div>${statTable([['fixed', B.fixed.stats], ['wf', B.wf.stats]])}`;
   draw(el.querySelector('.chart'), [{ m: 'fixed', c: B.fixed.curve }, { m: 'wf', c: B.wf.curve }], B.wf.curve[0][0], B.wf.curve[B.wf.curve.length - 1][0], lo, hi, 'The trader\'s Book', 1000, 330);
 }
 
@@ -713,7 +716,7 @@ function drawExceed(box) {
   document.getElementById('heatkey').innerHTML = [['var(--down-2)', 'move together'], ['var(--raised)', 'on their own'], ['var(--up-2)', 'offset each other']]
     .map(([c, t]) => `<span><i style="background:${c};box-shadow:inset 0 0 0 1px var(--line-strong)"></i>${t}</span>`).join('') + `<span><i style="border:1px solid var(--text)"></i>same coin</span>` +
     D.strategies.map(s => `<span><i style="background:var(--${s.family})"></i>${esc(s.label)}</span>`).join('');
-  document.getElementById('heatcap').innerHTML = `The correlation of each pair's profit month by month, over the months both trade: 1 when they always move together, 0 when each goes its own way, −1 when one gains as the other loses.`;
+  document.getElementById('heatcap').innerHTML = `The correlation of each setup's profit month by month, over the months both trade: 1 when they always move together, 0 when each goes its own way, −1 when one gains as the other loses.`;
   // the walk-forward Book's worst drawdown: what each setup did from the last high to the bottom
   const w = MC.corr.worst, by = ms.map((m, i) => [i, w.by[i]]).sort((a, b) => a[1] - b[1]);
   const big = Math.max(...by.map(b => Math.abs(b[1])), 1e-9);
@@ -747,7 +750,7 @@ document.getElementById('notes').innerHTML = [
   `1 R = ${D.risk}% of the initial capital of ${D.capital.toLocaleString('en-US')} USDT; sizes are set on the initial capital, without compounding. Profit / DD is the profit over the worst drawdown; linearity is how close the equity line is to a straight line (1 = perfectly straight, below 0 = a line going down; shown from ${D.min_line} trades).`,
   `Fixed setup: the values each script opens with. Walk-forward: the scripts' own mode. It trains on the first ${D.win[0].toLocaleString('en-US')} bars (about a year), then every ${D.win[2].toLocaleString('en-US')} bars (about six months) picks a setup using only the bars before, and trades it unchanged until the next choice. Both modes are measured from its first choice.`,
   `For each strategy, the ${word(D.keep_n)} coins kept were picked after the readings, as a trader picks a book's markets; the first shown is the one where the walk-forward improved most on the Fixed setup in profit / DD and linearity. They were chosen after the readings, so they show the method at its best on these markets. A picture of the past, not a forecast.`,
-  `Monte Carlo: ${PATHS} paths, each as long as the Book's history (${MC.weeks} weeks), made of pieces of ${word(MC.block_weeks)} weeks in a row starting on any week, drawn with replacement; the same pieces for both modes. “${IN20}” is the value only ${100 - MC.bad_pct}% of the paths go past. It reshuffles the history of the pairs kept; it does not undo their choice.`,
+  `Monte Carlo: ${PATHS} paths, each as long as the Book's history (${MC.weeks} weeks), made of pieces of ${word(MC.block_weeks)} weeks in a row starting on any week, drawn with replacement; the same pieces for both modes. “${IN20}” is the value only ${100 - MC.bad_pct}% of the paths go past. It reshuffles the history of the setups kept; it does not undo their choice.`,
   `Correlation: of each setup's profit month by month, over the months both setups trade (at least ${MC.corr_min_months}).`,
 ].map(t => `<li>${t}</li>`).join('');
 
@@ -755,7 +758,7 @@ document.getElementById('notes').innerHTML = [
 if (D.site) {
   document.getElementById('sitepaths').textContent = PATHS;
   document.getElementById('mclede').innerHTML = `The Book's history rebuilt ${PATHS} times from pieces of ${word(MC.block_weeks)} weeks, the same pieces for both modes. On a bad run, the walk-forward Book falls <b>${DEEP}</b> the Fixed setup's.`;
-  document.getElementById('booklede').innerHTML = `The ${N_KEPT} pairs at once, each trade risking 1 R: ${mem.join('; ')}.`;
+  document.getElementById('booklede').innerHTML = `The Albedo Adept Book: the ${N_KEPT} setups at once, each trade risking 1 R: ${mem.join('; ')}.`;
   const cap = document.querySelector('#rows .cap'); if (cap) cap.remove();
   // the thread: what the page ends with first, then the three steps that lead there
   const step = (sec, n, lbl, h2, p) => { const el = document.getElementById(sec);
@@ -765,9 +768,9 @@ if (D.site) {
   step('rows', 1, 'On TradingView', 'Each script tunes itself, on its best coin',
     'Grey, the Fixed setup the script opens with. Copper, its own walk-forward, choosing again every six months on the bars before.');
   document.querySelector('#sec-tv .lbl').textContent = 'Try them';
-  step('sec-book', 2, 'One Book', 'The nine pairs, traded together');
+  step('sec-book', 2, 'One Book', 'The nine setups, traded together');
   document.querySelector('#sec-corr .lbl').textContent = 'The Book, inside';
-  step('sec-phisys', 3, 'In Phisys', 'The same Book, ready to run', 'In Phisys the nine setups are a Book from your first login, and the walk-forward goes deeper.');
+  step('sec-phisys', 3, 'In Phisys', 'The same Book, ready to run', 'In Phisys the nine setups come as the Albedo Adept Book, and the walk-forward goes deeper.');
 }
 </script>
 </body>
