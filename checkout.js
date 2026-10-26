@@ -92,10 +92,12 @@
     $('co-bill').hidden = true;   // one payment for 1, 3 or 12 months: the months pick the price
     $('co-ref-row').hidden = !paid;
     $('co-terms-pay').hidden = !paid;
+    $('co-terms-row').hidden = !paid;   // Novice confirms by email: a line of text instead of the box
+    $('co-terms-note').hidden = paid;
     $('co-addr-row').hidden = !s.ref;
     $('co-pay').hidden = !paid || (s.ref && !s.refOk);
     $('co-go').hidden = paid && (!s.ref || s.refOk);
-    $('co-free').textContent = paid ? 'Check my referral' : 'Create my account';
+    $('co-free').textContent = paid ? 'Check my referral' : 'Subscribe';
     $('co-usdc').textContent = s.cents !== null ? usdc(s.cents) : euro(s.eur) + ' at the day’s rate';
     $('co-eur').textContent = euro(s.eur) + ' for ' + months(s.months) + ', total to pay';
     var rt = $('co-rate');
@@ -163,6 +165,7 @@
     return ok && needCountry() && needTerms();
   }
   function needTerms() {
+    if (state().plan === 'novice') return true;
     var el = $('co-terms'), ok = el.checked;
     if (!ok) { say('Tick the box to accept the Legal page first.'); el.focus(); }
     return ok;

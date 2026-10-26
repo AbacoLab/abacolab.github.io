@@ -18,9 +18,9 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="abaco-mark-small.svg" type="image/svg+xml">
 <link rel="stylesheet" href="fonts.css">
-<link rel="stylesheet" href="site.css?v=202610261300">
-<script src="site.js?v=202610261300" defer></script>
-<script src="checkout.js?v=202610261300" defer></script>
+<link rel="stylesheet" href="site.css?v=202610261400">
+<script src="site.js?v=202610261400" defer></script>
+<script src="checkout.js?v=202610261400" defer></script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="2d7db150-33e6-42af-9956-b3b92285aff9" data-domains="abaco.phisys.app"></script>
 </head>
 <body>
@@ -61,10 +61,10 @@
         <legend><span class="n">1</span>Plan</legend>
         <div class="seg" id="co-plan">
           <label><input type="radio" name="plan" value="novice"><span>Novice<b>€0</b></span></label>
-          <label class="soon" title="Launching soon"><input type="radio" name="plan" value="apprentice" disabled><span>Apprentice<b data-m="€34" data-y="€374">€34</b></span></label>
-          <label class="soon" title="Launching soon"><input type="radio" name="plan" value="adept" disabled><span>Adept<b data-m="€55" data-y="€605">€55</b></span></label>
-          <label class="soon" title="Launching soon"><input type="radio" name="plan" value="magister" disabled><span>Magister<b data-m="€89" data-y="€979">€89</b></span></label>
-          <label class="soon" title="Launching soon"><input type="radio" name="plan" value="doctor" disabled><span>Doctor<b data-m="€144" data-y="€1,584">€144</b></span></label>
+          <label class="locked" title="Launching soon"><input type="radio" name="plan" value="apprentice" disabled><span>Apprentice<b data-m="€34" data-y="€374">€34</b></span></label>
+          <label class="locked" title="Launching soon"><input type="radio" name="plan" value="adept" disabled><span>Adept<b data-m="€55" data-y="€605">€55</b></span></label>
+          <label class="locked" title="Launching soon"><input type="radio" name="plan" value="magister" disabled><span>Magister<b data-m="€89" data-y="€979">€89</b></span></label>
+          <label class="locked" title="Launching soon"><input type="radio" name="plan" value="doctor" disabled><span>Doctor<b data-m="€144" data-y="€1,584">€144</b></span></label>
         </div>
         <div class="seg" id="co-bill">
           <label><input type="radio" name="bill" value="m"><span>Monthly</span></label>
@@ -83,6 +83,7 @@
         <label class="check" id="co-ref-row"><input type="checkbox" id="co-ref"><span>I opened my Hyperliquid account through the <a href="https://app.hyperliquid.xyz/join/PHISYS" target="_blank" rel="noopener">Abaco referral link</a>: 15% off every plan, for life</span></label>
         <label class="fld" id="co-addr-row" hidden><span>The Hyperliquid address you opened with our link</span><input id="co-addr" type="text" autocomplete="off" spellcheck="false" placeholder="0x…"></label>
         <label class="check" id="co-terms-row"><input type="checkbox" id="co-terms" required><span>I have read and accept the <a href="legal.html" target="_blank" rel="noopener">Legal page</a>.<span id="co-terms-pay" hidden> I ask to start Phisys now.</span></span></label>
+        <p class="small" id="co-terms-note" hidden>By signing up you accept the <a href="legal.html" target="_blank" rel="noopener">Legal page</a>. You confirm by email, and can unsubscribe in one click.</p>
       </fieldset>
 
       <fieldset class="co-step" id="co-pay">
@@ -121,7 +122,7 @@
         </div>
       </fieldset>
 
-      <div id="co-go" hidden><button class="btn fill" type="button" id="co-free">Create my account</button></div>
+      <div id="co-go" hidden><button class="btn fill" type="button" id="co-free">Subscribe</button></div>
       <div id="co-receipt" hidden><button class="btn fill" type="button" id="co-send">Send us the receipt</button></div>
       <p class="status" id="co-status" aria-live="polite"></p>
     </form>
