@@ -712,7 +712,7 @@ h2.lines span{display:block;white-space:nowrap}
 .tier.novice{margin-bottom:16px;display:grid;grid-template-columns:minmax(0,1fr);gap:10px 28px;align-items:center}
 .tier.novice ul{margin:0}
 @media (min-width:900px){
-  .tier.novice{grid-template-columns:200px minmax(0,1fr) auto auto;grid-template-areas:"name list price btn" "for list sub btn"}
+  .tier.novice{grid-template-columns:200px minmax(0,1fr) auto auto;grid-template-areas:"name list price btn" "for list sub ."}
   .tier.novice .name{grid-area:name}.tier.novice .for{grid-area:for}.tier.novice ul{grid-area:list}
   .tier.novice .price{grid-area:price;text-align:right}.tier.novice .price-sub{grid-area:sub;text-align:right}.tier.novice .btn{grid-area:btn}
 }
