@@ -92,8 +92,8 @@
     $('co-bill').hidden = true;   // one payment for 1, 3 or 12 months: the months pick the price
     $('co-ref-row').hidden = !paid;
     $('co-terms-pay').hidden = !paid;
-    $('co-terms-row').hidden = !paid;   // Novice confirms by email: a line of text instead of the box
-    $('co-terms-note').hidden = paid;
+    $('co-terms-row').hidden = !paid;   // Novice confirms by email: no box, no country
+    $('co-country-row').hidden = !paid;
     $('co-addr-row').hidden = !s.ref;
     $('co-pay').hidden = !paid || (s.ref && !s.refOk);
     $('co-go').hidden = paid && (!s.ref || s.refOk);
@@ -152,6 +152,7 @@
     })(0);
   }
   function needCountry() {
+    if (state().plan === 'novice') return true;
     var el = $('co-country'), ok = !!el.value;
     el.setAttribute('aria-invalid', ok ? 'false' : 'true');
     if (!ok) { say('Choose the country you live in.'); el.focus(); }
