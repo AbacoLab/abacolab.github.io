@@ -54,7 +54,7 @@
   function months(n) { return n + (n === 1 ? ' month' : ' months'); }
 
   function state() {
-    var plan = PLANS[radio('plan')] ? radio('plan') : 'adept';
+    var plan = PLANS[radio('plan')] ? radio('plan') : 'novice';
     var bill = radio('bill') === 'y' ? 'y' : 'm';
     var n = +(radio('months') || (bill === 'y' ? 12 : 1));
     var p = PLANS[plan];
@@ -371,7 +371,8 @@
     fillCountries();
     lookCountry();
     var bill = q.get('bill') === 'y' ? 'y' : 'm';
-    setRadio('plan', PLANS[q.get('plan')] ? q.get('plan') : 'adept');
+    // the paid plans are launching soon: whatever the link says, the page opens on Novice
+    setRadio('plan', 'novice');
     setRadio('bill', bill);
     setRadio('months', bill === 'y' ? '12' : '1');
     // a renewal reminder links here with the plan, the months and the email filled in
