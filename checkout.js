@@ -260,6 +260,15 @@
   async function signPay(eth, from, tx) {
     say('Sent. Now sign in your wallet: it confirms the payment is yours (no cost, nothing moves).', tx.url);
     tx.sig = await eth.request({ method: 'personal_sign', params: [hexUtf8(payMessage(tx.hash)), from] });
+    // The discount belongs to the wallet opened with our link. When that is not the wallet that pays, phisys.app wants the same
+    // message signed by it too (`ref_sig`); the wallet refuses an account it does not hold, and then the claim goes without it
+    // and phisys.app says why it cannot take the discount.
+    tx.refSig = '';
+    if (tx.s.refOk && REF && REF !== String(from).toLowerCase()) {
+      say('The referral address is another wallet. Sign the same message with it: no cost, nothing moves.', tx.url);
+      try { tx.refSig = await eth.request({ method: 'personal_sign', params: [hexUtf8(payMessage(tx.hash)), REF] }); }
+      catch (e) { tx.refSig = ''; }
+    }
   }
   function noSig(tx, why) {
     $('co-receipt').hidden = false;
@@ -273,7 +282,7 @@
     say(tries ? 'Waiting for the network to confirm the transfer…' : 'Sent. Checking the transfer on ' + s.net.name + '…', tx.url);
     var body = { email: email().toLowerCase().replace(/\s+/g, ''), country: $('co-country').value, seen: seen || '', tv: $('co-tv').value.trim(),
                  plan: s.plan, months: s.months, net: radio('net') || 'arbitrum', tx: tx.hash.toLowerCase(), eur: s.eur, cents: s.cents,
-                 rate: rate, rateDate: rateDate, sig: tx.sig || '', ref: s.refOk ? REF : '' };
+                 rate: rate, rateDate: rateDate, sig: tx.sig || '', ref: s.refOk ? REF : '', ref_sig: tx.refSig || '' };
     fetch(PAY_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
       .then(function (r) { return r.json().then(function (j) { return { code: r.status, j: j }; }); })
       .then(function (x) {
