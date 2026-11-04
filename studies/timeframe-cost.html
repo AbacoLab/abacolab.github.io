@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How much a timeframe costs · Abaco</title>
-<meta name="description" content="The typical move of one bar against the cost of one round trip, for 55 Hyperliquid crypto perps at 5m, 15m, 1h and 4h. At 5 minutes the bar does not pay the trip; the trade must last from 8 minutes on ZEC to almost five hours on TRX, whatever the entry.">
-<meta property="og:title" content="How much a timeframe costs">
-<meta property="og:description" content="At 5 minutes the typical bar does not pay the round trip on any of 55 crypto perps. The trade must last from 8 minutes on ZEC to almost five hours on TRX, whatever the entry. Measured, asset by asset.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What win rate does your timeframe ask for? · Abaco</title>
+<meta name="description" content="A trade that wins twice what it risks breaks even at 33% without costs. On 89 Hyperliquid crypto perps, after fees and spread, it needs 56% on 5-minute bars and 38% on 1-hour bars.">
+<meta property="og:title" content="What win rate does your timeframe ask for?">
+<meta property="og:description" content="A trade that wins twice what it risks breaks even at 33% without costs. On 89 Hyperliquid crypto perps, after fees and spread, it needs 56% on 5-minute bars and 38% on 1-hour bars.">
 <meta property="og:image" content="https://abaco.phisys.app/img/og/timeframe.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -15,46 +15,68 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@AbacoLab">
 <link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" href="../abaco-mark-small.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../fonts.css">
-<link rel="stylesheet" href="../header.css">
-<style>
-  :root { --bg: #1b1d22; --fg: #ece8df; --muted: #a8abb2; --dim: #8d9099; --cu: #e07c4e; --line: #33363e; --card: #22252b; color-scheme: dark; }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; background: var(--bg); color: var(--fg); }
-  body { font-family: Jost, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 18px; line-height: 1.55; }
-  .wrap { max-width: 980px; margin: 0 auto; padding-inline: 24px; }
-  header { padding-block: 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-  header img { height: 34px; width: auto; display: block; }
-  header a { color: var(--fg); text-decoration: none; }
-  .kicker { color: var(--cu); font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
-  h1 { font-weight: 500; font-size: clamp(34px, 5.5vw, 56px); line-height: 1.05; margin: 8px 0 16px; letter-spacing: -0.01em; text-wrap: balance; }
-  h2 { font-weight: 500; font-size: clamp(24px, 3vw, 30px); margin: 48px 0 12px; text-wrap: balance; }
-  p { max-width: 64ch; margin: 0 0 14px; }
-  .lede { font-size: clamp(19px, 2vw, 22px); color: var(--muted); }
-  figure { margin: 28px 0; }
-  figure img { width: 100%; height: auto; display: block; border-radius: 6px; }
-  figcaption { color: var(--dim); font-size: 14px; margin-top: 8px; }
-  .counts { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin: 20px 0; }
-  .counts div { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
-  .counts .tf { color: var(--cu); font-family: "IBM Plex Mono", monospace; font-size: 13px; }
-  .counts .n { font-size: 30px; font-weight: 500; line-height: 1.1; font-variant-numeric: tabular-nums; }
-  .counts small { color: var(--dim); font-size: 13px; display: block; }
-  @media (max-width: 640px) { .wrap { padding-inline: 16px; } .counts { grid-template-columns: repeat(2, minmax(0,1fr)); } }
-  .tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; margin: 20px 0; }
-  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 15px; font-variant-numeric: tabular-nums; }
-  th, td { text-align: right; padding: 7px 12px; border-top: 1px solid var(--line); }
-  th:first-child, td:first-child { text-align: left; font-family: "IBM Plex Mono", monospace; font-size: 14px; }
-  thead th { border-top: 0; color: var(--dim); font-weight: 400; font-size: 13px; letter-spacing: .05em; text-transform: uppercase; background: var(--card); position: sticky; top: 0; }
-  .note { color: var(--muted); font-size: 16px; }
-  ul { max-width: 64ch; padding-left: 20px; } li { margin-bottom: 8px; }
-  footer { border-top: 1px solid var(--line); margin-top: 56px; padding-block: 24px 40px; color: var(--dim); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
-  footer a { color: var(--muted); }
-</style>
+<link rel="stylesheet" href="../site.css?v=202610231450">
+<script src="../site.js?v=202610231450" defer></script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="2d7db150-33e6-42af-9956-b3b92285aff9" data-domains="abaco.phisys.app"></script>
+<style>
+  .study { max-width: 980px; font-weight: 300; }
+  .study h1 { font-family: var(--body); font-weight: 500; font-size: clamp(34px, 5.5vw, 56px); line-height: 1.05; letter-spacing: -.01em; margin: 8px 0 18px; text-wrap: balance; }
+  .study h2 { font-family: var(--body); font-weight: 500; font-size: clamp(24px, 3vw, 30px); line-height: 1.15; letter-spacing: 0; margin: 44px 0 14px; text-wrap: balance; }
+  .study p { margin: 0 0 14px; font-size: 18px; line-height: 1.65; text-wrap: pretty; }
+  .study strong { font-weight: 500; }
+  .study .kicker { color: var(--cu); font-family: var(--mono); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; font-weight: 400; margin-top: 18px; }
+  .study .lede { font-size: clamp(19px, 2vw, 22px); color: var(--muted); max-width: none; line-height: 1.5; }
+  .study .skipnote { margin: 4px 0 0; font-size: 16px; } .study .skipnote a { color: var(--cu); text-decoration: none; border-bottom: 1px solid var(--cu-line); }
+  .study .part { margin: 56px 0 4px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .study .part.first { margin-top: 36px; }
+  .study .part h2 { font-size: clamp(30px, 4vw, 42px); margin: 6px 0 8px; font-weight: 500; }
+  .study .part p { color: var(--muted); margin: 0; }
+  .study figure { margin: 26px 0; } .study figure img { width: 100%; height: auto; display: block; border-radius: 6px; }
+  .study figcaption { color: var(--dim); font-size: 14px; margin-top: 8px; }
+  .study .note { color: var(--muted); font-size: 16px; }
+  .study ul { padding-left: 20px; margin: 0 0 14px; } .study li { margin-bottom: 10px; font-size: 18px; line-height: 1.6; }
+  .study .st-tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; margin: 18px 0; }
+  .study table { border-collapse: collapse; width: 100%; min-width: 600px; font-size: 15px; font-variant-numeric: tabular-nums; font-weight: 400; }
+  .study th, .study td { text-align: right; padding: 7px 12px; border-top: 1px solid var(--line); }
+  .study th:first-child, .study td:first-child { text-align: left; font-family: var(--mono); font-size: 14px; }
+  .study thead th { border-top: 0; color: var(--dim); font-weight: 400; font-size: 13px; letter-spacing: .05em; text-transform: uppercase; background: var(--card); position: sticky; top: 0; }
+  .study .st-tools { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 18px 0 8px; }
+  .study .st-tools input { background: var(--card); color: var(--fg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; font: inherit; font-size: 16px; width: 220px; }
+  .study .st-tools small { color: var(--dim); }
+  .study th[data-k] { cursor: pointer; } .study th[data-k]:hover { color: var(--fg); }
+  .study tr.hide, .study tr.extra { display: none; }
+  .study td.hot { color: var(--cu); }
+  .study .st-more { display: block; width: 100%; background: var(--card); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font: inherit; font-size: 16px; cursor: pointer; margin: 0 0 20px; }
+  .study .st-more:hover { border-color: var(--cu); }
+  .study .st-legend { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 22px; margin: 14px 0 0; }
+  .study .st-legend dt { font-family: var(--mono); font-size: 13px; color: var(--cu); padding-top: 4px; }
+  .study .st-legend dd { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.55; }
+  .study .st-rule { border-left: 2px solid var(--cu); padding: 2px 0 2px 16px; margin: 20px 0; font-size: 20px; line-height: 1.5; }
+  .study .callout { background: var(--card); border: 1px solid var(--cu); border-radius: 8px; padding: 18px 22px; margin: 28px 0; }
+  .study .callout strong { display: block; font-size: 22px; font-weight: 500; color: var(--cu); margin-bottom: 6px; }
+  .study .callout p { margin: 0 0 8px; } .study .callout p:last-child { margin: 0; }
+  .study .st-next { margin: 44px 0 0; }
+  .study .st-pair { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 4px 36px; align-items: start; margin: 6px 0 30px; }
+  .study .st-pair > div:first-child > p:first-child { margin-top: 0; } .study .st-pair > div:first-child > p:last-child { margin-bottom: 0; }
+  /* the drawings sit on paper, like the images of the study: the palette of the images, local to the card */
+  .study .ill { --fg: #1b1d22; --muted: #686b73; --cu: #b0532a; --line: #e2ded4; background: #fbfaf7; border: 1px solid #e2ded4; border-radius: 8px; padding: 8px 8px 4px; }
+  .study .ill svg { width: 100%; height: auto; display: block; }
+  .study .ill text { fill: var(--muted); font-family: var(--body); font-size: 13px; font-weight: 400; }
+  .study .ill .t { fill: var(--fg); } .study .ill .big { fill: var(--fg); font-size: 20px; font-weight: 500; } .study .ill .cu { fill: var(--cu); }
+  .study .ill .sm { font-size: 12px; }
+  .study .ill .ln { stroke: var(--line); stroke-width: 1; } .study .ill .path { fill: none; stroke: var(--fg); stroke-width: 1.6; stroke-linejoin: round; }
+  .study .ill .dash { stroke-dasharray: 4 3; fill: none; stroke-width: 1.2; } .study .ill .tgt { stroke: var(--cu); } .study .ill .stp { stroke: #9a9ca2; } .study .ill .ent { stroke: var(--line); }
+  .study .ill .candle { stroke: var(--muted); stroke-width: 1; fill: #d9d5ca; }
+  .study .ill .blk { fill: #c9c5ba; } .study .ill .cost { fill: var(--cu); }
+  @media (max-width: 820px) { .study .st-pair { grid-template-columns: minmax(0, 1fr); } .study .st-pair .ill { max-width: 380px; } }
+  @media (max-width: 640px) { .study .st-legend { grid-template-columns: minmax(0, 1fr); gap: 2px; } .study .st-legend dd { margin-bottom: 10px; } }
+</style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top"><a class="logo" href="../index.html" aria-label="Abaco, home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 308.94 120" aria-hidden="true" focusable="false">
+<a class="skip" href="#main">Skip to content</a>
+<header class="wrap top"><a class="logo" href="../index.html" aria-label="Abaco, home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 308.94 120" aria-hidden="true" focusable="false">
   <circle fill="#ece8df" cx="45.83" cy="80.79" r="2.99"/>
   <circle fill="#ece8df" cx="47.46" cy="71.92" r="3.65"/>
   <circle fill="#ece8df" cx="37.68" cy="67.70" r="4.46"/>
@@ -73,114 +95,248 @@
   <g fill="#e07c4e"><path transform="translate(132.380,45.200) scale(0.06000,-0.06000)" d="M33 230Q33 159 66.5 104.5Q100 50 157.5 20.0Q215 -10 288 -10Q361 -10 418.5 20.0Q476 50 509.5 104.5Q543 159 543 230Q543 302 509.5 356.0Q476 410 418.5 440.0Q361 470 288 470Q215 470 157.5 440.0Q100 410 66.5 356.0Q33 302 33 230ZM165 230Q165 269 181.5 299.0Q198 329 226.0 345.0Q254 361 288 361Q322 361 350.0 345.0Q378 329 394.5 299.0Q411 269 411 230Q411 191 394.5 161.5Q378 132 350.0 115.5Q322 99 288 99Q254 99 226.0 115.5Q198 132 181.5 161.5Q165 191 165 230Z"/></g>
 </g>
 </svg></a><a class="hdr-cta" href="../hyperliquid-audit.html"><span class="dot" aria-hidden="true"></span>HL Audit</a><nav class="nav" aria-label="Main"><a href="../phisys.html">phisys</a><span class="sep bar" aria-hidden="true"></span><a href="../tradingview.html">tradingview</a><span class="sep bar" aria-hidden="true"></span><a href="../studies.html" aria-current="page">studies</a><span class="sep bar" aria-hidden="true"></span><a href="../pricing.html">pricing</a></nav><a class="hdr-app" href="https://phisys.app/">Open Phisys</a></header>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.6 6.6L12 13l8.4-6.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="13" r="1.7" fill="#e07c4e"/></symbol></defs></svg>
+<main id="main">
+<div class="wrap study">
+  <div class="kicker">Study 01 · November 2026 · Out of sample, by choice</div>
+  <h1>What win rate does your timeframe ask for?</h1>
+  <p class="lede">Before you choose a timeframe, find out what it costs you.<br>We measured it on 89 Hyperliquid crypto perps, so you can look up your own.</p>
+  <p class="skipnote"><a href="#results">Already trading? Skip the basics and go to the results &darr;</a></p>
 
-  <div class="kicker">November 2026 · Out of sample, by choice</div>
-  <h1>How much a timeframe costs</h1>
-  <p class="lede">The typical move of one bar against the cost of one round trip, for 55 Hyperliquid crypto perps at 5m, 15m, 1h and 4h. Fourteen months of 5-minute bars, July 2025 to September 2026.</p>
+  <div class="part first"><div class="kicker">The basics</div>
+    <p>Four short sections with a drawing each: what a trade costs, and why volatility decides how much.</p></div>
 
-  <p><strong>At 5 minutes the typical bar does not pay the round trip, on any of the 55.</strong> At 15 minutes it pays one trip on 50, but two trips on only 5. At 1 hour it pays two trips on 50; at 4 hours on all 55.</p>
+  <h2>Start with a trade</h2>
+  <div class="st-pair"><div><p>Say you open a trade and decide in advance how it ends. If it goes against you, you lose $100. If it goes your way, you make $200.</p>
+  <p>Traders call the $100 you risk 1&nbsp;R, for risk, and a trade like this a 2:1 trade. We will use R from here on.</p>
+  <p>With no costs at all, you break even by winning one trade out of three: one win brings $200, two losses take $200.</p></div><div class="ill"><svg viewBox="0 0 340 178" role="img" aria-label="Three trades with the same stop and target: one wins $200, two lose $100 each. The sum is zero."><text class="sm" x="44" y="14">trade 1</text><line class="dash tgt" x1="44" x2="112" y1="36" y2="36"/><line class="dash ent" x1="44" x2="112" y1="92" y2="92"/><line class="dash stp" x1="44" x2="112" y1="120" y2="120"/><polyline class="path" points="44,92 53,85 64,95 75,70 86,76 97,56 110,36"/><circle cx="110" cy="36" r="4" style="fill:var(--cu)"/><text class="big cu" x="78" y="152" text-anchor="middle" style="font-size:17px">+$200</text><text class="sm" x="122" y="14">trade 2</text><line class="dash tgt" x1="122" x2="190" y1="36" y2="36"/><line class="dash ent" x1="122" x2="190" y1="92" y2="92"/><line class="dash stp" x1="122" x2="190" y1="120" y2="120"/><polyline class="path" points="122,92 131,98 142,89 153,106 164,100 175,112 188,120"/><circle cx="188" cy="120" r="4" style="fill:#686b73"/><text class="big " x="156" y="152" text-anchor="middle" style="font-size:17px">−$100</text><text class="sm" x="200" y="14">trade 3</text><line class="dash tgt" x1="200" x2="268" y1="36" y2="36"/><line class="dash ent" x1="200" x2="268" y1="92" y2="92"/><line class="dash stp" x1="200" x2="268" y1="120" y2="120"/><polyline class="path" points="200,92 209,86 220,100 231,94 242,109 253,106 266,120"/><circle cx="266" cy="120" r="4" style="fill:#686b73"/><text class="big " x="234" y="152" text-anchor="middle" style="font-size:17px">−$100</text><text class="sm cu" x="4" y="40">target</text><text class="sm" x="4" y="96">entry</text><text class="sm" x="4" y="124">stop</text><text class="big" x="304" y="152" text-anchor="middle" style="font-size:22px">= $0</text></svg></div></div>
+  <p><strong>But a trade is never free.</strong> Fees and spread are paid every time, win or lose. So you have to win more than one out of three, and how much more is exactly what this study measures.</p>
+  <p>In this example we put our stop loss at one ATR, how far on average a bar usually moves. It is how we measure volatility: how much an asset moves.</p>
 
-  <div class="counts">
-    <div><span class="tf">5m</span><div class="n">0 / 55</div><small>bars worth two round trips (taker)</small></div>
-    <div><span class="tf">15m</span><div class="n">5 / 55</div><small>HYPE, ZEC, XPL, ENA, ZRO</small></div>
-    <div><span class="tf">1h</span><div class="n">50 / 55</div><small>open for almost everything</small></div>
-    <div><span class="tf">4h</span><div class="n">55 / 55</div><small>open for everything</small></div>
-  </div>
+  <h2>What a trade really costs</h2>
+  <div class="st-pair"><div><p>Every time you enter or leave with a market order, Hyperliquid takes a fee of 0.045% of the size of your order. A market order takes the price that is already there, and that makes you a taker.</p>
+  <p>Traders count these small percentages in basis points, bps: 1 bps is 0.01%. So the fee is 4.5 bps, and getting in and out costs 9.</p>
+  <p>Then there is the spread: you buy a little above the price you can sell at.</p></div><div class="ill"><svg viewBox="0 0 340 214" role="img" aria-label="You buy $10,000 of BTC, the price does not move, and you sell for $9,991."><rect x="10" y="12" width="108" height="64" rx="6" style="fill:none;stroke:var(--line)"/><text class="sm" x="64" y="32" text-anchor="middle">you buy BTC</text><text class="big" x="64" y="58" text-anchor="middle">$10,000</text><rect x="222" y="12" width="108" height="64" rx="6" style="fill:none;stroke:var(--line)"/><text class="sm" x="276" y="32" text-anchor="middle">you sell, you get</text><text class="big" x="276" y="58" text-anchor="middle">$9,991</text><line x1="126" x2="212" y1="44" y2="44" style="stroke:var(--muted);stroke-width:1.5"/><polygon points="212,39 220,44 212,49" style="fill:var(--muted)"/><text class="sm" x="169" y="36" text-anchor="middle">same price</text><text class="t" x="10" y="116">Nothing moved. You are down $9.14:</text><rect class="blk" x="10.0" y="124" width="157.5" height="24"/><text class="t sm" x="88.8" y="166" text-anchor="middle">fee in</text><text class="sm" x="88.8" y="182" text-anchor="middle">$4.50</text><rect class="blk" x="167.5" y="124" width="157.5" height="24" style="opacity:.6"/><text class="t sm" x="246.3" y="166" text-anchor="middle">fee out</text><text class="sm" x="246.3" y="182" text-anchor="middle">$4.50</text><rect class="cost" x="325.1" y="124" width="4.9" height="24"/><text class="sm cu" x="330" y="116" text-anchor="end">spread $0.14</text><line x1="326.1" x2="326.1" y1="119" y2="124" style="stroke:var(--cu)"/><text class="sm" x="10" y="204">Drawn to the scale of the cost, not of the price.</text></svg></div></div>
+  <p>Fees plus spread are the cost of the round trip. BTC pays 9 bps, the typical asset 18, and the thinnest coins up to 88.</p>
 
-  <figure><img src="img/2-counts.png" alt="How many of 55 crypto perps have a typical bar move worth two round trips, per timeframe, taker and maker."><figcaption>Taker: fee 4.5 bps per side plus the asset's median impact spread. Maker: 1.5 bps per side, no spread, no guarantee of a fill.</figcaption></figure>
+  <h2>Volatility also decides how much you spend</h2>
+  <div class="st-pair"><div><p>Fees and spread are charged on the size of your position, not on what you risk.</p>
+  <p>And the size of your position depends on volatility. To risk $100 with the stop one ATR away, a calm asset forces you into a bigger position: the stop is so close that you need a large size for a small move to hurt.</p>
+  <p>Take 5-minute bars. To risk $100 on BTC you open about $78,000. On HYPE, which moves much more, about $29,000.</p></div><div class="ill"><svg viewBox="0 0 340 262" role="img" aria-label="The same $100 risk on a calm asset and on a lively one: the calm one needs a much bigger position."><text class="t" x="6" y="18">BTC</text><text class="sm" x="44" y="18">calm</text><line class="ln" x1="16" x2="16" y1="78.2" y2="89.2" style="stroke:#686b73"/><rect class="candle" x="10" y="80.5" width="12" height="6.4"/><line class="ln" x1="35" x2="35" y1="78.9" y2="89.2" style="stroke:#686b73"/><rect class="candle" x="29" y="81.2" width="12" height="5.7"/><line class="ln" x1="54" x2="54" y1="78.9" y2="90.5" style="stroke:#686b73"/><rect class="candle" x="48" y="81.2" width="12" height="7.0"/><line class="ln" x1="73" x2="73" y1="82.7" y2="90.5" style="stroke:#686b73"/><rect class="candle" x="67" y="85.0" width="12" height="3.2"/><line class="ln" x1="92" x2="92" y1="82.7" y2="94.3" style="stroke:#686b73"/><rect class="candle" x="86" y="85.0" width="12" height="7.0"/><line class="dash ent" x1="6" x2="156" y1="92" y2="92"/><line class="dash stp" x1="6" x2="156" y1="104.8" y2="104.8"/><text class="sm" x="154" y="87" text-anchor="end">entry</text><text class="sm" x="154" y="118.8" text-anchor="end">stop: you lose $100</text><rect class="blk" x="6" y="170" width="150.0" height="34" rx="3"/><text class="t" x="6" y="226">$78,000</text><text class="sm" x="6" y="244">position</text><text class="t" x="176" y="18">HYPE</text><text class="sm" x="214" y="18">moves a lot</text><line class="ln" x1="186" x2="186" y1="54.5" y2="84.4" style="stroke:#686b73"/><rect class="candle" x="180" y="60.8" width="12" height="17.4"/><line class="ln" x1="205" x2="205" y1="56.2" y2="84.4" style="stroke:#686b73"/><rect class="candle" x="199" y="62.5" width="12" height="15.6"/><line class="ln" x1="224" x2="224" y1="56.2" y2="87.8" style="stroke:#686b73"/><rect class="candle" x="218" y="62.5" width="12" height="19.1"/><line class="ln" x1="243" x2="243" y1="66.7" y2="87.8" style="stroke:#686b73"/><rect class="candle" x="237" y="72.9" width="12" height="8.7"/><line class="ln" x1="262" x2="262" y1="66.7" y2="98.2" style="stroke:#686b73"/><rect class="candle" x="256" y="72.9" width="12" height="19.1"/><line class="dash ent" x1="176" x2="326" y1="92" y2="92"/><line class="dash stp" x1="176" x2="326" y1="126.7" y2="126.7"/><text class="sm" x="324" y="87" text-anchor="end">entry</text><text class="sm" x="324" y="140.7" text-anchor="end">stop: you lose $100</text><rect class="blk" x="176" y="170" width="55.1" height="34" rx="3"/><text class="t" x="176" y="226">$29,000</text><text class="sm" x="176" y="244">position</text></svg></div></div>
+  <p>The costs are charged on those sizes: $72 on BTC and $30 on HYPE. That is 0.72 R against 0.30 R.</p>
+  <p>So HYPE is the cheaper trade, even if it costs more per dollar traded (11 bps against 9): it moves enough to need a much smaller position.</p>
+  <p>TRX is the extreme. It barely moves on a 5-minute bar: to risk $100 you open about $156,000, and the costs, $190, are higher than what you risk.</p>
+  <p>What counts is not what you pay per dollar. It is how far the asset moves for the dollars you put in.</p>
+  <div class="st-rule">Volatility can be dangerous, but it makes your trading cheaper. Very volatile moments also bring a wider spread. To choose an asset, balance the two: enough volatility, a tight spread, and the lowest fee you can get.</div>
 
-  <h2>Why the typical bar, when nobody enters on a typical bar</h2>
-  <p>Because the bar is the unit everything in a strategy is measured in. The stop is one or two ATRs of that bar, the target a multiple of the stop, the trailing moves bar by bar. If the bar is smaller than the cost, a stop set at one bar is hit by ordinary noise, and every hit costs a full round trip.</p>
-  <p>And the bar sets the scale of every holding period: the move grows with the square root of the bars held. We measured it asset by asset: from 5m to 1h the move grows between 3.2× on BTC and 4.0× on TRX, around √12 = 3.46. So the 5-minute bar tells how long a trade must last for its move to be worth two round trips, <em>whatever the entry rule</em>.</p>
+  <h2>Why the timeframe changes it</h2>
+  <div class="st-pair"><div><p>The same logic works across timeframes. Longer bars are more volatile bars: the ATR grows, so the stop goes further away.</p>
+  <p>On BTC one ATR is about 13 bps on a 5-minute bar and 114 on a 4-hour bar. A farther stop means a smaller position for the same $100.</p>
+  <p>On 5-minute bars you need about $78,000 and pay $72. On 4-hour bars, about $8,800 and you pay $8. Same asset, same fees, a tenth of the cost.</p></div><div class="ill"><svg viewBox="0 0 340 262" role="img" aria-label="On short bars the round trip fills most of the distance to the stop. On long bars it fills a small part."><text class="t" x="6" y="18">5-minute bars</text><line class="ln" x1="52" x2="52" y1="92.4" y2="98.5" style="stroke:#686b73"/><rect class="candle" x="46" y="93.7" width="12" height="3.5"/><line class="ln" x1="71" x2="71" y1="92.8" y2="98.5" style="stroke:#686b73"/><rect class="candle" x="65" y="94.0" width="12" height="3.2"/><line class="ln" x1="90" x2="90" y1="92.8" y2="99.2" style="stroke:#686b73"/><rect class="candle" x="84" y="94.0" width="12" height="3.9"/><line class="ln" x1="109" x2="109" y1="94.9" y2="99.2" style="stroke:#686b73"/><rect class="candle" x="103" y="96.1" width="12" height="1.8"/><line class="ln" x1="128" x2="128" y1="94.9" y2="101.3" style="stroke:#686b73"/><rect class="candle" x="122" y="96.1" width="12" height="3.9"/><line class="dash ent" x1="6" x2="156" y1="100" y2="100"/><line class="dash stp" x1="6" x2="156" y1="107.0" y2="107.0"/><rect x="146" y="100" width="10" height="7.0" style="fill:#c9c5ba"/><rect class="cost" x="146" y="100" width="10" height="5.0"/><text class="sm" x="6" y="95">entry</text><text class="sm" x="6" y="121.0">stop</text><text class="big cu" x="6" y="226">72%</text><text class="sm" x="6" y="244">of the stop is cost</text><text class="t" x="176" y="18">4-hour bars</text><line class="ln" x1="222" x2="222" y1="32.2" y2="86.2" style="stroke:#686b73"/><rect class="candle" x="216" y="43.5" width="12" height="31.4"/><line class="ln" x1="241" x2="241" y1="35.4" y2="86.2" style="stroke:#686b73"/><rect class="candle" x="235" y="46.7" width="12" height="28.2"/><line class="ln" x1="260" x2="260" y1="35.4" y2="92.5" style="stroke:#686b73"/><rect class="candle" x="254" y="46.7" width="12" height="34.5"/><line class="ln" x1="279" x2="279" y1="54.2" y2="92.5" style="stroke:#686b73"/><rect class="candle" x="273" y="65.5" width="12" height="15.7"/><line class="ln" x1="298" x2="298" y1="54.2" y2="111.3" style="stroke:#686b73"/><rect class="candle" x="292" y="65.5" width="12" height="34.5"/><line class="dash ent" x1="176" x2="326" y1="100" y2="100"/><line class="dash stp" x1="176" x2="326" y1="162.7" y2="162.7"/><rect x="316" y="100" width="10" height="62.7" style="fill:#c9c5ba"/><rect class="cost" x="316" y="100" width="10" height="5.0"/><text class="sm" x="176" y="95">entry</text><text class="sm" x="176" y="176.7">stop</text><text class="big cu" x="176" y="226">8%</text><text class="sm" x="176" y="244">of the stop is cost</text></svg></div></div>
+  <p>Phisys does this count for you, asset by asset: the Trading costs window, shown below.</p>
 
-  <figure><img src="img/1-minutes.png" alt="Minutes a trade must last for the typical move to equal two round trips, for 55 crypto perps."><figcaption>ZEC 8 minutes, HYPE 10, SOL 20, ETH 30, BTC 56, TRX almost five hours.</figcaption></figure>
+  <div class="part" id="results"><div class="kicker">The results</div>
+    <h2>What 89 Hyperliquid crypto perps say</h2></div>
 
-  <p>A "5-minute strategy" on BTC that pays its costs has to hold for an hour: it is an hourly strategy with 5-minute stops, which is the worst of both.</p>
+  <p>So, how often do you have to win just to not lose money to costs? <strong>Without costs, 33% would be enough on any timeframe.</strong> With them, on the typical crypto perp, you need 56% on 5-minute bars, 45% on 15-minute bars, 38% on 1-hour bars and 36% on 4-hour bars. The shorter the bars, the more of your winnings the costs eat.</p>
+  <p><strong>Before any edge.</strong></p>
 
-  <h2>Exceptions, so nobody has to point them out</h2>
-  <ul>
-    <li><strong>Makers.</strong> At 1.5 bps per side and no spread, the 5-minute bar is worth two round trips on 53 of the 55. Below 15 minutes the job is getting filled, not hitting the book.</li>
-    <li><strong>Events.</strong> A 5-minute bar inside a liquidation cascade moves ten round trips. That is an occasion, not a cadence.</li>
-    <li><strong>Fee tiers and referrals</strong> move the threshold by a few minutes, not by a timeframe.</li>
-    <li><strong>Asset matters more than timeframe.</strong> HYPE pays the trip at 5 minutes; TRX does not pay it at 1 hour.</li>
-  </ul>
+  <figure><img src="img/1-winrate.png" alt="Win rate needed to break even on a trade that wins twice what it risks, per timeframe, for the typical asset and for BTC, ETH, SOL, HYPE and TRX."><figcaption>Each column is a timeframe. The line is the win rate that trade needs there to break even after fees and spread. The dashed line is the 33% it needs with no costs at all.</figcaption></figure>
 
-  <figure><img src="img/3-majors.png" alt="Median move of one bar in basis points for BTC, ETH, SOL, XRP, DOGE and HYPE at four timeframes, against the taker round trip."><figcaption>Six majors. The line is the taker round trip for that asset.</figcaption></figure>
+  <h2>Cheap is not cheap in risk</h2>
+  <p>The cost per dollar traded and the win rate you need do not go together: BTC is the cheapest of the 89, and still needs 57% on 5-minute bars.</p>
+  <figure><img src="img/2-cost-vs-risk.png" alt="Round trip cost in basis points against the win rate needed at 5 minutes, one dot per asset."><figcaption>Each dot is an asset. The further right, the more it costs per dollar traded. The higher, the more it has to win.</figcaption></figure>
 
-  <h2>All 55, asset by asset</h2>
-  <p class="note">Move: median absolute close-to-close change of one bar, in basis points. Round trip: taker, 9 bps of fees plus the asset's median impact spread. Minutes: how long a trade must last for its move to equal two round trips.</p>
-  <div class="tbl"><table>
-    <thead><tr><th>asset</th><th>round trip, bps</th><th>5m move</th><th>15m move</th><th>1h move</th><th>minutes to 2 trips</th></tr></thead>
-    <tbody>
-<tr><td>ZEC</td><td>12</td><td>19</td><td>33</td><td>67</td><td>8</td></tr>
-<tr><td>HYPE</td><td>11</td><td>15</td><td>27</td><td>53</td><td>10</td></tr>
-<tr><td>ENA</td><td>14</td><td>17</td><td>29</td><td>58</td><td>13</td></tr>
-<tr><td>XPL</td><td>17</td><td>22</td><td>39</td><td>81</td><td>13</td></tr>
-<tr><td>ZRO</td><td>13</td><td>16</td><td>27</td><td>57</td><td>14</td></tr>
-<tr><td>WLD</td><td>14</td><td>16</td><td>27</td><td>54</td><td>15</td></tr>
-<tr><td>PENGU</td><td>14</td><td>16</td><td>28</td><td>56</td><td>16</td></tr>
-<tr><td>SUI</td><td>11</td><td>12</td><td>21</td><td>41</td><td>17</td></tr>
-<tr><td>TAO</td><td>14</td><td>15</td><td>26</td><td>52</td><td>17</td></tr>
-<tr><td>VIRTUAL</td><td>15</td><td>16</td><td>28</td><td>56</td><td>19</td></tr>
-<tr><td>SOL</td><td>10</td><td>10</td><td>17</td><td>33</td><td>20</td></tr>
-<tr><td>NEAR</td><td>15</td><td>14</td><td>25</td><td>50</td><td>21</td></tr>
-<tr><td>AAVE</td><td>13</td><td>12</td><td>22</td><td>44</td><td>22</td></tr>
-<tr><td>DOGE</td><td>10</td><td>10</td><td>18</td><td>34</td><td>22</td></tr>
-<tr><td>ADA</td><td>12</td><td>11</td><td>20</td><td>39</td><td>23</td></tr>
-<tr><td>ARB</td><td>15</td><td>14</td><td>24</td><td>48</td><td>24</td></tr>
-<tr><td>LINK</td><td>12</td><td>11</td><td>19</td><td>37</td><td>24</td></tr>
-<tr><td>AVAX</td><td>11</td><td>10</td><td>18</td><td>37</td><td>25</td></tr>
-<tr><td>UNI</td><td>15</td><td>13</td><td>23</td><td>45</td><td>25</td></tr>
-<tr><td>XRP</td><td>10</td><td>9</td><td>15</td><td>30</td><td>25</td></tr>
-<tr><td>LDO</td><td>16</td><td>14</td><td>24</td><td>50</td><td>26</td></tr>
-<tr><td>ONDO</td><td>16</td><td>14</td><td>24</td><td>48</td><td>26</td></tr>
-<tr><td>ASTER</td><td>14</td><td>12</td><td>20</td><td>38</td><td>27</td></tr>
-<tr><td>APT</td><td>15</td><td>13</td><td>23</td><td>46</td><td>28</td></tr>
-<tr><td>CRV</td><td>16</td><td>14</td><td>25</td><td>49</td><td>28</td></tr>
-<tr><td>ETHFI</td><td>19</td><td>16</td><td>28</td><td>57</td><td>29</td></tr>
-<tr><td>FET</td><td>18</td><td>15</td><td>26</td><td>52</td><td>29</td></tr>
-<tr><td>INJ</td><td>17</td><td>14</td><td>26</td><td>51</td><td>29</td></tr>
-<tr><td>ETH</td><td>9</td><td>8</td><td>14</td><td>27</td><td>30</td></tr>
-<tr><td>JTO</td><td>19</td><td>16</td><td>28</td><td>58</td><td>30</td></tr>
-<tr><td>JUP</td><td>18</td><td>14</td><td>25</td><td>52</td><td>30</td></tr>
-<tr><td>PENDLE</td><td>18</td><td>15</td><td>26</td><td>55</td><td>31</td></tr>
-<tr><td>XMR</td><td>16</td><td>12</td><td>23</td><td>46</td><td>32</td></tr>
-<tr><td>VVV</td><td>24</td><td>18</td><td>33</td><td>70</td><td>35</td></tr>
-<tr><td>ICP</td><td>18</td><td>13</td><td>24</td><td>48</td><td>36</td></tr>
-<tr><td>XLM</td><td>15</td><td>11</td><td>19</td><td>39</td><td>37</td></tr>
-<tr><td>OP</td><td>19</td><td>14</td><td>24</td><td>49</td><td>38</td></tr>
-<tr><td>PYTH</td><td>20</td><td>15</td><td>26</td><td>54</td><td>38</td></tr>
-<tr><td>DOT</td><td>16</td><td>12</td><td>20</td><td>41</td><td>39</td></tr>
-<tr><td>GRASS</td><td>27</td><td>19</td><td>34</td><td>70</td><td>39</td></tr>
-<tr><td>BCH</td><td>12</td><td>9</td><td>16</td><td>31</td><td>40</td></tr>
-<tr><td>KAITO</td><td>21</td><td>15</td><td>26</td><td>52</td><td>40</td></tr>
-<tr><td>LTC</td><td>12</td><td>9</td><td>15</td><td>30</td><td>40</td></tr>
-<tr><td>HBAR</td><td>16</td><td>10</td><td>18</td><td>37</td><td>47</td></tr>
-<tr><td>MORPHO</td><td>21</td><td>13</td><td>24</td><td>49</td><td>47</td></tr>
-<tr><td>FIL</td><td>19</td><td>12</td><td>22</td><td>43</td><td>49</td></tr>
-<tr><td>AERO</td><td>24</td><td>14</td><td>26</td><td>54</td><td>56</td></tr>
-<tr><td>BNB</td><td>11</td><td>6</td><td>12</td><td>23</td><td>56</td></tr>
-<tr><td>BTC</td><td>9</td><td>6</td><td>10</td><td>19</td><td>56</td></tr>
-<tr><td>STX</td><td>20</td><td>12</td><td>21</td><td>43</td><td>56</td></tr>
-<tr><td>ALGO</td><td>23</td><td>12</td><td>21</td><td>43</td><td>69</td></tr>
-<tr><td>ATOM</td><td>21</td><td>11</td><td>18</td><td>37</td><td>80</td></tr>
-<tr><td>IMX</td><td>30</td><td>14</td><td>24</td><td>49</td><td>95</td></tr>
-<tr><td>MINA</td><td>30</td><td>12</td><td>22</td><td>45</td><td>125</td></tr>
-<tr><td>TRX</td><td>12</td><td>3</td><td>6</td><td>12</td><td>296</td></tr>
+  <h2>How long the price takes</h2>
+  <p>Volatility, in minutes: how long does the price take to go 1% away from where it is? On the typical asset, 1h20. BTC takes 6h30, HYPE 1h10, TRX 15h.</p>
+  <p>A fast asset lets you use short timeframes. A slow one does not, however cheap it looks.</p>
+  <figure><img src="img/3-time-vs-cost.png" alt="Median time to move 1% and round trip cost in basis points, for eight assets."><figcaption>Median time to a 1% move, and the cost of the round trip beside it. The price may go either way, so for a trade with the right direction it is a minimum.</figcaption></figure>
+
+  <h2 id="table">All 89, asset by asset</h2>
+  <p>Find your asset. Hover a win rate to see how much of your risk, in R, the costs eat. Click a column to sort.</p>
+  <div class="st-tools"><input id="q" type="search" placeholder="Search an asset" aria-label="Search an asset" autocomplete="off"><small id="n"></small></div>
+  <div class="st-tbl"><table>
+    <thead><tr><th data-k="0">asset</th><th data-k="1">spread, bps</th><th data-k="2">round trip, bps</th><th data-k="3">5m</th><th data-k="4">15m</th><th data-k="5">1h</th><th data-k="6">4h</th><th data-k="7">1% takes</th></tr></thead>
+    <tbody id="rows">
+<tr><td data-v="ZEC">ZEC</td><td data-v="2.53">2.5</td><td data-v="11.53">11.5</td><td class="" data-v="0.42" title="the costs eat 0.26 R">42%</td><td class="" data-v="0.38" title="the costs eat 0.14 R">38%</td><td class="" data-v="0.355" title="the costs eat 0.07 R">36%</td><td class="" data-v="0.344" title="the costs eat 0.03 R">34%</td><td data-v="40.0">40 min</td></tr>
+<tr><td data-v="HYPE">HYPE</td><td data-v="1.55">1.6</td><td data-v="10.55">10.6</td><td class="" data-v="0.435" title="the costs eat 0.30 R">44%</td><td class="" data-v="0.388" title="the costs eat 0.17 R">39%</td><td class="" data-v="0.359" title="the costs eat 0.08 R">36%</td><td class="" data-v="0.346" title="the costs eat 0.04 R">35%</td><td data-v="70.0">1h10</td></tr>
+<tr><td data-v="PUMP">PUMP</td><td data-v="7.49">7.5</td><td data-v="16.49">16.5</td><td class="" data-v="0.444" title="the costs eat 0.33 R">44%</td><td class="" data-v="0.392" title="the costs eat 0.18 R">39%</td><td class="" data-v="0.36" title="the costs eat 0.08 R">36%</td><td class="" data-v="0.346" title="the costs eat 0.04 R">35%</td><td data-v="35.0">35 min</td></tr>
+<tr><td data-v="FARTCOIN">FARTCOIN</td><td data-v="7.1">7.1</td><td data-v="16.1">16.1</td><td class="" data-v="0.449" title="the costs eat 0.35 R">45%</td><td class="" data-v="0.395" title="the costs eat 0.18 R">40%</td><td class="" data-v="0.362" title="the costs eat 0.09 R">36%</td><td class="" data-v="0.347" title="the costs eat 0.04 R">35%</td><td data-v="40.0">40 min</td></tr>
+<tr><td data-v="ENA">ENA</td><td data-v="4.67">4.7</td><td data-v="13.67">13.7</td><td class="" data-v="0.456" title="the costs eat 0.37 R">46%</td><td class="" data-v="0.398" title="the costs eat 0.19 R">40%</td><td class="" data-v="0.363" title="the costs eat 0.09 R">36%</td><td class="" data-v="0.347" title="the costs eat 0.04 R">35%</td><td data-v="55.0">55 min</td></tr>
+<tr><td data-v="LIT">LIT</td><td data-v="10.39">10.4</td><td data-v="19.39">19.4</td><td class="" data-v="0.459" title="the costs eat 0.38 R">46%</td><td class="" data-v="0.399" title="the costs eat 0.20 R">40%</td><td class="" data-v="0.364" title="the costs eat 0.09 R">36%</td><td class="" data-v="0.348" title="the costs eat 0.04 R">35%</td><td data-v="30.0">30 min</td></tr>
+<tr><td data-v="ZRO">ZRO</td><td data-v="4.09">4.1</td><td data-v="13.09">13.1</td><td class="" data-v="0.461" title="the costs eat 0.38 R">46%</td><td class="" data-v="0.398" title="the costs eat 0.19 R">40%</td><td class="" data-v="0.362" title="the costs eat 0.09 R">36%</td><td class="" data-v="0.347" title="the costs eat 0.04 R">35%</td><td data-v="55.0">55 min</td></tr>
+<tr><td data-v="WLD">WLD</td><td data-v="4.74">4.7</td><td data-v="13.74">13.7</td><td class="" data-v="0.47" title="the costs eat 0.41 R">47%</td><td class="" data-v="0.403" title="the costs eat 0.21 R">40%</td><td class="" data-v="0.365" title="the costs eat 0.10 R">36%</td><td class="" data-v="0.348" title="the costs eat 0.04 R">35%</td><td data-v="60.0">1h</td></tr>
+<tr><td data-v="SUI">SUI</td><td data-v="2.17">2.2</td><td data-v="11.17">11.2</td><td class="" data-v="0.472" title="the costs eat 0.42 R">47%</td><td class="" data-v="0.405" title="the costs eat 0.21 R">40%</td><td class="" data-v="0.365" title="the costs eat 0.10 R">36%</td><td class="" data-v="0.348" title="the costs eat 0.04 R">35%</td><td data-v="100.0">1h40</td></tr>
+<tr><td data-v="SOL">SOL</td><td data-v="0.59">0.6</td><td data-v="9.59">9.6</td><td class="" data-v="0.476" title="the costs eat 0.43 R">48%</td><td class="" data-v="0.408" title="the costs eat 0.23 R">41%</td><td class="" data-v="0.368" title="the costs eat 0.10 R">37%</td><td class="" data-v="0.35" title="the costs eat 0.05 R">35%</td><td data-v="150.0">2h30</td></tr>
+<tr><td data-v="PENGU">PENGU</td><td data-v="5.47">5.5</td><td data-v="14.47">14.5</td><td class="" data-v="0.48" title="the costs eat 0.44 R">48%</td><td class="" data-v="0.408" title="the costs eat 0.22 R">41%</td><td class="" data-v="0.366" title="the costs eat 0.10 R">37%</td><td class="" data-v="0.349" title="the costs eat 0.05 R">35%</td><td data-v="60.0">1h</td></tr>
+<tr><td data-v="TAO">TAO</td><td data-v="4.84">4.8</td><td data-v="13.84">13.8</td><td class="" data-v="0.481" title="the costs eat 0.44 R">48%</td><td class="" data-v="0.41" title="the costs eat 0.23 R">41%</td><td class="" data-v="0.368" title="the costs eat 0.10 R">37%</td><td class="" data-v="0.35" title="the costs eat 0.05 R">35%</td><td data-v="70.0">1h10</td></tr>
+<tr><td data-v="NEAR">NEAR</td><td data-v="5.29">5.3</td><td data-v="14.29">14.3</td><td class="" data-v="0.485" title="the costs eat 0.46 R">48%</td><td class="" data-v="0.412" title="the costs eat 0.24 R">41%</td><td class="" data-v="0.369" title="the costs eat 0.11 R">37%</td><td class="" data-v="0.351" title="the costs eat 0.05 R">35%</td><td data-v="70.0">1h10</td></tr>
+<tr><td data-v="DOGE">DOGE</td><td data-v="1.42">1.4</td><td data-v="10.42">10.4</td><td class="" data-v="0.495" title="the costs eat 0.48 R">50%</td><td class="" data-v="0.416" title="the costs eat 0.25 R">42%</td><td class="" data-v="0.37" title="the costs eat 0.11 R">37%</td><td class="" data-v="0.35" title="the costs eat 0.05 R">35%</td><td data-v="145.0">2h25</td></tr>
+<tr><td data-v="AAVE">AAVE</td><td data-v="3.8">3.8</td><td data-v="12.8">12.8</td><td class="" data-v="0.496" title="the costs eat 0.49 R">50%</td><td class="" data-v="0.417" title="the costs eat 0.25 R">42%</td><td class="" data-v="0.371" title="the costs eat 0.11 R">37%</td><td class="" data-v="0.351" title="the costs eat 0.05 R">35%</td><td data-v="100.0">1h40</td></tr>
+<tr><td data-v="kPEPE">kPEPE</td><td data-v="4.29">4.3</td><td data-v="13.29">13.3</td><td class="" data-v="0.496" title="the costs eat 0.49 R">50%</td><td class="" data-v="0.416" title="the costs eat 0.25 R">42%</td><td class="" data-v="0.37" title="the costs eat 0.11 R">37%</td><td class="" data-v="0.35" title="the costs eat 0.05 R">35%</td><td data-v="90.0">1h30</td></tr>
+<tr><td data-v="VIRTUAL">VIRTUAL</td><td data-v="6.49">6.5</td><td data-v="15.49">15.5</td><td class="" data-v="0.499" title="the costs eat 0.50 R">50%</td><td class="" data-v="0.416" title="the costs eat 0.25 R">42%</td><td class="" data-v="0.37" title="the costs eat 0.11 R">37%</td><td class="" data-v="0.35" title="the costs eat 0.05 R">35%</td><td data-v="65.0">1h05</td></tr>
+<tr><td data-v="XRP">XRP</td><td data-v="0.76">0.8</td><td data-v="9.76">9.8</td><td class="" data-v="0.5" title="the costs eat 0.50 R">50%</td><td class="" data-v="0.42" title="the costs eat 0.26 R">42%</td><td class="" data-v="0.373" title="the costs eat 0.12 R">37%</td><td class="" data-v="0.352" title="the costs eat 0.06 R">35%</td><td data-v="180.0">3h</td></tr>
+<tr><td data-v="ETH">ETH</td><td data-v="0.47">0.5</td><td data-v="9.47">9.5</td><td class="hot" data-v="0.502" title="the costs eat 0.51 R">50%</td><td class="" data-v="0.421" title="the costs eat 0.26 R">42%</td><td class="" data-v="0.373" title="the costs eat 0.12 R">37%</td><td class="" data-v="0.352" title="the costs eat 0.06 R">35%</td><td data-v="200.0">3h20</td></tr>
+<tr><td data-v="MON">MON</td><td data-v="12.12">12.1</td><td data-v="21.12">21.1</td><td class="hot" data-v="0.502" title="the costs eat 0.51 R">50%</td><td class="" data-v="0.421" title="the costs eat 0.26 R">42%</td><td class="" data-v="0.374" title="the costs eat 0.12 R">37%</td><td class="" data-v="0.353" title="the costs eat 0.06 R">35%</td><td data-v="40.0">40 min</td></tr>
+<tr><td data-v="ADA">ADA</td><td data-v="3.26">3.3</td><td data-v="12.26">12.3</td><td class="hot" data-v="0.504" title="the costs eat 0.51 R">50%</td><td class="" data-v="0.42" title="the costs eat 0.26 R">42%</td><td class="" data-v="0.372" title="the costs eat 0.12 R">37%</td><td class="" data-v="0.351" title="the costs eat 0.05 R">35%</td><td data-v="115.0">1h55</td></tr>
+<tr><td data-v="ARB">ARB</td><td data-v="5.87">5.9</td><td data-v="14.87">14.9</td><td class="hot" data-v="0.505" title="the costs eat 0.52 R">50%</td><td class="" data-v="0.421" title="the costs eat 0.26 R">42%</td><td class="" data-v="0.372" title="the costs eat 0.12 R">37%</td><td class="" data-v="0.352" title="the costs eat 0.06 R">35%</td><td data-v="80.0">1h20</td></tr>
+<tr><td data-v="AVAX">AVAX</td><td data-v="2.49">2.5</td><td data-v="11.49">11.5</td><td class="hot" data-v="0.506" title="the costs eat 0.52 R">51%</td><td class="" data-v="0.421" title="the costs eat 0.26 R">42%</td><td class="" data-v="0.372" title="the costs eat 0.12 R">37%</td><td class="" data-v="0.351" title="the costs eat 0.05 R">35%</td><td data-v="125.0">2h05</td></tr>
+<tr><td data-v="UNI">UNI</td><td data-v="5.27">5.3</td><td data-v="14.27">14.3</td><td class="hot" data-v="0.507" title="the costs eat 0.52 R">51%</td><td class="" data-v="0.422" title="the costs eat 0.27 R">42%</td><td class="" data-v="0.372" title="the costs eat 0.12 R">37%</td><td class="" data-v="0.352" title="the costs eat 0.06 R">35%</td><td data-v="90.0">1h30</td></tr>
+<tr><td data-v="LINK">LINK</td><td data-v="2.64">2.6</td><td data-v="11.64">11.6</td><td class="hot" data-v="0.508" title="the costs eat 0.52 R">51%</td><td class="" data-v="0.422" title="the costs eat 0.27 R">42%</td><td class="" data-v="0.373" title="the costs eat 0.12 R">37%</td><td class="" data-v="0.352" title="the costs eat 0.06 R">35%</td><td data-v="135.0">2h15</td></tr>
+<tr><td data-v="kBONK">kBONK</td><td data-v="6.11">6.1</td><td data-v="15.11">15.1</td><td class="hot" data-v="0.513" title="the costs eat 0.54 R">51%</td><td class="" data-v="0.423" title="the costs eat 0.27 R">42%</td><td class="" data-v="0.372" title="the costs eat 0.12 R">37%</td><td class="" data-v="0.351" title="the costs eat 0.05 R">35%</td><td data-v="75.0">1h15</td></tr>
+<tr><td data-v="TIA">TIA</td><td data-v="7.68">7.7</td><td data-v="16.68">16.7</td><td class="hot" data-v="0.519" title="the costs eat 0.56 R">52%</td><td class="" data-v="0.426" title="the costs eat 0.28 R">43%</td><td class="" data-v="0.374" title="the costs eat 0.12 R">37%</td><td class="" data-v="0.352" title="the costs eat 0.06 R">35%</td><td data-v="70.0">1h10</td></tr>
+<tr><td data-v="WIF">WIF</td><td data-v="7.25">7.2</td><td data-v="16.25">16.2</td><td class="hot" data-v="0.519" title="the costs eat 0.56 R">52%</td><td class="" data-v="0.427" title="the costs eat 0.28 R">43%</td><td class="" data-v="0.374" title="the costs eat 0.12 R">37%</td><td class="" data-v="0.352" title="the costs eat 0.06 R">35%</td><td data-v="75.0">1h15</td></tr>
+<tr><td data-v="ONDO">ONDO</td><td data-v="6.31">6.3</td><td data-v="15.31">15.3</td><td class="hot" data-v="0.522" title="the costs eat 0.57 R">52%</td><td class="" data-v="0.429" title="the costs eat 0.29 R">43%</td><td class="" data-v="0.376" title="the costs eat 0.13 R">38%</td><td class="" data-v="0.353" title="the costs eat 0.06 R">35%</td><td data-v="85.0">1h25</td></tr>
+<tr><td data-v="CRV">CRV</td><td data-v="7.42">7.4</td><td data-v="16.42">16.4</td><td class="hot" data-v="0.524" title="the costs eat 0.57 R">52%</td><td class="" data-v="0.43" title="the costs eat 0.29 R">43%</td><td class="" data-v="0.376" title="the costs eat 0.13 R">38%</td><td class="" data-v="0.353" title="the costs eat 0.06 R">35%</td><td data-v="75.0">1h15</td></tr>
+<tr><td data-v="XMR">XMR</td><td data-v="6.47">6.5</td><td data-v="15.47">15.5</td><td class="hot" data-v="0.524" title="the costs eat 0.57 R">52%</td><td class="" data-v="0.433" title="the costs eat 0.30 R">43%</td><td class="" data-v="0.38" title="the costs eat 0.14 R">38%</td><td class="" data-v="0.356" title="the costs eat 0.07 R">36%</td><td data-v="95.0">1h35</td></tr>
+<tr><td data-v="VVV">VVV</td><td data-v="14.48">14.5</td><td data-v="23.48">23.5</td><td class="hot" data-v="0.525" title="the costs eat 0.58 R">52%</td><td class="" data-v="0.431" title="the costs eat 0.29 R">43%</td><td class="" data-v="0.377" title="the costs eat 0.13 R">38%</td><td class="" data-v="0.353" title="the costs eat 0.06 R">35%</td><td data-v="45.0">45 min</td></tr>
+<tr><td data-v="APT">APT</td><td data-v="6.71">6.7</td><td data-v="15.71">15.7</td><td class="hot" data-v="0.528" title="the costs eat 0.58 R">53%</td><td class="" data-v="0.432" title="the costs eat 0.29 R">43%</td><td class="" data-v="0.376" title="the costs eat 0.13 R">38%</td><td class="" data-v="0.353" title="the costs eat 0.06 R">35%</td><td data-v="85.0">1h25</td></tr>
+<tr><td data-v="JUP">JUP</td><td data-v="8.52">8.5</td><td data-v="17.52">17.5</td><td class="hot" data-v="0.531" title="the costs eat 0.59 R">53%</td><td class="" data-v="0.432" title="the costs eat 0.30 R">43%</td><td class="" data-v="0.377" title="the costs eat 0.13 R">38%</td><td class="" data-v="0.354" title="the costs eat 0.06 R">35%</td><td data-v="70.0">1h10</td></tr>
+<tr><td data-v="INJ">INJ</td><td data-v="8.2">8.2</td><td data-v="17.2">17.2</td><td class="hot" data-v="0.532" title="the costs eat 0.60 R">53%</td><td class="" data-v="0.433" title="the costs eat 0.30 R">43%</td><td class="" data-v="0.377" title="the costs eat 0.13 R">38%</td><td class="" data-v="0.354" title="the costs eat 0.06 R">35%</td><td data-v="70.0">1h10</td></tr>
+<tr><td data-v="LDO">LDO</td><td data-v="7.35">7.3</td><td data-v="16.35">16.4</td><td class="hot" data-v="0.532" title="the costs eat 0.59 R">53%</td><td class="" data-v="0.432" title="the costs eat 0.30 R">43%</td><td class="" data-v="0.376" title="the costs eat 0.13 R">38%</td><td class="" data-v="0.353" title="the costs eat 0.06 R">35%</td><td data-v="80.0">1h20</td></tr>
+<tr><td data-v="ETHFI">ETHFI</td><td data-v="10.2">10.2</td><td data-v="19.2">19.2</td><td class="hot" data-v="0.535" title="the costs eat 0.60 R">54%</td><td class="" data-v="0.434" title="the costs eat 0.30 R">43%</td><td class="" data-v="0.377" title="the costs eat 0.13 R">38%</td><td class="" data-v="0.354" title="the costs eat 0.06 R">35%</td><td data-v="60.0">1h</td></tr>
+<tr><td data-v="FET">FET</td><td data-v="8.93">8.9</td><td data-v="17.93">17.9</td><td class="hot" data-v="0.537" title="the costs eat 0.61 R">54%</td><td class="" data-v="0.436" title="the costs eat 0.31 R">44%</td><td class="" data-v="0.379" title="the costs eat 0.14 R">38%</td><td class="" data-v="0.354" title="the costs eat 0.06 R">35%</td><td data-v="70.0">1h10</td></tr>
+<tr><td data-v="WLFI">WLFI</td><td data-v="6.83">6.8</td><td data-v="15.83">15.8</td><td class="hot" data-v="0.541" title="the costs eat 0.62 R">54%</td><td class="" data-v="0.438" title="the costs eat 0.32 R">44%</td><td class="" data-v="0.38" title="the costs eat 0.14 R">38%</td><td class="" data-v="0.355" title="the costs eat 0.07 R">36%</td><td data-v="95.0">1h35</td></tr>
+<tr><td data-v="JTO">JTO</td><td data-v="10.46">10.5</td><td data-v="19.46">19.5</td><td class="hot" data-v="0.545" title="the costs eat 0.64 R">55%</td><td class="" data-v="0.438" title="the costs eat 0.31 R">44%</td><td class="" data-v="0.379" title="the costs eat 0.14 R">38%</td><td class="" data-v="0.354" title="the costs eat 0.06 R">35%</td><td data-v="60.0">1h</td></tr>
+<tr><td data-v="EIGEN">EIGEN</td><td data-v="13.27">13.3</td><td data-v="22.27">22.3</td><td class="hot" data-v="0.549" title="the costs eat 0.65 R">55%</td><td class="" data-v="0.442" title="the costs eat 0.33 R">44%</td><td class="" data-v="0.38" title="the costs eat 0.14 R">38%</td><td class="" data-v="0.354" title="the costs eat 0.06 R">35%</td><td data-v="55.0">55 min</td></tr>
+<tr><td data-v="PENDLE">PENDLE</td><td data-v="10.17">10.2</td><td data-v="19.17">19.2</td><td class="hot" data-v="0.55" title="the costs eat 0.65 R">55%</td><td class="" data-v="0.441" title="the costs eat 0.32 R">44%</td><td class="" data-v="0.38" title="the costs eat 0.14 R">38%</td><td class="" data-v="0.355" title="the costs eat 0.07 R">36%</td><td data-v="70.0">1h10</td></tr>
+<tr><td data-v="SEI">SEI</td><td data-v="7.29">7.3</td><td data-v="16.29">16.3</td><td class="hot" data-v="0.556" title="the costs eat 0.67 R">56%</td><td class="" data-v="0.445" title="the costs eat 0.34 R">44%</td><td class="" data-v="0.383" title="the costs eat 0.15 R">38%</td><td class="" data-v="0.356" title="the costs eat 0.07 R">36%</td><td data-v="100.0">1h40</td></tr>
+<tr><td data-v="STRK">STRK</td><td data-v="11.0">11.0</td><td data-v="20.0">20.0</td><td class="hot" data-v="0.556" title="the costs eat 0.67 R">56%</td><td class="" data-v="0.446" title="the costs eat 0.34 R">45%</td><td class="" data-v="0.383" title="the costs eat 0.15 R">38%</td><td class="" data-v="0.357" title="the costs eat 0.07 R">36%</td><td data-v="70.0">1h10</td></tr>
+<tr><td data-v="DOT">DOT</td><td data-v="6.73">6.7</td><td data-v="15.73">15.7</td><td class="hot" data-v="0.558" title="the costs eat 0.67 R">56%</td><td class="" data-v="0.446" title="the costs eat 0.34 R">45%</td><td class="" data-v="0.383" title="the costs eat 0.15 R">38%</td><td class="" data-v="0.356" title="the costs eat 0.07 R">36%</td><td data-v="110.0">1h50</td></tr>
+<tr><td data-v="ICP">ICP</td><td data-v="8.51">8.5</td><td data-v="17.51">17.5</td><td class="hot" data-v="0.559" title="the costs eat 0.68 R">56%</td><td class="" data-v="0.446" title="the costs eat 0.34 R">45%</td><td class="" data-v="0.382" title="the costs eat 0.15 R">38%</td><td class="" data-v="0.356" title="the costs eat 0.07 R">36%</td><td data-v="85.0">1h25</td></tr>
+<tr><td data-v="GRASS">GRASS</td><td data-v="17.98">18.0</td><td data-v="26.98">27.0</td><td class="hot" data-v="0.56" title="the costs eat 0.68 R">56%</td><td class="" data-v="0.446" title="the costs eat 0.34 R">45%</td><td class="" data-v="0.383" title="the costs eat 0.15 R">38%</td><td class="" data-v="0.356" title="the costs eat 0.07 R">36%</td><td data-v="40.0">40 min</td></tr>
+<tr><td data-v="LTC">LTC</td><td data-v="2.89">2.9</td><td data-v="11.89">11.9</td><td class="hot" data-v="0.561" title="the costs eat 0.68 R">56%</td><td class="" data-v="0.447" title="the costs eat 0.34 R">45%</td><td class="" data-v="0.383" title="the costs eat 0.15 R">38%</td><td class="" data-v="0.357" title="the costs eat 0.07 R">36%</td><td data-v="190.0">3h10</td></tr>
+<tr><td data-v="BCH">BCH</td><td data-v="3.6">3.6</td><td data-v="12.6">12.6</td><td class="hot" data-v="0.563" title="the costs eat 0.69 R">56%</td><td class="" data-v="0.446" title="the costs eat 0.34 R">45%</td><td class="" data-v="0.382" title="the costs eat 0.15 R">38%</td><td class="" data-v="0.355" title="the costs eat 0.07 R">36%</td><td data-v="170.0">2h50</td></tr>
+<tr><td data-v="OP">OP</td><td data-v="10.12">10.1</td><td data-v="19.12">19.1</td><td class="hot" data-v="0.564" title="the costs eat 0.69 R">56%</td><td class="" data-v="0.45" title="the costs eat 0.35 R">45%</td><td class="" data-v="0.385" title="the costs eat 0.15 R">38%</td><td class="" data-v="0.357" title="the costs eat 0.07 R">36%</td><td data-v="80.0">1h20</td></tr>
+<tr><td data-v="XLM">XLM</td><td data-v="5.47">5.5</td><td data-v="14.47">14.5</td><td class="hot" data-v="0.57" title="the costs eat 0.71 R">57%</td><td class="" data-v="0.45" title="the costs eat 0.35 R">45%</td><td class="" data-v="0.384" title="the costs eat 0.15 R">38%</td><td class="" data-v="0.357" title="the costs eat 0.07 R">36%</td><td data-v="130.0">2h10</td></tr>
+<tr><td data-v="BTC">BTC</td><td data-v="0.14">0.1</td><td data-v="9.14">9.1</td><td class="hot" data-v="0.572" title="the costs eat 0.72 R">57%</td><td class="" data-v="0.457" title="the costs eat 0.37 R">46%</td><td class="" data-v="0.388" title="the costs eat 0.17 R">39%</td><td class="" data-v="0.36" title="the costs eat 0.08 R">36%</td><td data-v="390.0">6h30</td></tr>
+<tr><td data-v="PYTH">PYTH</td><td data-v="12.14">12.1</td><td data-v="21.14">21.1</td><td class="hot" data-v="0.582" title="the costs eat 0.75 R">58%</td><td class="" data-v="0.455" title="the costs eat 0.36 R">46%</td><td class="" data-v="0.386" title="the costs eat 0.16 R">39%</td><td class="" data-v="0.357" title="the costs eat 0.07 R">36%</td><td data-v="70.0">1h10</td></tr>
+<tr><td data-v="FIL">FIL</td><td data-v="9.65">9.7</td><td data-v="18.65">18.6</td><td class="hot" data-v="0.584" title="the costs eat 0.75 R">58%</td><td class="" data-v="0.459" title="the costs eat 0.38 R">46%</td><td class="" data-v="0.388" title="the costs eat 0.16 R">39%</td><td class="" data-v="0.358" title="the costs eat 0.07 R">36%</td><td data-v="95.0">1h35</td></tr>
+<tr><td data-v="KAITO">KAITO</td><td data-v="12.11">12.1</td><td data-v="21.11">21.1</td><td class="hot" data-v="0.585" title="the costs eat 0.76 R">58%</td><td class="" data-v="0.458" title="the costs eat 0.37 R">46%</td><td class="" data-v="0.387" title="the costs eat 0.16 R">39%</td><td class="" data-v="0.358" title="the costs eat 0.07 R">36%</td><td data-v="75.0">1h15</td></tr>
+<tr><td data-v="MORPHO">MORPHO</td><td data-v="11.89">11.9</td><td data-v="20.89">20.9</td><td class="hot" data-v="0.585" title="the costs eat 0.75 R">58%</td><td class="" data-v="0.458" title="the costs eat 0.37 R">46%</td><td class="" data-v="0.387" title="the costs eat 0.16 R">39%</td><td class="" data-v="0.358" title="the costs eat 0.07 R">36%</td><td data-v="80.0">1h20</td></tr>
+<tr><td data-v="DASH">DASH</td><td data-v="12.67">12.7</td><td data-v="21.67">21.7</td><td class="hot" data-v="0.589" title="the costs eat 0.77 R">59%</td><td class="" data-v="0.459" title="the costs eat 0.38 R">46%</td><td class="" data-v="0.387" title="the costs eat 0.16 R">39%</td><td class="" data-v="0.358" title="the costs eat 0.07 R">36%</td><td data-v="75.0">1h15</td></tr>
+<tr><td data-v="AERO">AERO</td><td data-v="14.22">14.2</td><td data-v="23.22">23.2</td><td class="hot" data-v="0.592" title="the costs eat 0.78 R">59%</td><td class="" data-v="0.462" title="the costs eat 0.39 R">46%</td><td class="" data-v="0.388" title="the costs eat 0.17 R">39%</td><td class="" data-v="0.358" title="the costs eat 0.07 R">36%</td><td data-v="65.0">1h05</td></tr>
+<tr><td data-v="BNB">BNB</td><td data-v="1.61">1.6</td><td data-v="10.61">10.6</td><td class="hot" data-v="0.595" title="the costs eat 0.79 R">60%</td><td class="" data-v="0.465" title="the costs eat 0.40 R">46%</td><td class="" data-v="0.393" title="the costs eat 0.18 R">39%</td><td class="" data-v="0.361" title="the costs eat 0.08 R">36%</td><td data-v="300.0">5h</td></tr>
+<tr><td data-v="ORDI">ORDI</td><td data-v="12.48">12.5</td><td data-v="21.48">21.5</td><td class="hot" data-v="0.596" title="the costs eat 0.79 R">60%</td><td class="" data-v="0.46" title="the costs eat 0.38 R">46%</td><td class="" data-v="0.387" title="the costs eat 0.16 R">39%</td><td class="" data-v="0.357" title="the costs eat 0.07 R">36%</td><td data-v="75.0">1h15</td></tr>
+<tr><td data-v="HBAR">HBAR</td><td data-v="6.91">6.9</td><td data-v="15.91">15.9</td><td class="hot" data-v="0.597" title="the costs eat 0.79 R">60%</td><td class="" data-v="0.465" title="the costs eat 0.40 R">46%</td><td class="" data-v="0.39" title="the costs eat 0.17 R">39%</td><td class="" data-v="0.36" title="the costs eat 0.08 R">36%</td><td data-v="135.0">2h15</td></tr>
+<tr><td data-v="kFLOKI">kFLOKI</td><td data-v="9.64">9.6</td><td data-v="18.64">18.6</td><td class="hot" data-v="0.603" title="the costs eat 0.81 R">60%</td><td class="" data-v="0.465" title="the costs eat 0.40 R">46%</td><td class="" data-v="0.389" title="the costs eat 0.17 R">39%</td><td class="" data-v="0.359" title="the costs eat 0.08 R">36%</td><td data-v="100.0">1h40</td></tr>
+<tr><td data-v="MET">MET</td><td data-v="17.45">17.4</td><td data-v="26.45">26.4</td><td class="hot" data-v="0.606" title="the costs eat 0.82 R">61%</td><td class="" data-v="0.469" title="the costs eat 0.41 R">47%</td><td class="" data-v="0.393" title="the costs eat 0.18 R">39%</td><td class="" data-v="0.36" title="the costs eat 0.08 R">36%</td><td data-v="55.0">55 min</td></tr>
+<tr><td data-v="RENDER">RENDER</td><td data-v="13.58">13.6</td><td data-v="22.58">22.6</td><td class="hot" data-v="0.607" title="the costs eat 0.82 R">61%</td><td class="" data-v="0.47" title="the costs eat 0.41 R">47%</td><td class="" data-v="0.392" title="the costs eat 0.18 R">39%</td><td class="" data-v="0.361" title="the costs eat 0.08 R">36%</td><td data-v="80.0">1h20</td></tr>
+<tr><td data-v="ZEN">ZEN</td><td data-v="12.92">12.9</td><td data-v="21.92">21.9</td><td class="hot" data-v="0.611" title="the costs eat 0.83 R">61%</td><td class="" data-v="0.461" title="the costs eat 0.38 R">46%</td><td class="" data-v="0.383" title="the costs eat 0.15 R">38%</td><td class="" data-v="0.352" title="the costs eat 0.06 R">35%</td><td data-v="75.0">1h15</td></tr>
+<tr><td data-v="kSHIB">kSHIB</td><td data-v="6.36">6.4</td><td data-v="15.36">15.4</td><td class="hot" data-v="0.612" title="the costs eat 0.83 R">61%</td><td class="" data-v="0.47" title="the costs eat 0.41 R">47%</td><td class="" data-v="0.393" title="the costs eat 0.18 R">39%</td><td class="" data-v="0.361" title="the costs eat 0.08 R">36%</td><td data-v="160.0">2h40</td></tr>
+<tr><td data-v="AR">AR</td><td data-v="14.24">14.2</td><td data-v="23.24">23.2</td><td class="hot" data-v="0.614" title="the costs eat 0.84 R">61%</td><td class="" data-v="0.472" title="the costs eat 0.41 R">47%</td><td class="" data-v="0.393" title="the costs eat 0.18 R">39%</td><td class="" data-v="0.361" title="the costs eat 0.08 R">36%</td><td data-v="75.0">1h15</td></tr>
+<tr><td data-v="W">W</td><td data-v="16.61">16.6</td><td data-v="25.61">25.6</td><td class="hot" data-v="0.624" title="the costs eat 0.87 R">62%</td><td class="" data-v="0.478" title="the costs eat 0.43 R">48%</td><td class="" data-v="0.397" title="the costs eat 0.19 R">40%</td><td class="" data-v="0.362" title="the costs eat 0.09 R">36%</td><td data-v="70.0">1h10</td></tr>
+<tr><td data-v="POL">POL</td><td data-v="9.03">9.0</td><td data-v="18.03">18.0</td><td class="hot" data-v="0.625" title="the costs eat 0.88 R">62%</td><td class="" data-v="0.477" title="the costs eat 0.43 R">48%</td><td class="" data-v="0.395" title="the costs eat 0.18 R">40%</td><td class="" data-v="0.361" title="the costs eat 0.08 R">36%</td><td data-v="125.0">2h05</td></tr>
+<tr><td data-v="STX">STX</td><td data-v="11.98">12.0</td><td data-v="20.98">21.0</td><td class="hot" data-v="0.63" title="the costs eat 0.89 R">63%</td><td class="" data-v="0.48" title="the costs eat 0.44 R">48%</td><td class="" data-v="0.397" title="the costs eat 0.19 R">40%</td><td class="" data-v="0.362" title="the costs eat 0.09 R">36%</td><td data-v="100.0">1h40</td></tr>
+<tr><td data-v="HEMI">HEMI</td><td data-v="22.32">22.3</td><td data-v="31.32">31.3</td><td class="hot" data-v="0.636" title="the costs eat 0.91 R">64%</td><td class="" data-v="0.481" title="the costs eat 0.44 R">48%</td><td class="" data-v="0.397" title="the costs eat 0.19 R">40%</td><td class="" data-v="0.362" title="the costs eat 0.09 R">36%</td><td data-v="50.0">50 min</td></tr>
+<tr><td data-v="ALGO">ALGO</td><td data-v="13.37">13.4</td><td data-v="22.37">22.4</td><td class="hot" data-v="0.641" title="the costs eat 0.92 R">64%</td><td class="" data-v="0.489" title="the costs eat 0.47 R">49%</td><td class="" data-v="0.402" title="the costs eat 0.21 R">40%</td><td class="" data-v="0.365" title="the costs eat 0.10 R">36%</td><td data-v="100.0">1h40</td></tr>
+<tr><td data-v="BRETT">BRETT</td><td data-v="22.93">22.9</td><td data-v="31.93">31.9</td><td class="hot" data-v="0.652" title="the costs eat 0.96 R">65%</td><td class="" data-v="0.491" title="the costs eat 0.47 R">49%</td><td class="" data-v="0.4" title="the costs eat 0.20 R">40%</td><td class="" data-v="0.364" title="the costs eat 0.09 R">36%</td><td data-v="55.0">55 min</td></tr>
+<tr><td data-v="TRB">TRB</td><td data-v="12.12">12.1</td><td data-v="21.12">21.1</td><td class="hot" data-v="0.661" title="the costs eat 0.98 R">66%</td><td class="" data-v="0.486" title="the costs eat 0.46 R">49%</td><td class="" data-v="0.393" title="the costs eat 0.18 R">39%</td><td class="" data-v="0.358" title="the costs eat 0.07 R">36%</td><td data-v="110.0">1h50</td></tr>
+<tr><td data-v="MNT">MNT</td><td data-v="9.13">9.1</td><td data-v="18.13">18.1</td><td class="hot" data-v="0.668" title="the costs eat 1.00 R">67%</td><td class="" data-v="0.495" title="the costs eat 0.49 R">50%</td><td class="" data-v="0.402" title="the costs eat 0.21 R">40%</td><td class="" data-v="0.362" title="the costs eat 0.09 R">36%</td><td data-v="145.0">2h25</td></tr>
+<tr><td data-v="SAND">SAND</td><td data-v="12.42">12.4</td><td data-v="21.42">21.4</td><td class="hot" data-v="0.671" title="the costs eat 1.01 R">67%</td><td class="" data-v="0.493" title="the costs eat 0.48 R">49%</td><td class="" data-v="0.399" title="the costs eat 0.20 R">40%</td><td class="" data-v="0.361" title="the costs eat 0.08 R">36%</td><td data-v="105.0">1h45</td></tr>
+<tr><td data-v="ETC">ETC</td><td data-v="9.12">9.1</td><td data-v="18.12">18.1</td><td class="hot" data-v="0.677" title="the costs eat 1.03 R">68%</td><td class="" data-v="0.5" title="the costs eat 0.50 R">50%</td><td class="" data-v="0.403" title="the costs eat 0.21 R">40%</td><td class="" data-v="0.364" title="the costs eat 0.09 R">36%</td><td data-v="160.0">2h40</td></tr>
+<tr><td data-v="ATOM">ATOM</td><td data-v="12.71">12.7</td><td data-v="21.71">21.7</td><td class="hot" data-v="0.679" title="the costs eat 1.04 R">68%</td><td class="hot" data-v="0.507" title="the costs eat 0.52 R">51%</td><td class="" data-v="0.41" title="the costs eat 0.23 R">41%</td><td class="" data-v="0.369" title="the costs eat 0.11 R">37%</td><td data-v="135.0">2h15</td></tr>
+<tr><td data-v="ENS">ENS</td><td data-v="12.71">12.7</td><td data-v="21.71">21.7</td><td class="hot" data-v="0.679" title="the costs eat 1.04 R">68%</td><td class="" data-v="0.498" title="the costs eat 0.49 R">50%</td><td class="" data-v="0.4" title="the costs eat 0.20 R">40%</td><td class="" data-v="0.362" title="the costs eat 0.09 R">36%</td><td data-v="115.0">1h55</td></tr>
+<tr><td data-v="RUNE">RUNE</td><td data-v="13.01">13.0</td><td data-v="22.01">22.0</td><td class="hot" data-v="0.709" title="the costs eat 1.13 R">71%</td><td class="hot" data-v="0.52" title="the costs eat 0.56 R">52%</td><td class="" data-v="0.412" title="the costs eat 0.24 R">41%</td><td class="" data-v="0.368" title="the costs eat 0.10 R">37%</td><td data-v="145.0">2h25</td></tr>
+<tr><td data-v="AXS">AXS</td><td data-v="18.18">18.2</td><td data-v="27.18">27.2</td><td class="hot" data-v="0.72" title="the costs eat 1.16 R">72%</td><td class="hot" data-v="0.528" title="the costs eat 0.58 R">53%</td><td class="" data-v="0.418" title="the costs eat 0.25 R">42%</td><td class="" data-v="0.372" title="the costs eat 0.12 R">37%</td><td data-v="100.0">1h40</td></tr>
+<tr><td data-v="IMX">IMX</td><td data-v="22.5">22.5</td><td data-v="31.5">31.5</td><td class="hot" data-v="0.722" title="the costs eat 1.17 R">72%</td><td class="hot" data-v="0.527" title="the costs eat 0.58 R">53%</td><td class="" data-v="0.417" title="the costs eat 0.25 R">42%</td><td class="" data-v="0.371" title="the costs eat 0.11 R">37%</td><td data-v="80.0">1h20</td></tr>
+<tr><td data-v="GALA">GALA</td><td data-v="22.97">23.0</td><td data-v="31.97">32.0</td><td class="hot" data-v="0.726" title="the costs eat 1.18 R">73%</td><td class="hot" data-v="0.534" title="the costs eat 0.60 R">53%</td><td class="" data-v="0.422" title="the costs eat 0.27 R">42%</td><td class="" data-v="0.374" title="the costs eat 0.12 R">37%</td><td data-v="90.0">1h30</td></tr>
+<tr><td data-v="CAKE">CAKE</td><td data-v="12.43">12.4</td><td data-v="21.43">21.4</td><td class="hot" data-v="0.727" title="the costs eat 1.18 R">73%</td><td class="hot" data-v="0.528" title="the costs eat 0.58 R">53%</td><td class="" data-v="0.416" title="the costs eat 0.25 R">42%</td><td class="" data-v="0.368" title="the costs eat 0.10 R">37%</td><td data-v="165.0">2h45</td></tr>
+<tr><td data-v="COMP">COMP</td><td data-v="17.07">17.1</td><td data-v="26.07">26.1</td><td class="hot" data-v="0.733" title="the costs eat 1.20 R">73%</td><td class="hot" data-v="0.534" title="the costs eat 0.60 R">53%</td><td class="" data-v="0.422" title="the costs eat 0.27 R">42%</td><td class="" data-v="0.372" title="the costs eat 0.12 R">37%</td><td data-v="125.0">2h05</td></tr>
+<tr><td data-v="MINA">MINA</td><td data-v="21.7">21.7</td><td data-v="30.7">30.7</td><td class="hot" data-v="0.775" title="the costs eat 1.32 R">78%</td><td class="hot" data-v="0.549" title="the costs eat 0.65 R">55%</td><td class="" data-v="0.425" title="the costs eat 0.28 R">42%</td><td class="" data-v="0.375" title="the costs eat 0.12 R">38%</td><td data-v="90.0">1h30</td></tr>
+<tr><td data-v="PAXG">PAXG</td><td data-v="1.26">1.3</td><td data-v="10.26">10.3</td><td class="hot" data-v="0.933" title="the costs eat 1.80 R">93%</td><td class="hot" data-v="0.62" title="the costs eat 0.86 R">62%</td><td class="" data-v="0.451" title="the costs eat 0.35 R">45%</td><td class="" data-v="0.39" title="the costs eat 0.17 R">39%</td><td data-v="1105.0">18h25</td></tr>
+<tr><td data-v="TRX">TRX</td><td data-v="3.14">3.1</td><td data-v="12.14">12.1</td><td class="hot" data-v="0.967" title="the costs eat 1.90 R">97%</td><td class="hot" data-v="0.65" title="the costs eat 0.95 R">65%</td><td class="" data-v="0.472" title="the costs eat 0.41 R">47%</td><td class="" data-v="0.396" title="the costs eat 0.19 R">40%</td><td data-v="900.0">15h</td></tr>
+<tr><td data-v="MEGA">MEGA</td><td data-v="79.18">79.2</td><td data-v="88.18">88.2</td><td class="hot" data-v="1.065" title="the costs eat 2.19 R">100%+</td><td class="hot" data-v="0.689" title="the costs eat 1.07 R">69%</td><td class="" data-v="0.496" title="the costs eat 0.49 R">50%</td><td class="" data-v="0.412" title="the costs eat 0.23 R">41%</td><td data-v="40.0">40 min</td></tr>
     </tbody>
   </table></div>
+  <button class="st-more" id="more" type="button">Show all 89</button>
+  <button class="st-more" id="fewer" type="button" style="display:none">Show fewer</button>
+  <dl class="st-legend">
+    <dt>spread, bps</dt><dd>The gap between the price you would pay and the price you would get on an order of about $6,000 ($20,000 on BTC and ETH), median over July 2025 to November 2026. A bigger order pays more.</dd>
+    <dt>round trip, bps</dt><dd>What getting in and out costs with market orders: the two fees (9 bps) plus the spread.</dd>
+    <dt>5m, 15m, 1h, 4h</dt><dd>The win rate a 2:1 trade needs to break even on that timeframe, with the stop one ATR away. The lower the better. Orange: above 50%. A plus: not enough even winning every time.</dd>
+    <dt>1% takes</dt><dd>The median time the price takes to move 1% away from any 5-minute close, up or down.</dd>
+  </dl>
+
+  <h2>What to do with it</h2>
+  <div class="st-rule">Look up your asset and your timeframe before you trade. If the win rate it needs is more than you can believe, change one of the two.</div>
+  <ul>
+    <li><strong>Put the stop further away.</strong> The position shrinks, and so do the costs. At two ATRs they halve, and so does the extra win rate.</li>
+    <li><strong>Use limit orders when you can.</strong> A limit order waits to be filled instead of crossing the spread: you are a maker. Hyperliquid charges makers 1.5 bps a side and there is no spread to pay. The same trade then needs 37% on 5-minute bars. The work is getting filled.</li>
+    <li><strong>Be careful with events.</strong> A 5-minute bar inside a liquidation cascade moves several times its median. That is an occasion, not a cadence.</li>
+  </ul>
+  <div class="callout"><strong>Costs change. Recompute them from time to time.</strong><p>Spreads widen and narrow with the market. SOL's was 0.2 bps from 6 August to 4 September 2026 and 1.0 over the last 30 days.</p><p>The numbers on this page are medians over July 2025 to November 2026. Yours, today, can be different.</p></div>
+
+  <h2>Trading costs, in Phisys</h2>
+  <p>You do not have to do this by hand. The Trading costs window in Phisys does the count on your own watchlist, at the timeframe you trade, from 15 minutes up. It opens from the Assets column.</p>
+  <p>It uses today's numbers: the spread of the last two days and the volatility of the last 90. So they can differ from the medians above, and that is the point: it follows the market, so costs do not surprise you.</p>
+  <figure><img src="img/4-phisys-costs.png" alt="The Trading costs window of Phisys, listing crypto perps with the cost of 100 trades in R."><figcaption>The Trading costs window on 1-hour bars: what 100 trades cost, in units of risk, on the cheapest assets of the Crypto watchlist today. The cost is charged on the position: commission (grey) plus spread (copper).</figcaption></figure>
 
   <h2>What this does not say</h2>
-  <p>Nothing about where to enter. An event bar moves three to ten times the median, and that is the bar a strategy looks for. We measured that separately: after a 15-minute shock the gross move beats the round trip in 11 cases out of 110. In our measurement, the right entry did not rescue the timeframe.</p>
-  <p>Nothing about an edge either. Above two round trips there is room; room is not an advantage. Whether a rule may have one is indicated out of sample, and only there.</p>
+  <p>Nothing about where to enter, and nothing about an edge. Break-even is the floor, not a result. Whether a rule clears it is answered out of sample, and only there.</p>
+  <p>The 89 are the crypto perps of Hyperliquid with the most volume and at least 90 days of history. Stock, index and commodity perps are not part of this study: evaluate them in Phisys.</p>
+  <p class="note">Fees are Hyperliquid's base tier. Fee tiers and referrals move them a little.</p>
 
-  <h2>Method</h2>
-  <p>Bars at 15m, 1h and 4h are built from the 5-minute bars (first open, highest high, lowest low, last close), and a bar counts only when all its 5-minute pieces are there. Fees are Hyperliquid's base tier. The impact spread is the distance between Hyperliquid's impact bid and ask, median over the period, measured by us at 5 minutes. The 36 HIP-3 perps on stocks, indices and commodities are left out of this page: their bars include the hours when the underlying is closed, and need a session-only reading.</p>
-
-  <footer>
-    <span>© 2026 Abaco · Nothing on this site is investment advice.</span>
-    <span><a href="../">abaco.phisys.app</a> · <a href="https://x.com/AbacoLab">X</a> · <a href="https://www.tradingview.com/u/abacolab/">TradingView</a></span>
-  </footer>
+  <p class="st-next"><strong>Next, in December.</strong> 1.3 million accounts, 79 that trade well, and what is left when you copy them. <a href="hl-accounts.html">Read the preview</a>.</p>
 </div>
+<section class="sec" aria-labelledby="report-h">
+  <div class="wrap narrow">
+    <article class="block compact">
+      <div class="art"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><rect class="s-mu" x="12" y="30" width="96" height="62" rx="7"/><path class="s-mu" d="M15 34L60 66L105 34"/><path class="s-w" d="M22 84H44M76 84H98"/><circle class="f-cu" cx="60" cy="66" r="5.5"/></svg></div>
+      <div class="body">
+        <p class="eyebrow"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>free</p>
+        <h2 id="report-h">Monthly report, by email</h2>
+        <p class="say">Studies and walk-forward optimisations of the sample strategies, once a month, at no cost.</p>
+        <form class="sub" data-mock="notes-status" novalidate><label class="sr" for="notes-email">Email</label><input id="notes-email" type="email" placeholder="you@example.com" autocomplete="email"><button class="btn fill" type="submit">Send it</button></form>
+        <p class="status" id="notes-status" aria-live="polite">Studies and news on Abaco tools. Unsubscribe in one click.</p>
+      </div>
+    </article>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap foot">
+    <div class="mark"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle class="f-fg" cx="25.06" cy="92.50" r="7.14"/><circle class="f-fg" cx="38.45" cy="105.87" r="8.71"/><circle class="f-fg" cx="60.88" cy="105.37" r="10.63"/><circle class="f-cu" cx="81.51" cy="88.51" r="12.97"/><circle class="f-cu" cx="86.26" cy="57.23" r="15.82"/><circle class="f-cu" cx="68.89" cy="23.30" r="19.30"/></svg><p>© 2026 Abaco. Nothing on this site is investment advice. We do not give signals or manage money; we publish measurements and tools. <a href="../legal.html">Legal</a></p></div>
+    <div class="links"><h4>Out there</h4><a href="https://x.com/AbacoLab" target="_blank" rel="noopener">X</a> · <a href="https://www.tradingview.com/u/AbacoLab/" target="_blank" rel="noopener">TradingView</a> · <a href="https://discord.gg/ZhKZRpw6qC" target="_blank" rel="noopener" data-umami-event="discord-footer">Discord</a></div>
+    <div><h4>Write</h4><div class="mail"><span id="mail-addr" data-mail>abaco at phisys dot app</span></div></div>
+    <div class="foot-sub"><h4>Monthly report</h4><form class="sub" data-mock="foot-status" novalidate><label class="sr" for="foot-email">Email</label><input id="foot-email" type="email" placeholder="you@example.com" autocomplete="email"><button class="btn" type="submit">Send it</button></form><p class="status" id="foot-status" aria-live="polite">Studies and news on Abaco tools.<br>Unsubscribe in one click.</p></div>
+  </div>
+</footer>
+<script>
+(function () {
+  var SHOWN = 10, body = document.getElementById('rows'), q = document.getElementById('q'), n = document.getElementById('n');
+  var more = document.getElementById('more'), fewer = document.getElementById('fewer'), open = false;
+  var rows = [].slice.call(body.rows);
+  function paint() {
+    var s = q.value.trim().toLowerCase(), shown = 0, k = 0;
+    rows.forEach(function (r) {
+      var hit = !s || r.cells[0].textContent.toLowerCase().indexOf(s) === 0;
+      r.classList.toggle('hide', !hit);
+      var extra = hit && !s && !open && k >= SHOWN;
+      r.classList.toggle('extra', extra);
+      if (hit) { shown++; k++; }
+    });
+    n.textContent = shown + ' of ' + rows.length;
+    more.style.display = (s || open) ? 'none' : '';
+    fewer.style.display = (!s && open) ? '' : 'none';
+  }
+  more.addEventListener('click', function () { open = true; paint(); });
+  fewer.addEventListener('click', function () { open = false; paint(); document.getElementById('table').scrollIntoView({block: 'start'}); });
+  q.addEventListener('input', paint); paint();
+  [].forEach.call(document.querySelectorAll('.study th[data-k]'), function (th) {
+    var dir = 1;
+    th.addEventListener('click', function () {
+      var k = +th.dataset.k; dir = -dir;
+      rows.sort(function (a, b) {
+        var x = a.cells[k].dataset.v, y = b.cells[k].dataset.v;
+        if (k === 0) return dir * x.localeCompare(y);
+        return dir * (parseFloat(x) - parseFloat(y));
+      });
+      rows.forEach(function (r) { body.appendChild(r); });
+      paint();
+    });
+  });
+})();
+</script>
 </body>
 </html>
