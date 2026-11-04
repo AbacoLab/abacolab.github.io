@@ -27,13 +27,14 @@
   .study p { margin: 0 0 14px; font-size: 18px; line-height: 1.65; text-wrap: pretty; }
   .study strong { font-weight: 500; }
   .study .kicker { color: var(--cu); font-family: var(--mono); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; font-weight: 400; margin-top: 18px; }
-  .study .lede { font-size: clamp(19px, 2vw, 22px); color: var(--muted); max-width: none; line-height: 1.5; }
+  .study .lede { font-size: clamp(19px, 2vw, 22px); color: var(--fg); max-width: none; line-height: 1.5; }
   .study .skipnote { margin: 4px 0 0; font-size: 16px; } .study .skipnote a { color: var(--cu); text-decoration: none; border-bottom: 1px solid var(--cu-line); }
   .study .part { margin: 56px 0 4px; padding-top: 20px; border-top: 1px solid var(--line); }
   .study .part.first { margin-top: 36px; }
   .study .part h2 { font-size: clamp(30px, 4vw, 42px); margin: 6px 0 8px; font-weight: 500; }
   .study .part p { color: var(--muted); margin: 0; }
   .study figure { margin: 26px 0; } .study figure img { width: 100%; height: auto; display: block; border-radius: 6px; }
+  .study figure.st-shot img { border: 1px solid #4a4e58; }
   .study figcaption { color: var(--dim); font-size: 14px; margin-top: 8px; }
   .study .note { color: var(--muted); font-size: 16px; }
   .study ul { padding-left: 20px; margin: 0 0 14px; } .study li { margin-bottom: 10px; font-size: 18px; line-height: 1.6; }
@@ -58,7 +59,7 @@
   .study .callout strong { display: block; font-size: 22px; font-weight: 500; color: var(--cu); margin-bottom: 6px; }
   .study .callout p { margin: 0 0 8px; } .study .callout p:last-child { margin: 0; }
   .study .st-next { margin: 44px 0 0; }
-  .study .st-pair { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 4px 36px; align-items: start; margin: 6px 0 30px; }
+  .study .st-pair { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 4px 36px; align-items: start; margin: 6px 0 24px; }
   .study .st-pair > div:first-child > p:first-child { margin-top: 0; } .study .st-pair > div:first-child > p:last-child { margin-bottom: 0; }
   /* the drawings sit on paper, like the images of the study: the palette of the images, local to the card */
   .study .ill { --fg: #1b1d22; --muted: #686b73; --cu: #b0532a; --line: #e2ded4; background: #fbfaf7; border: 1px solid #e2ded4; border-radius: 8px; padding: 8px 8px 4px; }
@@ -95,13 +96,13 @@
   <g fill="#e07c4e"><path transform="translate(132.380,45.200) scale(0.06000,-0.06000)" d="M33 230Q33 159 66.5 104.5Q100 50 157.5 20.0Q215 -10 288 -10Q361 -10 418.5 20.0Q476 50 509.5 104.5Q543 159 543 230Q543 302 509.5 356.0Q476 410 418.5 440.0Q361 470 288 470Q215 470 157.5 440.0Q100 410 66.5 356.0Q33 302 33 230ZM165 230Q165 269 181.5 299.0Q198 329 226.0 345.0Q254 361 288 361Q322 361 350.0 345.0Q378 329 394.5 299.0Q411 269 411 230Q411 191 394.5 161.5Q378 132 350.0 115.5Q322 99 288 99Q254 99 226.0 115.5Q198 132 181.5 161.5Q165 191 165 230Z"/></g>
 </g>
 </svg></a><a class="hdr-cta" href="../hyperliquid-audit.html"><span class="dot" aria-hidden="true"></span>HL Audit</a><nav class="nav" aria-label="Main"><a href="../phisys.html">phisys</a><span class="sep bar" aria-hidden="true"></span><a href="../tradingview.html">tradingview</a><span class="sep bar" aria-hidden="true"></span><a href="../studies.html" aria-current="page">studies</a><span class="sep bar" aria-hidden="true"></span><a href="../pricing.html">pricing</a></nav><a class="hdr-app" href="https://phisys.app/">Open Phisys</a></header>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.6 6.6L12 13l8.4-6.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="13" r="1.7" fill="#e07c4e"/></symbol></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.6 6.6L12 13l8.4-6.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="13" r="1.7" fill="#e07c4e"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M6 3.5h8.5L18 7v13.5H6z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 11h6M9 14.5h6M9 18h3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="18" r="1.5" fill="#e07c4e"/></symbol></defs></svg>
 <main id="main">
 <div class="wrap study">
   <div class="kicker">Study 01 · November 2026 · Out of sample, by choice</div>
   <h1>What win rate does your timeframe ask for?</h1>
   <p class="lede">Before you choose a timeframe, find out what it costs you.<br>We measured it on 89 Hyperliquid crypto perps, so you can look up your own.</p>
-  <p class="skipnote"><a href="#results">Already trading? Skip the basics and go to the results &darr;</a></p>
+  <p class="skipnote"><a href="#results">Already experienced? Skip the basics and go to the results &darr;</a></p>
 
   <div class="part first"><div class="kicker">The basics</div>
     <p>Four short sections with a drawing each: what a trade costs, and why volatility decides how much.</p></div>
@@ -109,7 +110,7 @@
   <h2>Start with a trade</h2>
   <div class="st-pair"><div><p>Say you open a trade and decide in advance how it ends. If it goes against you, you lose $100. If it goes your way, you make $200.</p>
   <p>Traders call the $100 you risk 1&nbsp;R, for risk, and a trade like this a 2:1 trade. We will use R from here on.</p>
-  <p>With no costs at all, you break even by winning one trade out of three: one win brings $200, two losses take $200.</p></div><div class="ill"><svg viewBox="0 0 340 178" role="img" aria-label="Three trades with the same stop and target: one wins $200, two lose $100 each. The sum is zero."><text class="sm" x="44" y="14">trade 1</text><line class="dash tgt" x1="44" x2="112" y1="36" y2="36"/><line class="dash ent" x1="44" x2="112" y1="92" y2="92"/><line class="dash stp" x1="44" x2="112" y1="120" y2="120"/><polyline class="path" points="44,92 53,85 64,95 75,70 86,76 97,56 110,36"/><circle cx="110" cy="36" r="4" style="fill:var(--cu)"/><text class="big cu" x="78" y="152" text-anchor="middle" style="font-size:17px">+$200</text><text class="sm" x="122" y="14">trade 2</text><line class="dash tgt" x1="122" x2="190" y1="36" y2="36"/><line class="dash ent" x1="122" x2="190" y1="92" y2="92"/><line class="dash stp" x1="122" x2="190" y1="120" y2="120"/><polyline class="path" points="122,92 131,98 142,89 153,106 164,100 175,112 188,120"/><circle cx="188" cy="120" r="4" style="fill:#686b73"/><text class="big " x="156" y="152" text-anchor="middle" style="font-size:17px">−$100</text><text class="sm" x="200" y="14">trade 3</text><line class="dash tgt" x1="200" x2="268" y1="36" y2="36"/><line class="dash ent" x1="200" x2="268" y1="92" y2="92"/><line class="dash stp" x1="200" x2="268" y1="120" y2="120"/><polyline class="path" points="200,92 209,86 220,100 231,94 242,109 253,106 266,120"/><circle cx="266" cy="120" r="4" style="fill:#686b73"/><text class="big " x="234" y="152" text-anchor="middle" style="font-size:17px">−$100</text><text class="sm cu" x="4" y="40">target</text><text class="sm" x="4" y="96">entry</text><text class="sm" x="4" y="124">stop</text><text class="big" x="304" y="152" text-anchor="middle" style="font-size:22px">= $0</text></svg></div></div>
+  <p>With no costs at all, you break even by winning one trade out of three: one win brings $200, two losses take $200.</p></div><div class="ill"><svg viewBox="0 0 340 178" role="img" aria-label="Three trades with the same stop and target: one wins $200, two lose $100 each. The sum is zero."><text class="sm" x="44" y="14">trade 1</text><line class="dash tgt" x1="44" x2="112" y1="36" y2="36"/><line class="dash ent" x1="44" x2="112" y1="92" y2="92"/><line class="dash stp" x1="44" x2="112" y1="120" y2="120"/><polyline class="path" points="44,92 53,85 64,95 75,70 86,76 97,56 110,36"/><circle cx="110" cy="36" r="4" style="fill:var(--cu)"/><text class="big cu" x="78" y="152" text-anchor="middle" style="font-size:17px">+$200</text><text class="sm" x="122" y="14">trade 2</text><line class="dash tgt" x1="122" x2="190" y1="36" y2="36"/><line class="dash ent" x1="122" x2="190" y1="92" y2="92"/><line class="dash stp" x1="122" x2="190" y1="120" y2="120"/><polyline class="path" points="122,92 131,98 142,89 153,106 164,100 175,112 188,120"/><circle cx="188" cy="120" r="4" style="fill:#686b73"/><text class="big " x="156" y="152" text-anchor="middle" style="font-size:17px">−$100</text><text class="sm" x="200" y="14">trade 3</text><line class="dash tgt" x1="200" x2="268" y1="36" y2="36"/><line class="dash ent" x1="200" x2="268" y1="92" y2="92"/><line class="dash stp" x1="200" x2="268" y1="120" y2="120"/><polyline class="path" points="200,92 209,86 220,100 231,94 242,109 253,106 266,120"/><circle cx="266" cy="120" r="4" style="fill:#686b73"/><text class="big " x="234" y="152" text-anchor="middle" style="font-size:17px">−$100</text><text class="sm cu" x="4" y="40">target</text><text class="sm" x="4" y="96">entry</text><text class="sm" x="4" y="124">stop</text><text class="big" x="304" y="152" text-anchor="middle" style="font-size:17px">= $0</text></svg></div></div>
   <p><strong>But a trade is never free.</strong> Fees and spread are paid every time, win or lose. So you have to win more than one out of three, and how much more is exactly what this study measures.</p>
   <p>In this example we put our stop loss at one ATR, how far on average a bar usually moves. It is how we measure volatility: how much an asset moves.</p>
 
@@ -117,7 +118,6 @@
   <div class="st-pair"><div><p>Every time you enter or leave with a market order, Hyperliquid takes a fee of 0.045% of the size of your order. A market order takes the price that is already there, and that makes you a taker.</p>
   <p>Traders count these small percentages in basis points, bps: 1 bps is 0.01%. So the fee is 4.5 bps, and getting in and out costs 9.</p>
   <p>Then there is the spread: you buy a little above the price you can sell at.</p></div><div class="ill"><svg viewBox="0 0 340 214" role="img" aria-label="You buy $10,000 of BTC, the price does not move, and you sell for $9,991."><rect x="10" y="12" width="108" height="64" rx="6" style="fill:none;stroke:var(--line)"/><text class="sm" x="64" y="32" text-anchor="middle">you buy BTC</text><text class="big" x="64" y="58" text-anchor="middle">$10,000</text><rect x="222" y="12" width="108" height="64" rx="6" style="fill:none;stroke:var(--line)"/><text class="sm" x="276" y="32" text-anchor="middle">you sell, you get</text><text class="big" x="276" y="58" text-anchor="middle">$9,991</text><line x1="126" x2="212" y1="44" y2="44" style="stroke:var(--muted);stroke-width:1.5"/><polygon points="212,39 220,44 212,49" style="fill:var(--muted)"/><text class="sm" x="169" y="36" text-anchor="middle">same price</text><text class="t" x="10" y="116">Nothing moved. You are down $9.14:</text><rect class="blk" x="10.0" y="124" width="157.5" height="24"/><text class="t sm" x="88.8" y="166" text-anchor="middle">fee in</text><text class="sm" x="88.8" y="182" text-anchor="middle">$4.50</text><rect class="blk" x="167.5" y="124" width="157.5" height="24" style="opacity:.6"/><text class="t sm" x="246.3" y="166" text-anchor="middle">fee out</text><text class="sm" x="246.3" y="182" text-anchor="middle">$4.50</text><rect class="cost" x="325.1" y="124" width="4.9" height="24"/><text class="sm cu" x="330" y="116" text-anchor="end">spread $0.14</text><line x1="326.1" x2="326.1" y1="119" y2="124" style="stroke:var(--cu)"/><text class="sm" x="10" y="204">Drawn to the scale of the cost, not of the price.</text></svg></div></div>
-  <p>Fees plus spread are the cost of the round trip. BTC pays 9 bps, the typical asset 18, and the thinnest coins up to 88.</p>
 
   <h2>Volatility also decides how much you spend</h2>
   <div class="st-pair"><div><p>Fees and spread are charged on the size of your position, not on what you risk.</p>
@@ -142,6 +142,15 @@
   <p><strong>Before any edge.</strong></p>
 
   <figure><img src="img/1-winrate.png" alt="Win rate needed to break even on a trade that wins twice what it risks, per timeframe, for the typical asset and for BTC, ETH, SOL, HYPE and TRX."><figcaption>Each column is a timeframe. The line is the win rate that trade needs there to break even after fees and spread. The dashed line is the 33% it needs with no costs at all.</figcaption></figure>
+
+  <h2>The move of a bar against the cost</h2>
+  <p>Another way to see it: the typical move of one bar, on six major perps, against what a round trip costs. On 5-minute bars the move barely covers the cost, and often not even that.</p>
+  <figure><img src="img/6-majors.png" alt="Median move of one bar in basis points for BTC, ETH, SOL, XRP, DOGE and HYPE at four timeframes, against the taker round trip."><figcaption>Six majors. The line is the taker round trip for that asset.</figcaption></figure>
+
+  <h2>How long a trade must last</h2>
+  <p>The typical move of a bar grows with the square root of the time: a bar of one hour moves about 3.5 times a bar of five minutes. So the 5-minute bar tells how long a trade must last for its move to be worth two round trips, whatever the entry.</p>
+  <p>For the typical asset it is 36 min. HYPE needs 10 min, BTC 57 min, TRX 5h20.</p>
+  <figure><img src="img/5-must-last.png" alt="Minutes a trade must last for the typical move of a bar to equal two round trips, one bar per crypto perp."><figcaption>Copper: within 15 minutes. Ink: within the hour. Grey: longer. A 5-minute strategy on a grey asset is an hourly strategy with 5-minute stops.</figcaption></figure>
 
   <h2>Cheap is not cheap in risk</h2>
   <p>The cost per dollar traded and the win rate you need do not go together: BTC is the cheapest of the 89, and still needs 57% on 5-minute bars.</p>
@@ -270,15 +279,27 @@
   <h2>Trading costs, in Phisys</h2>
   <p>You do not have to do this by hand. The Trading costs window in Phisys does the count on your own watchlist, at the timeframe you trade, from 15 minutes up. It opens from the Assets column.</p>
   <p>It uses today's numbers: the spread of the last two days and the volatility of the last 90. So they can differ from the medians above, and that is the point: it follows the market, so costs do not surprise you.</p>
-  <figure><img src="img/4-phisys-costs.png" alt="The Trading costs window of Phisys, listing crypto perps with the cost of 100 trades in R."><figcaption>The Trading costs window on 1-hour bars: what 100 trades cost, in units of risk, on the cheapest assets of the Crypto watchlist today. The cost is charged on the position: commission (grey) plus spread (copper).</figcaption></figure>
+  <figure class="st-shot"><img src="img/4-phisys-costs.png" alt="The Trading costs window of Phisys, listing crypto perps with the cost of 100 trades in R."><figcaption>The Trading costs window on 1-hour bars: what 100 trades cost, in units of risk, on the cheapest assets of the Crypto watchlist today. The cost is charged on the position: commission (grey) plus spread (copper).</figcaption></figure>
 
   <h2>What this does not say</h2>
   <p>Nothing about where to enter, and nothing about an edge. Break-even is the floor, not a result. Whether a rule clears it is answered out of sample, and only there.</p>
   <p>The 89 are the crypto perps of Hyperliquid with the most volume and at least 90 days of history. Stock, index and commodity perps are not part of this study: evaluate them in Phisys.</p>
   <p class="note">Fees are Hyperliquid's base tier. Fee tiers and referrals move them a little.</p>
 
-  <p class="st-next"><strong>Next, in December.</strong> 1.3 million accounts, 79 that trade well, and what is left when you copy them. <a href="hl-accounts.html">Read the preview</a>.</p>
 </div>
+<section class="sec" style="padding-bottom:0" aria-labelledby="next-h">
+  <div class="wrap narrow">
+    <article class="block compact">
+      <div class="art"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path class="s-w" d="M10 96H110"/><path class="s-mu" d="M12 88L34 76L50 80L72 54L90 44L108 28" fill="none"/><circle class="f-cu" cx="108" cy="28" r="5.5"/><circle class="f-b2" cx="12" cy="88" r="2.5"/></svg></div>
+      <div class="body">
+        <p class="eyebrow"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-note"/></svg>next, in December</p>
+        <h2 id="next-h">1.3 million accounts. 79 trade well.</h2>
+        <p class="say">Our screen on every Hyperliquid account, and what is left when you copy the ones it picks.</p>
+        <p><a class="btn fill" href="hl-accounts.html">Read the preview</a></p>
+      </div>
+    </article>
+  </div>
+</section>
 <section class="sec" aria-labelledby="report-h">
   <div class="wrap narrow">
     <article class="block compact">
@@ -286,7 +307,7 @@
       <div class="body">
         <p class="eyebrow"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>free</p>
         <h2 id="report-h">Monthly report, by email</h2>
-        <p class="say">Studies and walk-forward optimisations of the sample strategies, once a month, at no cost.</p>
+        <p class="say">Studies, once a month, at no cost.</p>
         <form class="sub" data-mock="notes-status" novalidate><label class="sr" for="notes-email">Email</label><input id="notes-email" type="email" placeholder="you@example.com" autocomplete="email"><button class="btn fill" type="submit">Send it</button></form>
         <p class="status" id="notes-status" aria-live="polite">Studies and news on Abaco tools. Unsubscribe in one click.</p>
       </div>
