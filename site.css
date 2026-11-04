@@ -31,8 +31,8 @@ p{margin:0}
 .wrap.narrow{max-width:880px}
 
 /* type */
-h1,h2,h3,h4{margin:0;font-family:var(--display);font-weight:600;line-height:1;letter-spacing:.004em;text-wrap:balance}
-h1{font-size:var(--t-h1);font-weight:700;line-height:.94}
+h1,h2,h3,h4{margin:0;font-family:var(--display);font-weight:500;line-height:1;letter-spacing:.004em;text-wrap:balance}
+h1{font-size:var(--t-h1);font-weight:500;line-height:.94}
 h2{font-size:var(--t-h2)}
 h3{font-size:var(--t-h3);line-height:1.08}
 h4{font-size:20px;line-height:1.15;letter-spacing:.02em}
@@ -89,7 +89,7 @@ h4{font-size:20px;line-height:1.15;letter-spacing:.02em}
 /* home hero: the abacus as a wide band, the claim on a solid block over the band's left edge */
 .hero{display:grid;grid-template-columns:minmax(0,1fr);padding-block:clamp(28px,5vw,64px) 0}
 .hero-claim{position:relative;z-index:1;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(24px,3.2vw,44px);box-shadow:0 30px 60px -32px rgba(0,0,0,.85);container-type:inline-size;min-width:0}
-.hero-claim h1{font-weight:700;line-height:.9;font-size:clamp(46px,13vw,96px);font-size:min(18cqi,112px);padding-block:.04em;letter-spacing:0}
+.hero-claim h1{font-weight:500;line-height:.9;font-size:clamp(46px,13vw,96px);font-size:min(18cqi,112px);padding-block:.04em;letter-spacing:0}
 .hero-claim h1 span{display:block;white-space:nowrap}
 .hero-claim .l1{color:var(--cu)}
 .hero-claim .l2{font-size:1.08em}
@@ -123,6 +123,8 @@ h4{font-size:20px;line-height:1.15;letter-spacing:.02em}
 .phero{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center;padding-block:clamp(40px,7vw,96px) clamp(24px,4vw,48px)}
 .phero .copy{display:grid;gap:22px;min-width:0;align-content:start}
 .phero .art svg{max-width:300px}
+.phero.wide-copy{align-items:start}
+.phero.wide-copy .art{align-self:center}
 @media (min-width:860px){.phero{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}.phero .art{--art-bg:var(--bg)}}
 @media (max-width:859px){.phero .art{--art-bg:var(--bg)}}
 
@@ -820,10 +822,10 @@ html.zoomed{overflow:hidden}
 .lede.wide2{max-width:none}
 .claims span a{color:var(--fg);text-decoration:underline;text-decoration-color:var(--cu);text-underline-offset:3px}
 .card h3 + .claims{margin-top:10px}
-.beta-top{padding-bottom:0}
+.beta-top{padding-top:clamp(40px,7vw,96px);padding-bottom:0}
 /* pricing: the beta block opens the page with a headline as big as the plans' */
 .beta-top .tvask{max-width:1040px;gap:16px}
-.beta-top h2#beta-h{font-size:var(--t-h1);font-weight:700;line-height:.94}
+.beta-top h2#beta-h{font-size:var(--t-h1);font-weight:500;line-height:.94}
 .beta-top .say{font-size:var(--t-lede);max-width:none}
 /* pricing: the beta's places, one dot each (update data-taken and the dots by hand) */
 .seats{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:8px}
