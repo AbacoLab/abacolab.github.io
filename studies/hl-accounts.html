@@ -15,62 +15,65 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@AbacoLab">
 <link rel="icon" href="../favicon.ico" sizes="any">
-<link rel="icon" href="../abaco-mark-small.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../fonts.css">
-<link rel="stylesheet" href="../site.css?v=202610231450">
-<script src="../site.js?v=202610231450" defer></script>
-<script defer src="https://cloud.umami.is/script.js" data-website-id="2d7db150-33e6-42af-9956-b3b92285aff9" data-domains="abaco.phisys.app"></script>
+<link rel="stylesheet" href="../header.css">
 <style>
-    .study { font-weight: 300; }
-  .study{ max-width: 980px; margin: 0 auto; padding-inline: 24px; }
-  .study .kicker{ color: var(--cu); font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
-  .study h1{ font-weight: 500; font-size: clamp(34px, 5.5vw, 56px); line-height: 1.05; margin: 8px 0 16px; letter-spacing: -0.01em; text-wrap: balance; }
-  .study h2{ font-weight: 500; font-size: clamp(24px, 3vw, 30px); margin: 48px 0 12px; text-wrap: balance; }
-  .study p{ max-width: 64ch; margin: 0 0 14px; }
-  .study .lede{ font-size: clamp(19px, 2vw, 22px); color: var(--muted); }
-  .study figure{ margin: 28px 0; }
-  .study figure img{ width: 100%; height: auto; display: block; border-radius: 6px; }
-  .study figcaption{ color: var(--dim); font-size: 14px; margin-top: 8px; }
-  .study .counts{ display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin: 20px 0; }
-  .study .counts div{ background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
-  .study .counts .tf{ color: var(--cu); font-family: "IBM Plex Mono", monospace; font-size: 13px; }
-  .study .counts .n{ font-size: 30px; font-weight: 500; line-height: 1.1; font-variant-numeric: tabular-nums; }
-  .study .counts small{ color: var(--dim); font-size: 13px; display: block; }
-  @media (max-width: 640px){.study{ padding-inline: 16px; }
-  .study .counts{ grid-template-columns: repeat(2, minmax(0,1fr)); }}
-  .study .st-tbl{ overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; margin: 20px 0; }
-  .study table{ border-collapse: collapse; width: 100%; min-width: 560px; font-size: 15px; font-variant-numeric: tabular-nums; }
-  .study th,.study td{ text-align: right; padding: 7px 12px; border-top: 1px solid var(--line); }
-  .study th:first-child,.study td:first-child{ text-align: left; font-family: "IBM Plex Mono", monospace; font-size: 14px; }
-  .study thead th{ border-top: 0; color: var(--dim); font-weight: 400; font-size: 13px; letter-spacing: .05em; text-transform: uppercase; background: var(--card); position: sticky; top: 0; }
-  .study .note{ color: var(--muted); font-size: 16px; }
-  .study ul{ max-width: 64ch; padding-left: 20px; }
-  .study li{ margin-bottom: 8px; }
-  .study .tag{ display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--bg); background: var(--cu); border-radius: 4px; padding: 2px 8px; margin-left: 10px; vertical-align: middle; }
-  .study .preview{ background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--cu); border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 22px 0; color: var(--muted); font-size: 16px; }
-  .study .preview p{ margin: 0; }
-  .study .bars{ margin: 20px 0; display: grid; gap: 10px; }
-  .study .bar{ display: grid; grid-template-columns: 150px minmax(0,1fr) 120px; gap: 12px; align-items: center; font-size: 15px; }
-  .study .bar .track{ height: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 4px; position: relative; }
-  .study .bar .fill{ position: absolute; inset: 0 auto 0 0; background: var(--cu); border-radius: 3px 0 0 3px; }
-  .study .bar .fill.dim{ background: #6a6e77; }
-  .study .bar .v{ font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
-  @media (max-width: 640px){.study .bar{ grid-template-columns: 110px minmax(0,1fr) 84px; }}
-  .study .eqs{ display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; margin: 18px 0 8px; }
-  .study .eq{ background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; min-width: 0; }
-  .study .eq .a{ font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--muted); }
-  .study .eq svg{ width: 100%; height: 52px; display: block; margin: 4px 0; }
-  .study .eq .e{ fill: none; stroke: var(--cu); stroke-width: 1; }
-  .study .eq .z{ stroke: var(--line); stroke-width: 1; }
-  .study .eq .m{ display: flex; justify-content: space-between; gap: 6px; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; font-variant-numeric: tabular-nums; }
-  .study h3.sub{ font-weight: 500; font-size: 20px; margin: 30px 0 8px; }
-  .study h1, .study h2, .study h3 { font-family: var(--body); } .study strong { font-weight: 500; }
-  .study p { max-width: none; line-height: 1.65; } .study > .kicker:first-child { margin-top: 18px; }
+  :root { --bg: #1b1d22; --fg: #ece8df; --muted: #a8abb2; --dim: #8d9099; --cu: #e07c4e; --line: #33363e; --card: #22252b; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg); }
+  body { font-family: Jost, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 18px; line-height: 1.55; }
+  .wrap { max-width: 980px; margin: 0 auto; padding-inline: 24px; }
+  header { padding-block: 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  header img { height: 34px; width: auto; display: block; }
+  header a { color: var(--fg); text-decoration: none; }
+  .kicker { color: var(--cu); font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
+  h1 { font-weight: 500; font-size: clamp(34px, 5.5vw, 56px); line-height: 1.05; margin: 8px 0 16px; letter-spacing: -0.01em; text-wrap: balance; }
+  h2 { font-weight: 500; font-size: clamp(24px, 3vw, 30px); margin: 48px 0 12px; text-wrap: balance; }
+  p { max-width: 64ch; margin: 0 0 14px; }
+  .lede { font-size: clamp(19px, 2vw, 22px); color: var(--muted); }
+  figure { margin: 28px 0; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 6px; }
+  figcaption { color: var(--dim); font-size: 14px; margin-top: 8px; }
+  .counts { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin: 20px 0; }
+  .counts div { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+  .counts .tf { color: var(--cu); font-family: "IBM Plex Mono", monospace; font-size: 13px; }
+  .counts .n { font-size: 30px; font-weight: 500; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .counts small { color: var(--dim); font-size: 13px; display: block; }
+  @media (max-width: 640px) { .wrap { padding-inline: 16px; } .counts { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  .tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; margin: 20px 0; }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 15px; font-variant-numeric: tabular-nums; }
+  th, td { text-align: right; padding: 7px 12px; border-top: 1px solid var(--line); }
+  th:first-child, td:first-child { text-align: left; font-family: "IBM Plex Mono", monospace; font-size: 14px; }
+  thead th { border-top: 0; color: var(--dim); font-weight: 400; font-size: 13px; letter-spacing: .05em; text-transform: uppercase; background: var(--card); position: sticky; top: 0; }
+  .note { color: var(--muted); font-size: 16px; }
+  ul { max-width: 64ch; padding-left: 20px; } li { margin-bottom: 8px; }
+  footer { border-top: 1px solid var(--line); margin-top: 56px; padding-block: 24px 40px; color: var(--dim); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+  footer a { color: var(--muted); }
+
+  .tag { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--bg); background: var(--cu); border-radius: 4px; padding: 2px 8px; margin-left: 10px; vertical-align: middle; }
+  .preview { background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--cu); border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 22px 0; color: var(--muted); font-size: 16px; }
+  .preview p { margin: 0; }
+  .bars { margin: 20px 0; display: grid; gap: 10px; }
+  .bar { display: grid; grid-template-columns: 150px minmax(0,1fr) 120px; gap: 12px; align-items: center; font-size: 15px; }
+  .bar .track { height: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 4px; position: relative; }
+  .bar .fill { position: absolute; inset: 0 auto 0 0; background: var(--cu); border-radius: 3px 0 0 3px; }
+  .bar .fill.dim { background: #6a6e77; }
+  .bar .v { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+  @media (max-width: 640px) { .bar { grid-template-columns: 110px minmax(0,1fr) 84px; } }
+  .eqs { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; margin: 18px 0 8px; }
+  .eq { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; min-width: 0; }
+  .eq .a { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--muted); }
+  .eq svg { width: 100%; height: 52px; display: block; margin: 4px 0; }
+  .eq .e { fill: none; stroke: var(--cu); stroke-width: 1; }
+  .eq .z { stroke: var(--line); stroke-width: 1; }
+  .eq .m { display: flex; justify-content: space-between; gap: 6px; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+   h3.sub { font-weight: 500; font-size: 20px; margin: 30px 0 8px; }
 </style>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="2d7db150-33e6-42af-9956-b3b92285aff9" data-domains="abaco.phisys.app"></script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<header class="wrap top"><a class="logo" href="../index.html" aria-label="Abaco, home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 308.94 120" aria-hidden="true" focusable="false">
+<div class="wrap">
+  <header class="top"><a class="logo" href="../index.html" aria-label="Abaco, home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 308.94 120" aria-hidden="true" focusable="false">
   <circle fill="#ece8df" cx="45.83" cy="80.79" r="2.99"/>
   <circle fill="#ece8df" cx="47.46" cy="71.92" r="3.65"/>
   <circle fill="#ece8df" cx="37.68" cy="67.70" r="4.46"/>
@@ -89,9 +92,6 @@
   <g fill="#e07c4e"><path transform="translate(132.380,45.200) scale(0.06000,-0.06000)" d="M33 230Q33 159 66.5 104.5Q100 50 157.5 20.0Q215 -10 288 -10Q361 -10 418.5 20.0Q476 50 509.5 104.5Q543 159 543 230Q543 302 509.5 356.0Q476 410 418.5 440.0Q361 470 288 470Q215 470 157.5 440.0Q100 410 66.5 356.0Q33 302 33 230ZM165 230Q165 269 181.5 299.0Q198 329 226.0 345.0Q254 361 288 361Q322 361 350.0 345.0Q378 329 394.5 299.0Q411 269 411 230Q411 191 394.5 161.5Q378 132 350.0 115.5Q322 99 288 99Q254 99 226.0 115.5Q198 132 181.5 161.5Q165 191 165 230Z"/></g>
 </g>
 </svg></a><a class="hdr-cta" href="../hyperliquid-audit.html"><span class="dot" aria-hidden="true"></span>HL Audit</a><nav class="nav" aria-label="Main"><a href="../phisys.html">phisys</a><span class="sep bar" aria-hidden="true"></span><a href="../tradingview.html">tradingview</a><span class="sep bar" aria-hidden="true"></span><a href="../studies.html" aria-current="page">studies</a><span class="sep bar" aria-hidden="true"></span><a href="../pricing.html">pricing</a></nav><a class="hdr-app" href="https://phisys.app/">Open Phisys</a></header>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.6 6.6L12 13l8.4-6.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="13" r="1.7" fill="#e07c4e"/></symbol></defs></svg>
-<main id="main">
-<div class="wrap study">
 
   <div class="kicker">December 2026 · Out of sample, by choice</div>
   <h1>1.3 million accounts. 79 trade well.<span class="tag">preview</span></h1>
@@ -123,7 +123,7 @@
 
   <h2>Does the selection hold</h2>
   <p>The test that matters. The screen is applied again as of 19 April 2026, using only what was known that day, and the accounts it picks are followed for the next six months.</p>
-  <div class="st-tbl"><table>
+  <div class="tbl"><table>
     <thead><tr><th>group</th><th>accounts</th><th>in profit after</th><th>median PnL after</th></tr></thead>
     <tbody>
 <tr><td>picked by the screen</td><td>277</td><td>62%</td><td>+$617</td></tr>
@@ -138,29 +138,10 @@
   <p>Nothing about which account to follow. It measures how many pass a screen and what became of them, and it picks the ones worth a closer look in the full study. An equity line that was smooth for a year can end in a day, and two of the picked accounts did. Only perpetuals are read.</p>
   <p class="note">Our curves were checked against the figures Hyperliquid itself publishes for the accounts: on 30 of them, 24 agree within 5% and none is off by more than half.</p>
 
-  </div>
-<section class="sec" aria-labelledby="report-h">
-  <div class="wrap narrow">
-    <article class="block compact">
-      <div class="art"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><rect class="s-mu" x="12" y="30" width="96" height="62" rx="7"/><path class="s-mu" d="M15 34L60 66L105 34"/><path class="s-w" d="M22 84H44M76 84H98"/><circle class="f-cu" cx="60" cy="66" r="5.5"/></svg></div>
-      <div class="body">
-        <p class="eyebrow"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>free</p>
-        <h2 id="report-h">Monthly report, by email</h2>
-        <p class="say">Studies and walk-forward optimisations of the sample strategies, once a month, at no cost.</p>
-        <form class="sub" data-mock="notes-status" novalidate><label class="sr" for="notes-email">Email</label><input id="notes-email" type="email" placeholder="you@example.com" autocomplete="email"><button class="btn fill" type="submit">Send it</button></form>
-        <p class="status" id="notes-status" aria-live="polite">Studies and news on Abaco tools. Unsubscribe in one click.</p>
-      </div>
-    </article>
-  </div>
-</section>
-</main>
-<footer>
-  <div class="wrap foot">
-    <div class="mark"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle class="f-fg" cx="25.06" cy="92.50" r="7.14"/><circle class="f-fg" cx="38.45" cy="105.87" r="8.71"/><circle class="f-fg" cx="60.88" cy="105.37" r="10.63"/><circle class="f-cu" cx="81.51" cy="88.51" r="12.97"/><circle class="f-cu" cx="86.26" cy="57.23" r="15.82"/><circle class="f-cu" cx="68.89" cy="23.30" r="19.30"/></svg><p>© 2026 Abaco. Nothing on this site is investment advice. We do not give signals or manage money; we publish measurements and tools. <a href="../legal.html">Legal</a></p></div>
-    <div class="links"><h4>Out there</h4><a href="https://x.com/AbacoLab" target="_blank" rel="noopener">X</a> · <a href="https://www.tradingview.com/u/AbacoLab/" target="_blank" rel="noopener">TradingView</a> · <a href="https://discord.gg/ZhKZRpw6qC" target="_blank" rel="noopener" data-umami-event="discord-footer">Discord</a></div>
-    <div><h4>Write</h4><div class="mail"><span id="mail-addr" data-mail>abaco at phisys dot app</span></div></div>
-    <div class="foot-sub"><h4>Monthly report</h4><form class="sub" data-mock="foot-status" novalidate><label class="sr" for="foot-email">Email</label><input id="foot-email" type="email" placeholder="you@example.com" autocomplete="email"><button class="btn" type="submit">Send it</button></form><p class="status" id="foot-status" aria-live="polite">Studies and news on Abaco tools.<br>Unsubscribe in one click.</p></div>
-  </div>
-</footer>
+  <footer>
+    <span>© 2026 Abaco · Nothing on this site is investment advice.</span>
+    <span><a href="../">abaco.phisys.app</a> · <a href="https://x.com/AbacoLab">X</a> · <a href="https://www.tradingview.com/u/abacolab/">TradingView</a></span>
+  </footer>
+</div>
 </body>
 </html>
