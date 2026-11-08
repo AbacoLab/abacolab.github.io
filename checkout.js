@@ -394,6 +394,18 @@
     // a renewal reminder carries the referral address: the box is ticked and the address checked again on load
     var qref = (q.get('ref') || '').trim();
     if (isAddr(qref)) { $('co-ref').checked = true; $('co-addr').value = qref; setTimeout(function () { checkRef(state(), qref); }, 0); }
+    // a USDC payer's renewal link (the reminder) opens on the USDC card and names the wallet he paid with: a payment from another
+    // wallet is held until Abaco releases it
+    if (q.get('method') === 'usdc' && $('co-mm')) {
+      var qw = (q.get('wallet') || '').trim(), usdcCard = $('co-mm').parentNode;
+      if (isAddr(qw)) {
+        var note = document.createElement('p');
+        note.className = 'small';
+        note.textContent = 'Pay from ' + qw.slice(0, 6) + '…' + qw.slice(-4) + ', the wallet you paid with before: a payment from another wallet waits for us to release it.';
+        usdcCard.insertBefore(note, $('co-mm'));
+      }
+      setTimeout(function () { if (!$('co-pay').hidden) usdcCard.scrollIntoView({block: 'center'}); }, 0);
+    }
 
     $('co').addEventListener('change', function (e) {
       var n = e.target.name;
