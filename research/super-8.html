@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><title>Super 8, Read Line by Line · Abaco</title><meta content="noindex, nofollow" name="robots"/>
+<meta content="How the Super 8 strategy on TradingView enters, adds, exits and sizes, read from its Pine source, and why it is not a martingale." name="description"/>
+<link href="../favicon.ico" rel="icon" sizes="any"/>
+<link href="../abaco-mark-small.svg" rel="icon" type="image/svg+xml"/>
+<link href="../fonts.css" rel="stylesheet"/>
+<script data-domains="abaco.phisys.app" data-website-id="2d7db150-33e6-42af-9956-b3b92285aff9" defer="" src="https://cloud.umami.is/script.js"></script><style>
+:root{--ground:#0e0f12;--surface:#1b1d22;--panel:#22252b;--raised:#2a2d34;--line:#33363e;--line-strong:#4a4f5a;--text:#ece8df;--text-2:#a8abb2;--text-3:#8d9099;--copper:#e07c4e;--copper-soft:#482711;--up:#a5d6a7;--up-soft:#223d20;--down:#b87878;--down-soft:#3a2121;--warn:#e3b04e;--warn-soft:#463506;--ref:#7d828c;--series-1:#5a91d7;color-scheme:dark;
+--display:"Barlow Condensed","Arial Narrow","Roboto Condensed",system-ui,sans-serif;
+--sans:Jost,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--ground:#efece6;--surface:#fbfaf7;--panel:#f4f2ed;--raised:#ebe7df;--line:#e2ded4;--line-strong:#c4bfb3;--text:#1b1d22;--text-2:#50535b;--text-3:#686b73;--copper:#b0532a;--copper-soft:#fdddc9;--up:#2c6330;--up-soft:#d6eed3;--down:#965254;--down-soft:#f2d7d6;--warn:#876b1b;--warn-soft:#f9ebbe;--ref:#7d828c;--series-1:#3a84ca;color-scheme:light}}
+:root[data-theme="light"]{--ground:#efece6;--surface:#fbfaf7;--panel:#f4f2ed;--raised:#ebe7df;--line:#e2ded4;--line-strong:#c4bfb3;--text:#1b1d22;--text-2:#50535b;--text-3:#686b73;--copper:#b0532a;--copper-soft:#fdddc9;--up:#2c6330;--up-soft:#d6eed3;--down:#965254;--down-soft:#f2d7d6;--warn:#876b1b;--warn-soft:#f9ebbe;--ref:#7d828c;--series-1:#3a84ca;color-scheme:light}
+*{box-sizing:border-box}
+body{background:var(--surface);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.55;margin:0}
+main{max-width:960px;margin:0 auto;padding-block:40px 64px;padding-left:max(20px,env(safe-area-inset-left,0px));
+padding-right:max(20px,env(safe-area-inset-right,0px));display:grid;gap:40px}
+main>*,section>*{min-width:0}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.eyebrow{font-family:var(--display);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--copper);
+font-size:15px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(32px,5.5vw,48px);line-height:1.04;margin:6px 0 12px;
+text-wrap:balance}
+h2{font-family:var(--display);font-weight:600;font-size:26px;line-height:1.1;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:600;font-size:19px;margin:0;display:flex;flex-wrap:wrap;gap:6px 10px;
+align-items:baseline}
+p{margin:0}
+.lede{font-size:18px}
+.meta{font-family:var(--mono);font-size:12.5px;color:var(--text-3);margin-top:12px;overflow-wrap:anywhere}
+section{display:grid;gap:14px;min-width:0}
+.muted{color:var(--text-2)} .dim{color:var(--text-3)}
+.tagx{font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:0;color:var(--text-3);text-transform:none}
+.ln{display:block}
+.txt{display:grid;gap:4px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.05em;font-size:13px;
+color:var(--text-2);background:var(--raised);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+th.n,td.n{text-align:right}
+td.n,.num{font-family:var(--mono);font-size:13.5px;white-space:nowrap}
+td.k{font-weight:500;white-space:nowrap}
+td.sub,span.sub{color:var(--text-2)} span.sub{font-size:13px}
+tr.grp td{background:var(--raised);font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+text-transform:uppercase;color:var(--text-2);padding-block:6px}
+code{font-family:var(--mono);font-size:13px;background:var(--raised);padding:1px 5px;border-radius:4px;
+overflow-wrap:anywhere}
+.up{color:var(--up)} .down{color:var(--down)} .warn{color:var(--warn)}
+.chip{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 4px;
+border:1px solid;border-radius:4px;font-size:12px;line-height:1;vertical-align:1px;font-family:var(--mono)}
+.chip.up{color:var(--up);border-color:var(--up)} .chip.warn{color:var(--warn);border-color:var(--warn)}
+.chip.down{color:var(--down);border-color:var(--down)} .chip.cu{color:var(--copper);border-color:var(--copper)}
+.chip.off{color:var(--text-3);border-color:var(--line-strong)}
+.st{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.note{background:var(--warn-soft);border:1px solid var(--warn);border-radius:6px;padding:12px 14px;
+display:grid;gap:6px}
+.note.down{background:var(--down-soft);border-color:var(--down)}
+.note b{font-family:var(--display);font-weight:600;font-size:17px}
+.brief{border-left:3px solid var(--copper);background:var(--panel);border-radius:0 6px 6px 0;padding:14px 18px;
+display:grid;gap:8px}
+.lbl{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--copper)}
+.exp{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.exp>div{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:grid;gap:4px;
+align-content:start}
+.exp b{font-family:var(--display);font-weight:600;font-size:17px}
+ol.dec{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:d}
+ol.dec>li{counter-increment:d;background:var(--panel);border:1px solid var(--line);border-radius:6px;
+padding:14px 16px 14px 54px;position:relative;display:grid;gap:6px;min-width:0}
+ol.dec>li::before{content:counter(d);position:absolute;left:18px;top:12px;font:700 24px/1 var(--display);
+color:var(--copper)}
+.ask{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text);
+background:var(--copper-soft);border:1px solid var(--copper);padding:3px 8px;border-radius:999px}
+dl.key{margin:0;display:grid;grid-template-columns:max-content minmax(0,1fr);gap:8px 24px;font-size:14px;
+line-height:1.5}
+dl.key dt{font-weight:500} dl.key dd{margin:0;color:var(--text-2);display:grid;gap:2px;min-width:0}
+dl.key.small{font-size:13.5px;gap:6px 22px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px 18px;display:grid;gap:14px;
+min-width:0}
+.card.up{border-color:var(--up)}
+.card h3 small{font-family:var(--mono);font-size:13px;color:var(--text-3);font-weight:400}
+.card .tw{background:var(--surface)}
+.cards{display:grid;gap:16px}
+.tests{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:8px 16px;align-items:center;font-size:14px}
+.tests .dir{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2)}
+.tests .row{display:flex;flex-wrap:wrap;gap:6px 14px}
+.curves{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+figure{margin:0;display:grid;gap:6px;min-width:0}
+figcaption{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2)}
+svg{width:100%;height:auto;display:block}
+svg text{font-family:var(--mono);font-size:10px;fill:var(--text-3)}
+svg .band{fill:var(--raised);stroke:none}
+svg .zero{stroke:var(--line-strong);stroke-width:1;vector-effect:non-scaling-stroke}
+svg .fixed{fill:none;stroke:var(--ref);stroke-width:1;stroke-dasharray:3 3;vector-effect:non-scaling-stroke}
+svg .chosen{fill:none;stroke:var(--copper);stroke-width:1;vector-effect:non-scaling-stroke}
+svg .base{fill:none;stroke:var(--text-2);stroke-width:1;vector-effect:non-scaling-stroke}
+.swatch{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--text-2)}
+.swatch span{display:inline-flex;align-items:center;gap:7px}
+.swatch i{display:inline-block;width:22px;height:0;border-top:1px solid}
+.swatch i.c{border-color:var(--copper)} .swatch i.f{border-color:var(--ref);border-top-style:dashed}
+.swatch i.b{height:10px;border:0;background:var(--raised)} .swatch i.s{border-color:var(--text-2)}
+.tags{display:flex;flex-wrap:wrap;gap:4px 6px;margin-bottom:2px}
+details{min-width:0}
+details summary{cursor:pointer;font-family:var(--display);font-weight:600;letter-spacing:.05em;
+text-transform:uppercase;color:var(--text-2)}
+details[open] summary{margin-bottom:12px}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px;overflow-x:auto;
+font-family:var(--mono);font-size:12px;margin:0}
+.foot{font-family:var(--mono);font-size:12px;color:var(--text-3);border-top:1px solid var(--line);padding-top:14px;
+display:grid;gap:4px;overflow-wrap:anywhere}
+@media (max-width:600px){main{gap:32px;padding-block:28px 48px}dl.key{grid-template-columns:minmax(0,1fr);gap:0}
+dl.key dt{margin-top:8px}.tests{grid-template-columns:minmax(0,1fr)}}
+
+.fold>summary{font:inherit;text-transform:none;letter-spacing:normal;color:inherit;list-style:none;display:flex;gap:10px;align-items:baseline;cursor:pointer}
+.fold>summary::-webkit-details-marker{display:none}
+.fold>summary::before{content:"\25B8";color:var(--text-3);font-size:14px}
+.fold[open]>summary::before{content:"\25BE"}
+.fold>summary h2{margin:0}
+.fold>summary .hint{color:var(--text-3);font-size:13px;font-weight:400}
+.fold[open]>summary{margin-bottom:14px}
+.fold>.body{display:grid;gap:18px}
+.fold .tw table{font-size:12px}
+.fold .tw th,.fold .tw td{white-space:nowrap;padding-inline:8px}
+
+/* Super 8 page: lists, figure, steps */
+a{color:var(--copper)}
+header{display:grid;gap:4px}
+ul.facts,.exp ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.exp ul{gap:4px;font-size:15px}
+ol.steps{margin:0;padding-left:22px;display:grid;gap:8px}
+ol.steps b,ul.facts b{font-weight:600}
+.brief b{font-family:var(--display);font-weight:600;font-size:19px}
+figure.fig{margin:0;display:grid;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px}
+.figwrap{overflow-x:auto}
+.figwrap svg{display:block;width:100%;min-width:420px;height:auto}
+.fig .grid line{stroke:var(--line);stroke-width:1;vector-effect:non-scaling-stroke}
+.fig text{font-family:var(--mono);font-size:12px;fill:var(--text-3)}
+.fig .tick text{text-anchor:end}
+.fig .xl text,.fig .val text,.fig .cap text{text-anchor:middle}
+.fig .val text{fill:var(--text-2)}
+.fig .cap text{fill:var(--series-1);font-size:11px}
+.fig .s8 rect{fill:var(--series-1)}
+.fig .mg rect{fill:var(--line-strong)}
+figcaption{font-size:13.5px;color:var(--text-2)}
+.sw{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:0;margin-right:4px}
+.sw.s8{background:var(--series-1)} .sw.mg{background:var(--line-strong)}
+footer.meta{border-top:1px solid var(--line);padding-top:14px}
+</style>
+<main>
+<header>
+<div class="eyebrow">Strategy review · TradingView open source</div>
+<h1>Super 8, read line by line</h1>
+<p class="lede">
+<span class="ln">What the strategy does, bar by bar, read from its Pine source.</span>
+<span class="ln">And the question that comes first: is it a martingale?</span>
+</p>
+<p class="meta">Script: <a href="https://www.tradingview.com/script/zFPZofwt/">Super 8 - 30M BTC</a> by AssassinsGrid · Mozilla Public License 2.0 · last update 9 Feb 2024 · read on 13 Nov 2026</p>
+</header>
+
+<section class="brief">
+<div class="lbl">The short answer</div>
+<p>
+<span class="ln"><b>It is not a martingale.</b></span>
+<span class="ln">It averages into a position against the move, with a cap, a hard stop and a loss known before the first entry.</span>
+<span class="ln">A martingale doubles after a loss and has no floor.</span>
+<span class="ln">Here the size grows in a straight line, stops at three entries, and the full position loses about 5% of the balance at the stop.</span>
+</p>
+</section>
+
+<section>
+<h2>The setting</h2>
+<dl class="key">
+<dt>Market</dt><dd>BTCUSDT perpetual on OKX, 30-minute bars, long and short.</dd>
+<dt>Costs</dt><dd>0.05% commission per side. No slippage.</dd>
+<dt>Margin</dt><dd>1.5%, so up to about 66× leverage is allowed.</dd>
+<dt>Fills</dt><dd>Orders fill at the close of the bar that triggers them.</dd>
+<dt>Inputs</dt><dd>About thirty, all tuned by the author on the whole BTC history.</dd>
+</dl>
+</section>
+
+<section>
+<h2>How it enters</h2>
+<p class="muted">Two entries. Either one is enough. The short side is the mirror image.</p>
+<div class="exp">
+<div>
+<b>The trend entry</b>
+<span class="ln">All five at once:</span>
+<ul>
+<li>EMA 100 over EMA 500, and the EMA 500 rising.</li>
+<li>DMI on the long side (+DI over −DI), with ADX over 20.5 (length 28, smoothing 9).</li>
+<li>Parabolic SAR under the close (0.1, 0.04, 0.4).</li>
+<li>MACD histogram above zero (24, 52, 11).</li>
+<li>Volume over 0.4 times its 55-bar average.</li>
+</ul>
+</div>
+<div>
+<b>The dip entry</b>
+<span class="ln">All four at once:</span>
+<ul>
+<li>The low crosses under the lower Bollinger band (40, 2.2).</li>
+<li>The same EMA trend as above.</li>
+<li>DMI not on the short side with ADX over 20.5.</li>
+<li>Bands at least 5% wide.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section>
+<h2>How it adds</h2>
+<ul class="facts">
+<li>At most three entries in one position.</li>
+<li>Every add needs a fresh signal from either entry. For an add, the bands only need to be 2% wide.</li>
+<li>Every add needs a price at least 0.7% better than the last entry.</li>
+<li>Sizes grow 1 : 2 : 3. The first entry is one sixth of the full position, the second two sixths, the third three sixths.</li>
+</ul>
+<figure class="fig">
+<div class="figwrap">
+<svg viewBox="0 0 600 236" role="img" aria-labelledby="figt">
+<title id="figt">Position size after each entry: Super 8 stops at 6 units after three entries, a doubling martingale reaches 31 units after five.</title>
+<g class="grid">
+<line x1="50" y1="180" x2="580" y2="180"/>
+<line x1="50" y1="140" x2="580" y2="140"/>
+<line x1="50" y1="100" x2="580" y2="100"/>
+<line x1="50" y1="60" x2="580" y2="60"/>
+<line x1="50" y1="20" x2="580" y2="20"/>
+</g>
+<g class="tick">
+<text x="42" y="184">0</text>
+<text x="42" y="144">8</text>
+<text x="42" y="104">16</text>
+<text x="42" y="64">24</text>
+<text x="42" y="24">32</text>
+</g>
+<g class="s8">
+<rect x="71" y="175" width="30" height="5"/>
+<rect x="177" y="165" width="30" height="15"/>
+<rect x="283" y="150" width="30" height="30"/>
+</g>
+<g class="cap">
+<text x="404" y="172">capped</text>
+<text x="510" y="172">capped</text>
+</g>
+<g class="mg">
+<rect x="105" y="175" width="30" height="5"/>
+<rect x="211" y="165" width="30" height="15"/>
+<rect x="317" y="145" width="30" height="35"/>
+<rect x="423" y="105" width="30" height="75"/>
+<rect x="529" y="25" width="30" height="155"/>
+</g>
+<g class="val">
+<text x="86" y="170">1</text>
+<text x="192" y="160">3</text>
+<text x="298" y="145">6</text>
+<text x="120" y="170">1</text>
+<text x="226" y="160">3</text>
+<text x="332" y="140">7</text>
+<text x="438" y="100">15</text>
+<text x="544" y="20">31</text>
+</g>
+<g class="xl">
+<text x="103" y="200">1st entry</text>
+<text x="209" y="200">2nd</text>
+<text x="315" y="200">3rd</text>
+<text x="421" y="200">4th</text>
+<text x="527" y="200">5th</text>
+</g>
+</svg>
+</div>
+<figcaption>
+<span class="ln"><span class="sw s8"></span>Super 8 · <span class="sw mg"></span>a martingale that doubles each add.</span>
+<span class="ln">Position size after each entry, in units of the first entry.</span>
+</figcaption>
+</figure>
+</section>
+
+<section>
+<h2>How it exits</h2>
+<dl class="key">
+<dt>Stop</dt><dd>
+<span class="ln">The closer of two levels.</span>
+<span class="ln">8% from the average entry.</span>
+<span class="ln">An ATR stop, 15 times the 14-bar ATR, that follows the price and never moves back.</span>
+</dd>
+<dt>Target</dt><dd>
+<span class="ln">A trailing exit that switches on past the farther of two levels: the 55-bar Donchian high, or the average entry plus 1.8%.</span>
+<span class="ln">From there it trails 0.3% behind the price.</span>
+</dd>
+<dt>After an add</dt><dd>Stop and target are computed again from the new average entry.</dd>
+<dt>Opposite signal</dt><dd>An order the other way, netted against the open position: it can shrink it, close it or flip it.</dd>
+</dl>
+</section>
+
+<section>
+<h2>How it sizes</h2>
+<ul class="facts">
+<li>Each entry is sized so the full position loses 5% of the balance if the stop is hit.</li>
+<li>The size comes from that 5% divided by the distance to the stop, so a closer stop means a bigger position.</li>
+<li>The balance includes realized profit, so the size compounds.</li>
+</ul>
+</section>
+
+<section>
+<h2>Weak points</h2>
+<div class="note">
+<b>Read the backtest with care</b>
+<span class="ln">About thirty inputs tuned on the whole history of one asset. Nothing was held out to test them on.</span>
+<span class="ln">A 0.3% trail on 30-minute bars, with the bar magnifier off. TradingView cannot see the path inside the bar, so the backtest is too kind. The author says so in a tooltip.</span>
+<span class="ln">No slippage on any fill, the stops included.</span>
+</div>
+<ul class="facts">
+<li>On a bar that gives a dip add while a long is open, the script cancels its exit orders. Until the next close the position has no stop.</li>
+<li>An opposite signal is sized with the formula for a new position, counting the trades still open on the other side. What it leaves open is hard to predict.</li>
+<li><code>pyramiding = 0</code> in the header does nothing. The script uses <code>strategy.order</code>, which ignores it, and counts the entries itself.</li>
+</ul>
+</section>
+
+<section>
+<h2>Porting it to Phisys</h2>
+<p class="muted">The plan for a faithful copy.</p>
+<ol class="steps">
+<li><b>One signal module</b> with the two entries, so an add can come from either one.</li>
+<li><b>Three management options</b>: sizes that grow from one tranche to the next, the add distance in % from the last entry, and a trailing exit with an activation price.</li>
+<li><b>The strategy file</b>, built from the module and those options, with the stop from the average entry.</li>
+</ol>
+<p>
+<span class="ln">Two things stay as Phisys does them.</span>
+<span class="ln">Risk is measured on the initial capital, never compounded.</span>
+<span class="ln">Exit levels inside a bar are resolved on 5-minute bars, which removes the trailing stop's free ride.</span>
+</p>
+</section>
+
+<footer class="meta">Abaco · a reading of public code, not advice · the strategy's numbers are the author's defaults</footer>
+</main>
+</html>
