@@ -317,16 +317,19 @@ footer.meta{border-top:1px solid var(--line);padding-top:14px}
 
 <section>
 <h2>Porting it to Phisys</h2>
-<p class="muted">The plan for a faithful copy.</p>
+<p class="muted">A faithful copy needs more than three options. This is what it takes.</p>
 <ol class="steps">
-<li><b>One signal module</b> with the two entries, so an add can come from either one.</li>
-<li><b>Three management options</b>: sizes that grow from one tranche to the next, the add distance in % from the last entry, and a trailing exit with an activation price.</li>
-<li><b>The strategy file</b>, built from the module and those options, with the stop from the average entry.</li>
+<li><b>Growing tranches</b>: sizes 1 : 2 : 3, each add at least a set % better than the last entry, on a fresh signal.</li>
+<li><b>A stop in % of price</b>, computed again from the average after every add.</li>
+<li><b>A stop on a line</b>: the ATR line is a series of its own, built on the whole history as the Pine builds it, and the stop is the closer of the two.</li>
+<li><b>A target that trails</b>: reaching the farther of the Donchian high and the average plus a % switches on a trailing stop.</li>
+<li><b>An add signal of its own</b>: the same entries, with the bands only 2% wide.</li>
+<li><b>The executor</b> runs every one of these live, the same way the backtest does.</li>
 </ol>
 <p>
 <span class="ln">Two things stay as Phisys does them.</span>
 <span class="ln">Risk is measured on the initial capital, never compounded.</span>
-<span class="ln">Exit levels inside a bar are resolved on 5-minute bars, which removes the trailing stop's free ride.</span>
+<span class="ln">The trailing stop moves at each bar's close, in the backtest and live alike. TradingView moves it inside the bar, so our backtest is stricter, and it matches what really runs.</span>
 </p>
 </section>
 
